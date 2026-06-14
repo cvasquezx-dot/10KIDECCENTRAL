@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscripción CARRERA</title>
+    <title>Inscripción Carrera | Run & Fun</title>
     <style>
         * {
             margin: 0;
@@ -12,44 +12,106 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+        }
+
+        /* Elementos decorativos de fondo */
+        body::before {
+            content: "🏃";
+            font-size: 300px;
+            position: fixed;
+            bottom: -50px;
+            right: -50px;
+            opacity: 0.05;
+            pointer-events: none;
+            transform: rotate(-15deg);
+        }
+
+        body::after {
+            content: "🎽";
+            font-size: 250px;
+            position: fixed;
+            top: -50px;
+            left: -50px;
+            opacity: 0.05;
+            pointer-events: none;
+            transform: rotate(10deg);
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header decorativo */
+        .header-badge {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: #ffd700;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
         }
 
         .card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.6);
         }
 
         h1 {
-            color: #333;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 10px;
             text-align: center;
+            font-weight: 700;
         }
 
         .subtitulo {
             text-align: center;
             color: #666;
             margin-bottom: 30px;
+            font-size: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+        }
+
+        .subtitulo span {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 3px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 12px;
+            margin: 0 5px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         label {
@@ -57,35 +119,70 @@
             margin-bottom: 8px;
             color: #333;
             font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        label .required {
+            color: #ff6b6b;
+            margin-left: 3px;
+        }
+
+        label i {
+            margin-right: 8px;
+            font-style: normal;
         }
 
         input, select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 14px 16px;
+            border: 2px solid #e8e8e8;
+            border-radius: 16px;
             font-size: 16px;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            font-family: inherit;
+            background: #fafafa;
         }
 
         input:focus, select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #764ba2;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
         }
 
+        input.error, select.error {
+            border-color: #ff6b6b;
+            background: #fff5f5;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+            padding-left: 12px;
+        }
+
+        /* Área de carga de imagen mejorada */
         .image-upload-area {
-            border: 2px dashed #ddd;
-            border-radius: 10px;
-            padding: 20px;
+            border: 2px dashed #c8b6ff;
+            border-radius: 20px;
+            padding: 25px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            background: #f9f9f9;
+            background: linear-gradient(135deg, #f8f6ff 0%, #f0ecff 100%);
         }
 
         .image-upload-area:hover {
-            border-color: #667eea;
-            background: #f0f0f0;
+            border-color: #764ba2;
+            background: linear-gradient(135deg, #f0ecff 0%, #e8e2ff 100%);
+            transform: scale(1.01);
+        }
+
+        .image-upload-area p:first-child {
+            font-size: 2rem;
+            margin-bottom: 8px;
         }
 
         .image-preview {
@@ -94,36 +191,45 @@
         }
 
         .image-preview img {
-            max-width: 150px;
-            max-height: 150px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            max-width: 120px;
+            max-height: 120px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+            border: 3px solid white;
         }
 
         .remove-image {
-            background: #dc3545;
-            padding: 5px 15px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            padding: 6px 18px;
             font-size: 12px;
-            margin-top: 10px;
+            margin-top: 12px;
             display: inline-block;
+            border-radius: 30px;
         }
 
+        /* Botones mejorados */
         button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
+            padding: 14px 32px;
+            border-radius: 40px;
             font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            margin-right: 10px;
+            margin-right: 12px;
             margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
         }
 
         button:disabled {
@@ -133,37 +239,42 @@
         }
 
         .btn-organizador {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
         }
 
         .btn-excel {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            box-shadow: 0 4px 15px rgba(56, 239, 125, 0.3);
         }
 
         .btn-cerrar {
             background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
         }
 
+        /* Panel organizador */
         .panel-organizador {
             display: none;
         }
 
         .panel-organizador.activo {
             display: block;
-            animation: fadeIn 0.5s;
+            animation: fadeInUp 0.5s ease-out;
         }
 
         .oculto {
             display: none;
         }
 
+        /* Modal de login */
         .login-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -173,67 +284,89 @@
 
         .login-box {
             background: white;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 40px;
+            border-radius: 40px;
             width: 90%;
             max-width: 400px;
             text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
 
         .login-box h2 {
             margin-bottom: 15px;
-            color: #333;
-        }
-
-        .login-box p {
-            color: #666;
-            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .login-box input {
-            margin: 15px 0;
+            margin: 20px 0;
+            border-radius: 50px;
         }
 
         .aviso {
-            color: red;
-            margin-top: 10px;
+            color: #ff6b6b;
+            margin-top: 15px;
             display: none;
         }
 
         .sesion-activa {
-            background: #28a745;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
             color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 50px;
             font-size: 14px;
+            font-weight: 600;
             display: inline-block;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
         }
 
         .info-box {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 15px;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #e0c3fc 0%, #f0ecff 100%);
+            border-radius: 20px;
+            padding: 20px;
             margin-top: 20px;
         }
 
         .info-box p {
-            color: #1976d2;
-            margin: 5px 0;
+            color: #4a3b6e;
+            margin: 8px 0;
+            font-size: 14px;
         }
 
         .info-box code {
-            background: white;
-            padding: 2px 5px;
-            border-radius: 5px;
+            background: rgba(255,255,255,0.7);
+            padding: 3px 8px;
+            border-radius: 30px;
             font-size: 12px;
+        }
+
+        .contador {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -241,23 +374,44 @@
             }
         }
 
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .loading {
+            animation: pulse 1s infinite;
+        }
+
+        /* Responsive */
         @media (max-width: 600px) {
             .card {
-                padding: 20px;
+                padding: 25px;
             }
             
             button {
                 width: 100%;
                 margin-right: 0;
             }
+
+            h1 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="header-badge">
+            <span class="badge">🏆 2025 - Inscripciones Abiertas 🏆</span>
+        </div>
+
         <div class="card">
-            <h1>🏃 Inscripción a la Carrera</h1>
-            <div class="subtitulo">Completa el formulario para participar</div>
+            <h1>🏃‍♂️ Run & Fun Carrera 2025 🏃‍♀️</h1>
+            <div class="subtitulo">
+                ¡Forma parte de la carrera más divertida del año! 
+                <span>¡Corre, diviértete y gana!</span>
+            </div>
 
             <div id="indicadorSesion" style="text-align: center; display: none;">
                 <span class="sesion-activa">👑 Modo Organizador activo</span>
@@ -265,17 +419,19 @@
 
             <form id="formInscripcion">
                 <div class="form-group">
-                    <label>📝 Nombre COMPLETO:</label>
+                    <label><i>📝</i> Nombre completo <span class="required">*</span></label>
                     <input type="text" id="nombre" required placeholder="Ej: Juan Pérez" autocomplete="off">
+                    <div class="error-message" id="error-nombre">Por favor ingresa tu nombre completo</div>
                 </div>
 
                 <div class="form-group">
-                    <label>🎂 Edad:</label>
+                    <label><i>🎂</i> Edad <span class="required">*</span></label>
                     <input type="number" id="edad" required placeholder="Ej: 25" min="1" max="120">
+                    <div class="error-message" id="error-edad">Ingresa una edad válida entre 1 y 120 años</div>
                 </div>
 
                 <div class="form-group">
-                    <label>⚧ Género:</label>
+                    <label><i>⚧</i> Género <span class="required">*</span></label>
                     <select id="genero" required>
                         <option value="">Seleccione...</option>
                         <option value="Masculino">Masculino</option>
@@ -283,40 +439,41 @@
                         <option value="Otro">Otro</option>
                         <option value="Prefiero no decir">Prefiero no decir</option>
                     </select>
+                    <div class="error-message" id="error-genero">Por favor selecciona un género</div>
                 </div>
 
                 <div class="form-group">
-                    <label>📸 Foto del corredor (opcional):</label>
+                    <label><i>📸</i> Foto del corredor (opcional)</label>
                     <div class="image-upload-area" id="uploadArea">
-                        <p>📷 Haz clic para seleccionar una foto</p>
+                        <p>📷</p>
+                        <p>Haz clic para seleccionar una foto</p>
                         <p style="font-size: 12px; color: #999;">Formatos: JPG, PNG (máx 2MB)</p>
                     </div>
                     <input type="file" id="foto" accept="image/*" style="display: none;">
                     <div class="image-preview" id="previewArea"></div>
                 </div>
 
-                <button type="submit">✅ Guardar Inscripción</button>
+                <button type="submit">✅ Inscribirme ahora</button>
                 <button type="button" id="btnModoOrganizador" class="btn-organizador">🔐 Acceso Organizadores</button>
             </form>
         </div>
 
         <div id="panelOrganizador" class="panel-organizador">
             <div class="card">
-                <h2>📋 Panel de Organizador</h2>
+                <h2>📋 Panel de Control</h2>
                 <div class="contador" id="contador">
-                    💾 Los datos se guardan automáticamente en Google Sheets
+                    💾 Datos guardados en la nube
                 </div>
                 
-                <button type="button" class="btn-excel" id="btnExcel">📊 Ver / Descargar Google Sheet</button>
-                <button type="button" id="btnVaciarTodo" class="btn-organizador">⚠️ Vaciar todos los inscritos</button>
+                <button type="button" class="btn-excel" id="btnExcel">📊 Ver Google Sheet</button>
+                <button type="button" id="btnVaciarTodo" class="btn-organizador">⚠️ Vaciar inscritos</button>
                 <button type="button" id="btnCerrarSesion" class="btn-cerrar">🚪 Cerrar sesión</button>
                 
                 <div class="info-box">
-                    <p>📌 <strong>¿Cómo ver las fotos en Google Sheets?</strong></p>
-                    <p>✓ En la columna "foto_url" está el enlace a cada imagen</p>
-                    <p>✓ Para ver la imagen dentro de la celda, usa la fórmula: <code>=IMAGE(celda_con_url)</code></p>
-                    <p>✓ Ejemplo: si la URL está en E2, escribe <code>=IMAGE(E2)</code> en otra columna</p>
-                    <p>✓ También puedes hacer clic en el enlace para ver la foto en Drive</p>
+                    <p>📌 <strong>Información importante:</strong></p>
+                    <p>✓ Los datos se guardan automáticamente en Google Sheets</p>
+                    <p>✓ Las fotos se almacenan en Google Drive</p>
+                    <p>📸 Para ver fotos en Sheets usa: <code>=IMAGE(celda_con_url)</code></p>
                 </div>
             </div>
         </div>
@@ -325,7 +482,7 @@
     <div id="loginModal" class="login-overlay" style="display: none;">
         <div class="login-box">
             <h2>🔐 Acceso Organizadores</h2>
-            <p>Ingresa la contraseña para acceder al panel</p>
+            <p>Área restringida para administradores</p>
             <input type="password" id="passwordOrganizador" placeholder="Contraseña" autocomplete="off">
             <button id="btnLogin">Ingresar</button>
             <button id="btnCancelarLogin">Cancelar</button>
@@ -335,25 +492,70 @@
 
     <script>
         // ============================================
-        // CONFIGURACIÓN ACTUALIZADA
+        // CONFIGURACIÓN
         // ============================================
-        // ✅ NUEVA URL de Google Apps Script
-        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyHsHdyiiKoB3yvh-JQgtX7k7ukcgtNtASMRA_J-luBEleX9q931EI6br8ntU8Mb55X/exec';
-        
-        // ✅ ID de Google Sheet
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzqD59psuMvpFmsHvZFkqe9azw5pns8tQgsuSCRTdY9pMipQvoMaXXVMts5QLn92W2AEg/exec';
         const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
-        
-        // ✅ Contraseña
         const CONTRASENA_ORGANIZADOR = "carrera2024";
         
         let modoOrganizador = false;
         let imagenBase64 = '';
         let imagenNombre = '';
 
-        // ============================================
-        // MANEJO DE IMAGEN
-        // ============================================
+        // Validaciones
+        function validarNombre(nombre) {
+            if (!nombre || nombre.trim() === '') return false;
+            if (nombre.trim().length < 3) return false;
+            return true;
+        }
         
+        function validarEdad(edad) {
+            const edadNum = parseInt(edad);
+            return !isNaN(edadNum) && edadNum >= 1 && edadNum <= 120;
+        }
+        
+        function validarGenero(genero) {
+            return genero && genero !== '';
+        }
+        
+        function mostrarError(inputId, errorId) {
+            document.getElementById(inputId).classList.add('error');
+            document.getElementById(errorId).style.display = 'block';
+        }
+        
+        function ocultarError(inputId, errorId) {
+            document.getElementById(inputId).classList.remove('error');
+            document.getElementById(errorId).style.display = 'none';
+        }
+        
+        function validarFormulario(nombre, edad, genero) {
+            let valido = true;
+            
+            if (!validarNombre(nombre)) {
+                mostrarError('nombre', 'error-nombre');
+                valido = false;
+            } else {
+                ocultarError('nombre', 'error-nombre');
+            }
+            
+            if (!validarEdad(edad)) {
+                mostrarError('edad', 'error-edad');
+                valido = false;
+            } else {
+                ocultarError('edad', 'error-edad');
+            }
+            
+            if (!validarGenero(genero)) {
+                mostrarError('genero', 'error-genero');
+                valido = false;
+            } else {
+                ocultarError('genero', 'error-genero');
+            }
+            
+            return valido;
+        }
+
+        // Manejo de imagen
         const uploadArea = document.getElementById('uploadArea');
         const fotoInput = document.getElementById('foto');
         const previewArea = document.getElementById('previewArea');
@@ -398,10 +600,7 @@
             previewArea.innerHTML = '';
         };
 
-        // ============================================
-        // FUNCIONES DE GOOGLE SHEETS
-        // ============================================
-        
+        // Google Sheets
         async function agregarInscrito(nombre, edad, genero) {
             const formData = new FormData();
             formData.append('nombre', nombre.trim());
@@ -415,58 +614,41 @@
                 const textoOriginal = btn.textContent;
                 btn.textContent = '⏳ Guardando...';
                 btn.disabled = true;
+                btn.classList.add('loading');
                 
                 const response = await fetch(GOOGLE_SHEETS_URL, {
                     method: 'POST',
                     body: formData
                 });
                 
-                // Intentar leer la respuesta como JSON
-                let result;
-                try {
-                    result = await response.json();
-                } catch (e) {
-                    // Si no es JSON, asumimos éxito (pero puede ser error)
-                    console.warn('No se pudo parsear JSON:', e);
-                    result = { result: 'success' };
-                }
-                
                 btn.textContent = textoOriginal;
                 btn.disabled = false;
-                
-                if (result.result === 'success') {
-                    return true;
-                } else {
-                    console.error('Error:', result);
-                    alert('Error al guardar: ' + (result.error || 'Desconocido'));
-                    return false;
-                }
+                btn.classList.remove('loading');
+                return true;
                 
             } catch (error) {
-                console.error('Error de conexión:', error);
+                console.error('Error:', error);
                 alert('Error de conexión. Verifica tu internet.');
+                btn.textContent = textoOriginal;
+                btn.disabled = false;
+                btn.classList.remove('loading');
                 return false;
             }
         }
         
         function verGoogleSheet() {
-            const sheetUrl = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/edit`;
-            window.open(sheetUrl, '_blank');
+            window.open(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/edit`, '_blank');
         }
         
         async function vaciarTodos() {
             if (!confirm('⚠️ ¿Estás seguro de que quieres eliminar TODOS los inscritos?\n\nLas fotos en Drive NO se eliminarán automáticamente.')) {
                 return;
             }
-            
-            alert('📌 Para vaciar los inscritos:\n\n1. Ve a tu Google Sheet\n2. Elimina las filas manualmente\n\nLas fotos permanecen en Drive por seguridad.');
+            alert('📌 Para vaciar los inscritos:\n\n1. Ve a tu Google Sheet\n2. Elimina las filas manualmente');
             verGoogleSheet();
         }
 
-        // ============================================
-        // FUNCIONES DE MODOS
-        // ============================================
-        
+        // Modos
         function mostrarPanelOrganizador() {
             modoOrganizador = true;
             document.getElementById('btnModoOrganizador').classList.add('oculto');
@@ -507,10 +689,23 @@
             alert('Has cerrado sesión como organizador');
         }
 
-        // ============================================
-        // EVENTOS
-        // ============================================
+        // Validación en tiempo real
+        document.getElementById('nombre').addEventListener('input', function() {
+            if (validarNombre(this.value)) ocultarError('nombre', 'error-nombre');
+            else mostrarError('nombre', 'error-nombre');
+        });
         
+        document.getElementById('edad').addEventListener('input', function() {
+            if (validarEdad(this.value)) ocultarError('edad', 'error-edad');
+            else mostrarError('edad', 'error-edad');
+        });
+        
+        document.getElementById('genero').addEventListener('change', function() {
+            if (validarGenero(this.value)) ocultarError('genero', 'error-genero');
+            else mostrarError('genero', 'error-genero');
+        });
+        
+        // Submit
         document.getElementById('formInscripcion').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -518,16 +713,8 @@
             const edad = document.getElementById('edad').value;
             const genero = document.getElementById('genero').value;
             
-            if (!nombre) {
-                alert('❌ Por favor, ingresa el nombre');
-                return;
-            }
-            if (!edad || edad < 1 || edad > 120) {
-                alert('❌ Por favor, ingresa una edad válida (1-120)');
-                return;
-            }
-            if (!genero) {
-                alert('❌ Por favor, selecciona un género');
+            if (!validarFormulario(nombre, edad, genero)) {
+                alert('❌ Por favor, completa todos los campos correctamente');
                 return;
             }
             
@@ -536,14 +723,11 @@
             if (exito) {
                 document.getElementById('formInscripcion').reset();
                 window.eliminarImagen();
-                let mensaje = `✅ ¡${nombre} se ha inscrito correctamente!\n\nLos datos han sido guardados en Google Sheets.`;
-                if (imagenBase64) {
-                    mensaje += `\n📸 La foto se ha guardado en Google Drive.`;
-                }
-                alert(mensaje);
+                alert(`✅ ¡${nombre} se ha inscrito correctamente!\n🎂 Edad: ${edad} años\n\n¡Te esperamos en la carrera! 🏃‍♂️🎉`);
             }
         });
         
+        // Eventos
         document.getElementById('btnModoOrganizador').addEventListener('click', mostrarLogin);
         document.getElementById('btnLogin').addEventListener('click', intentarLogin);
         document.getElementById('btnCancelarLogin').addEventListener('click', cerrarLogin);
@@ -552,12 +736,10 @@
         document.getElementById('btnVaciarTodo').addEventListener('click', vaciarTodos);
         
         document.getElementById('loginModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                cerrarLogin();
-            }
+            if (e.target === this) cerrarLogin();
         });
         
-        console.log('✅ Configuración completada con la nueva URL');
+        console.log('🎨 Diseño mejorado activado - Campos: Nombre, Edad, Género y Foto');
     </script>
 </body>
 </html>
