@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción Carrera - Con Foto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Estilos para la carga de imagen */
+        .image-upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f9f9f9;
+        }
+
+        .image-upload-area:hover {
+            border-color: #667eea;
+            background: #f0f0f0;
+        }
+
+        .image-preview {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .remove-image {
+            background: #dc3545;
+            padding: 5px 15px;
+            font-size: 12px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-organizador {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+
+        .btn-excel {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+
+        .btn-cerrar {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        }
+
+        .panel-organizador {
+            display: none;
+        }
+
+        .panel-organizador.activo {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .oculto {
+            display: none;
+        }
+
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s;
+        }
+
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .login-box p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .login-box input {
+            margin: 15px 0;
+        }
+
+        .aviso {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .sesion-activa {
+            background: #28a745;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .info-box p {
+            color: #1976d2;
+            margin: 5px 0;
+        }
+
+        .info-box code {
+            background: white;
+            padding: 2px 5px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 20px;
+            }
+            
+            button {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tarjeta del formulario de inscripción -->
+        <div class="card">
+            <h1>🏃 Inscripción a la Carrera</h1>
+            <div class="subtitulo">Completa el formulario para participar</div>
+
+            <!-- Indicador de sesión organizador activa -->
+            <div id="indicadorSesion" style="text-align: center; display: none;">
+                <span class="sesion-activa">👑 Modo Organizador activo</span>
+            </div>
+
+            <form id="formInscripcion">
+                <div class="form-group">
+                    <label>📝 Nombre completo:</label>
+                    <input type="text" id="nombre" required placeholder="Ej: Juan Pérez" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label>🎂 Edad:</label>
+                    <input type="number" id="edad" required placeholder="Ej: 25" min="1" max="120">
+                </div>
+
+                <div class="form-group">
+                    <label>⚧ Género:</label>
+                    <select id="genero" required>
+                        <option value="">Seleccione...</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
+                        <option value="Prefiero no decir">Prefiero no decir</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>📸 Foto del corredor (opcional):</label>
+                    <div class="image-upload-area" id="uploadArea">
+                        <p>📷 Haz clic para seleccionar una foto</p>
+                        <p style="font-size: 12px; color: #999;">Formatos: JPG, PNG (máx 2MB)</p>
+                    </div>
+                    <input type="file" id="foto" accept="image/*" style="display: none;">
+                    <div class="image-preview" id="previewArea"></div>
+                </div>
+
+                <button type="submit">✅ Guardar Inscripción</button>
+                <button type="button" id="btnModoOrganizador" class="btn-organizador">🔐 Acceso Organizadores</button>
+            </form>
+        </div>
+
+        <!-- Panel de organizador (oculto por defecto) -->
+        <div id="panelOrganizador" class="panel-organizador">
+            <div class="card">
+                <h2>📋 Panel de Organizador</h2>
+                <div class="contador" id="contador">
+                    💾 Los datos se guardan automáticamente en Google Sheets
+                </div>
+                
+                <button type="button" class="btn-excel" id="btnExcel">📊 Ver / Descargar Google Sheet</button>
+                <button type="button" id="btnVaciarTodo" class="btn-organizador">⚠️ Vaciar todos los inscritos</button>
+                <button type="button" id="btnCerrarSesion" class="btn-cerrar">🚪 Cerrar sesión</button>
+                
+                <div class="info-box">
+                    <p>📌 <strong>¿Cómo ver las fotos en Google Sheets?</strong></p>
+                    <p>✓ En la columna "foto_url" está el enlace a cada imagen</p>
+                    <p>✓ Para ver la imagen dentro de la celda, usa la fórmula: <code>=IMAGE(celda_con_url)</code></p>
+                    <p>✓ Ejemplo: si la URL está en E2, escribe <code>=IMAGE(E2)</code> en otra columna</p>
+                    <p>✓ También puedes hacer clic en el enlace para ver la foto en Drive</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de login -->
+    <div id="loginModal" class="login-overlay" style="display: none;">
+        <div class="login-box">
+            <h2>🔐 Acceso Organizadores</h2>
+            <p>Ingresa la contraseña para acceder al panel</p>
+            <input type="password" id="passwordOrganizador" placeholder="Contraseña" autocomplete="off">
+            <button id="btnLogin">Ingresar</button>
+            <button id="btnCancelarLogin">Cancelar</button>
+            <div id="errorLogin" class="aviso">❌ Contraseña incorrecta</div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURACIÓN DE GOOGLE SHEETS (YA CONFIGURADO)
+        // ============================================
+        // ✅ URL de Google Apps Script
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxHHxYphjRKcipCLJXGdj6nYTQCLXUgKZ8dJDuw-kcxzv3_USutfP7PifUWg7rSiS3uvw/exec';
+        
+        // ✅ ID de Google Sheet
+        const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
+        
+        // ============================================
+        // CONFIGURACIÓN GENERAL
+        // ============================================
+        const CONTRASENA_ORGANIZADOR = "carrera2024";
+        
+        let modoOrganizador = false;
+        let imagenBase64 = '';
+        let imagenNombre = '';
+
+        // ============================================
+        // MANEJO DE IMAGEN
+        // ============================================
+        
+        const uploadArea = document.getElementById('uploadArea');
+        const fotoInput = document.getElementById('foto');
+        const previewArea = document.getElementById('previewArea');
+        
+        uploadArea.addEventListener('click', () => {
+            fotoInput.click();
+        });
+        
+        fotoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            if (file.size > 2 * 1024 * 1024) {
+                alert('❌ La imagen no puede superar los 2MB');
+                fotoInput.value = '';
+                return;
+            }
+            
+            if (!file.type.startsWith('image/')) {
+                alert('❌ Por favor selecciona una imagen válida');
+                fotoInput.value = '';
+                return;
+            }
+            
+            imagenNombre = file.name;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagenBase64 = e.target.result.split(',')[1];
+                previewArea.innerHTML = `
+                    <img src="${e.target.result}" alt="Vista previa">
+                    <button type="button" class="remove-image" onclick="eliminarImagen()">🗑️ Eliminar foto</button>
+                `;
+            };
+            reader.readAsDataURL(file);
+        });
+        
+        window.eliminarImagen = function() {
+            imagenBase64 = '';
+            imagenNombre = '';
+            fotoInput.value = '';
+            previewArea.innerHTML = '';
+        };
+
+        // ============================================
+        // FUNCIONES DE GOOGLE SHEETS
+        // ============================================
+        
+        async function agregarInscrito(nombre, edad, genero) {
+            const formData = new FormData();
+            formData.append('nombre', nombre.trim());
+            formData.append('edad', parseInt(edad));
+            formData.append('genero', genero);
+            formData.append('image', imagenNombre);
+            formData.append('himage', imagenBase64);
+            
+            try {
+                const btn = document.querySelector('#formInscripcion button[type="submit"]');
+                const textoOriginal = btn.textContent;
+                btn.textContent = '⏳ Guardando...';
+                btn.disabled = true;
+                
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                });
+                
+                btn.textContent = textoOriginal;
+                btn.disabled = false;
+                return true;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error de conexión. Verifica tu internet.');
+                return false;
+            }
+        }
+        
+        function verGoogleSheet() {
+            const sheetUrl = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/edit`;
+            window.open(sheetUrl, '_blank');
+        }
+        
+        async function vaciarTodos() {
+            if (!confirm('⚠️ ¿Estás seguro de que quieres eliminar TODOS los inscritos?\n\nLas fotos en Drive NO se eliminarán automáticamente.')) {
+                return;
+            }
+            
+            alert('📌 Para vaciar los inscritos:\n\n1. Ve a tu Google Sheet\n2. Elimina las filas manualmente\n\nLas fotos permanecen en Drive por seguridad.');
+            verGoogleSheet();
+        }
+
+        // ============================================
+        // FUNCIONES DE MODOS
+        // ============================================
+        
+        function mostrarPanelOrganizador() {
+            modoOrganizador = true;
+            document.getElementById('btnModoOrganizador').classList.add('oculto');
+            document.getElementById('indicadorSesion').style.display = 'block';
+            document.getElementById('panelOrganizador').classList.add('activo');
+        }
+        
+        function ocultarPanelOrganizador() {
+            modoOrganizador = false;
+            document.getElementById('panelOrganizador').classList.remove('activo');
+        }
+        
+        function mostrarLogin() {
+            document.getElementById('loginModal').style.display = 'flex';
+            document.getElementById('passwordOrganizador').value = '';
+            document.getElementById('errorLogin').style.display = 'none';
+        }
+        
+        function cerrarLogin() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+        
+        function intentarLogin() {
+            const password = document.getElementById('passwordOrganizador').value;
+            if (password === CONTRASENA_ORGANIZADOR) {
+                cerrarLogin();
+                mostrarPanelOrganizador();
+            } else {
+                document.getElementById('errorLogin').style.display = 'block';
+            }
+        }
+        
+        function cerrarSesion() {
+            modoOrganizador = false;
+            ocultarPanelOrganizador();
+            document.getElementById('btnModoOrganizador').classList.remove('oculto');
+            document.getElementById('indicadorSesion').style.display = 'none';
+            alert('Has cerrado sesión como organizador');
+        }
+
+        // ============================================
+        // EVENTOS
+        // ============================================
+        
+        document.getElementById('formInscripcion').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const edad = document.getElementById('edad').value;
+            const genero = document.getElementById('genero').value;
+            
+            if (!nombre) {
+                alert('❌ Por favor, ingresa el nombre');
+                return;
+            }
+            if (!edad || edad < 1 || edad > 120) {
+                alert('❌ Por favor, ingresa una edad válida (1-120)');
+                return;
+            }
+            if (!genero) {
+                alert('❌ Por favor, selecciona un género');
+                return;
+            }
+            
+            const exito = await agregarInscrito(nombre, edad, genero);
+            
+            if (exito) {
+                document.getElementById('formInscripcion').reset();
+                window.eliminarImagen();
+                let mensaje = `✅ ¡${nombre} se ha inscrito correctamente!\n\nLos datos han sido guardados en Google Sheets.`;
+                if (imagenBase64) {
+                    mensaje += `\n📸 La foto se ha guardado en Google Drive.`;
+                }
+                alert(mensaje);
+            }
+        });
+        
+        document.getElementById('btnModoOrganizador').addEventListener('click', mostrarLogin);
+        document.getElementById('btnLogin').addEventListener('click', intentarLogin);
+        document.getElementById('btnCancelarLogin').addEventListener('click', cerrarLogin);
+        document.getElementById('btnCerrarSesion').addEventListener('click', cerrarSesion);
+        document.getElementById('btnExcel').addEventListener('click', verGoogleSheet);
+        document.getElementById('btnVaciarTodo').addEventListener('click', vaciarTodos);
+        
+        document.getElementById('loginModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                cerrarLogin();
+            }
+        });
+        
+        console.log('✅ Configuración completada. La página está lista para recibir inscripciones con foto.');
+    </script>
+</body>
+</html>
