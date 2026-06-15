@@ -31,7 +31,7 @@
         /* Header */
         .main-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .logo-badge {
@@ -60,6 +60,26 @@
             font-size: 0.9rem;
             max-width: 600px;
             margin: 0 auto;
+        }
+
+        /* Banner de imagen */
+        .hero-image {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.01);
         }
 
         /* Layout principal */
@@ -446,6 +466,9 @@
             .container {
                 padding: 1rem;
             }
+            .hero-image img {
+                border-radius: 16px;
+            }
         }
     </style>
 </head>
@@ -484,6 +507,13 @@
             <div class="logo-badge">🏆 INSCRIPCIONES 2025</div>
             <h1>VALENCIA RACE</h1>
             <div class="subtitle">3K · 5K · 9K · La carrera más vibrante del año</div>
+        </div>
+
+        <!-- BANNER DE IMAGEN AGREGADO -->
+        <div class="hero-image">
+            <img src="https://drive.google.com/uc?export=view&id=1TS8Kvlz9Fyar7PJKajTdogZzv3XchBoU" 
+                 alt="Valencia Race Banner" 
+                 loading="lazy">
         </div>
 
         <div class="dashboard">
@@ -545,7 +575,6 @@
         closeMenu.addEventListener('click', closeSidebar);
         overlay.addEventListener('click', closeSidebar);
 
-        // Cerrar menú al seleccionar una opción (en móvil)
         function handleMobileClose() {
             if (window.innerWidth <= 900) {
                 closeSidebar();
@@ -553,7 +582,6 @@
         }
 
         // ========== CONTENIDO DINÁMICO ==========
-        // Sección Registro
         function renderRegistro() {
             mainContent.innerHTML = `
                 <div style="margin-bottom: 2rem;">
@@ -598,11 +626,9 @@
                     <button type="submit" class="btn-primary">✅ INSCRIBIRME AHORA</button>
                 </form>
             `;
-            // Re-inicializar eventos del formulario
             initFormEvents();
         }
 
-        // Sección Información
         function renderInfo() {
             mainContent.innerHTML = `
                 <div style="margin-bottom: 2rem;">
@@ -633,7 +659,6 @@
             `;
         }
 
-        // Sección Organizador
         function renderOrganizador() {
             mainContent.innerHTML = `
                 <div style="margin-bottom: 2rem;">
@@ -732,7 +757,6 @@
             removePhotoBtn.style.display = 'none';
         }
 
-        // ========== ENVÍO A GOOGLE SHEETS ==========
         async function agregarInscrito(nombre, edad, genero) {
             const fd = new FormData();
             fd.append('nombre', nombre.trim());
@@ -808,7 +832,6 @@
                 renderOrganizador();
             }
             
-            // Actualizar clase activa en el menú
             menuItems.forEach(item => {
                 if (item.getAttribute('data-section') === section) {
                     item.classList.add('active');
@@ -820,7 +843,6 @@
             handleMobileClose();
         }
 
-        // Eventos del menú
         menuItems.forEach(item => {
             item.addEventListener('click', () => {
                 const section = item.getAttribute('data-section');
@@ -828,13 +850,7 @@
             });
         });
 
-        // Cargar sección inicial
         renderRegistro();
-
-        // Cerrar modal al hacer clic fuera
-        window.addEventListener('click', (e) => {
-            if (e.target === loginModal) cerrarLogin();
-        });
     </script>
 </body>
 </html>
