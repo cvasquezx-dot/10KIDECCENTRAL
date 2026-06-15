@@ -13,40 +13,29 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f0f1a 100%);
-            color: #ffffff;
-            line-height: 1.5;
+            background: #f5f7fa;
+            color: #1a1a2e;
             min-height: 100vh;
-            padding: 2rem;
             position: relative;
         }
 
-        /* Elementos decorativos de fondo */
+        /* Fondo decorativo sutil */
         body::before {
-            content: "🏃";
-            font-size: 400px;
+            content: "";
             position: fixed;
-            bottom: -100px;
-            right: -100px;
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        body::after {
-            content: "⚡";
-            font-size: 300px;
-            position: fixed;
-            top: -80px;
-            left: -80px;
-            opacity: 0.03;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 107, 53, 0.03) 0%, transparent 60%);
             pointer-events: none;
             z-index: 0;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 2rem;
             position: relative;
             z-index: 1;
         }
@@ -54,7 +43,7 @@
         /* Header principal */
         .main-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .logo-badge {
@@ -62,159 +51,179 @@
             background: linear-gradient(135deg, #ff6b35, #f7931e);
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            margin-bottom: 1rem;
+            color: white;
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #ffffff, #ff9a2e, #ff6b35);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 1rem;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
             letter-spacing: -1px;
         }
 
         .subtitle {
-            color: rgba(255,255,255,0.6);
-            font-size: 1.1rem;
+            color: #666;
+            font-size: 1rem;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Grid de dos columnas */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        /* Layout con menú lateral derecho */
+        .dashboard {
+            display: flex;
             gap: 2rem;
-            margin-bottom: 3rem;
+            margin-top: 2rem;
         }
 
-        /* Tarjetas estilo AUTOMY */
-        .card {
-            background: rgba(20, 20, 35, 0.8);
-            backdrop-filter: blur(10px);
+        /* Contenido principal (izquierda) */
+        .main-content {
+            flex: 1;
+            background: white;
             border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.05);
             padding: 2rem;
+            min-height: 500px;
+        }
+
+        /* Menú lateral derecho */
+        .sidebar {
+            width: 320px;
+            flex-shrink: 0;
+        }
+
+        /* Tarjetas del menú lateral */
+        .menu-card {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
             transition: all 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 154, 46, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .card-header {
+        .menu-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            justify-content: space-between;
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
         }
 
-        .card-icon {
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, #ff6b35, #ff9a2e);
-            width: 55px;
-            height: 55px;
+        .menu-header:hover {
+            background: #f8f9fa;
+        }
+
+        .menu-header-left {
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 16px;
+            gap: 0.8rem;
         }
 
-        .card-title {
+        .menu-icon {
             font-size: 1.5rem;
+        }
+
+        .menu-title {
             font-weight: 700;
-            color: #fff;
+            font-size: 1rem;
+            color: #1a1a2e;
         }
 
-        .card-subtitle {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.5);
+        .menu-arrow {
+            font-size: 1.2rem;
+            color: #999;
+            transition: transform 0.3s;
         }
 
-        /* Formulario */
+        .menu-card.open .menu-arrow {
+            transform: rotate(180deg);
+        }
+
+        .menu-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            padding: 0 1.5rem;
+            border-top: none;
+        }
+
+        .menu-card.open .menu-content {
+            max-height: 800px;
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+
+        /* Formulario dentro del menú */
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.4rem;
+            color: #888;
         }
 
         input, select {
             width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
             border-radius: 12px;
-            padding: 14px 16px;
-            color: #fff;
+            padding: 12px 14px;
+            color: #1a1a2e;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: all 0.2s;
         }
 
         input:focus, select:focus {
             outline: none;
             border-color: #ff9a2e;
-            background: rgba(255,255,255,0.1);
-            box-shadow: 0 0 0 3px rgba(255, 154, 46, 0.2);
-        }
-
-        input::placeholder {
-            color: rgba(255,255,255,0.3);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 154, 46, 0.1);
         }
 
         /* Área de foto */
         .photo-area {
-            border: 2px dashed rgba(255, 154, 46, 0.4);
+            border: 2px dashed #ddd;
             border-radius: 16px;
-            padding: 1.5rem;
+            padding: 1.2rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: rgba(255, 154, 46, 0.03);
+            background: #fafafa;
         }
 
         .photo-area:hover {
             border-color: #ff9a2e;
-            background: rgba(255, 154, 46, 0.08);
-        }
-
-        .photo-area.drag-over {
-            border-color: #ff9a2e;
-            background: rgba(255, 154, 46, 0.15);
+            background: #fff8f0;
         }
 
         .camera-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            margin-bottom: 0.3rem;
         }
 
         .photo-area p {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.6);
+            font-size: 0.8rem;
+            color: #666;
         }
 
         .photo-area small {
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.4);
+            font-size: 0.65rem;
+            color: #999;
         }
 
         .photo-preview {
@@ -225,185 +234,114 @@
 
         .photo-preview.active {
             display: block;
-            animation: fadeIn 0.3s ease;
         }
 
         .preview-image img {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             object-fit: cover;
             border-radius: 50%;
             border: 3px solid #ff9a2e;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
 
         .remove-photo-btn {
-            background: rgba(255, 77, 77, 0.2);
+            background: none;
             border: 1px solid #ff4d4d;
             color: #ff4d4d;
-            padding: 5px 15px;
-            font-size: 0.7rem;
-            border-radius: 30px;
-            margin-top: 0.8rem;
+            padding: 4px 12px;
+            font-size: 0.65rem;
+            border-radius: 20px;
+            margin-top: 0.5rem;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
-        .remove-photo-btn:hover {
-            background: #ff4d4d;
-            color: #fff;
-        }
-
-        /* Botón principal */
-        .btn {
-            background: linear-gradient(135deg, #ff6b35, #ff9a2e);
+        /* Botones */
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
             border: none;
             color: white;
-            padding: 14px 32px;
-            font-size: 0.9rem;
+            padding: 12px 24px;
+            font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s;
             border-radius: 40px;
             width: 100%;
             font-family: inherit;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
         }
 
-        .btn:hover {
+        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
         }
 
         .btn-outline {
             background: transparent;
             border: 1px solid #ff9a2e;
             color: #ff9a2e;
-            box-shadow: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.75rem;
         }
 
         .btn-outline:hover {
             background: #ff9a2e;
-            color: #0a0a0a;
+            color: white;
         }
 
-        /* Botón organizador al final de la página */
-        .organizador-footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .btn-organizador-footer {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: rgba(255,255,255,0.6);
-            padding: 12px 28px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-radius: 40px;
-            font-family: inherit;
-        }
-
-        .btn-organizador-footer:hover {
-            border-color: #ff9a2e;
-            color: #ff9a2e;
-            background: rgba(255, 154, 46, 0.1);
-        }
-
-        /* Info carrera */
+        /* Información de carrera */
         .info-list {
             list-style: none;
-            margin-top: 1rem;
         }
 
         .info-list li {
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .info-icon {
-            font-size: 1.5rem;
-            width: 40px;
+            font-size: 1.3rem;
+            width: 35px;
         }
 
         .info-text strong {
             display: block;
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.5);
+            font-size: 0.7rem;
+            color: #999;
             text-transform: uppercase;
         }
 
         .info-text span {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
+            color: #1a1a2e;
         }
 
-        /* Panel organizador (subsección que aparece) */
-        .panel-organizador {
-            display: none;
-            margin-top: 2rem;
-            padding: 2rem;
-            background: rgba(20, 20, 35, 0.9);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 154, 46, 0.3);
-            animation: slideUp 0.4s ease;
-        }
-
-        .panel-organizador.activo {
-            display: block;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .panel-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .panel-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #ff9a2e;
-        }
-
+        /* Panel organizador dentro del menú */
         .admin-stats {
-            background: rgba(255, 154, 46, 0.1);
-            border-radius: 16px;
+            background: #f0f7ff;
+            border-radius: 12px;
             padding: 1rem;
             text-align: center;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(255, 154, 46, 0.2);
+            margin-bottom: 1rem;
+        }
+
+        .admin-stats p {
+            color: #ff6b35;
+            font-size: 0.8rem;
         }
 
         .btn-group {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
         }
 
         /* Modal */
@@ -413,8 +351,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(4px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -422,12 +360,11 @@
         }
 
         .modal-box {
-            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
-            border: 1px solid rgba(255,154,46,0.3);
+            background: white;
             border-radius: 24px;
             padding: 2rem;
             width: 90%;
-            max-width: 360px;
+            max-width: 340px;
             text-align: center;
         }
 
@@ -446,16 +383,36 @@
             display: none;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        /* Área de contenido principal dinámico */
+        .welcome-message {
+            text-align: center;
+            padding: 3rem;
         }
 
-        @media (max-width: 768px) {
-            .grid-2 { grid-template-columns: 1fr; }
-            h1 { font-size: 2.5rem; }
-            body { padding: 1rem; }
-            .btn-group { flex-direction: column; }
+        .welcome-message h3 {
+            font-size: 1.5rem;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-message p {
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .dashboard {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -463,113 +420,139 @@
 <div class="container">
     <div class="main-header">
         <div class="logo-badge">🏆 INSCRIPCIONES 2026</div>
-        <h1>10K 2026 IDEC CENTRAL SAN CRITOBAL</h1>
-        <div class="subtitle">10K · La carrera más vibrante del año</div>
+        <h1>10K 2026</h1>
+        <div class="subtitle">IDEC CENTRAL SAN CRISTOBAL</div>
     </div>
 
-    <div class="grid-2">
-        <!-- Columna izquierda: Formulario -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">📝</div>
-                <div>
-                    <div class="card-title">Registro de corredor</div>
-                    <div class="card-subtitle">Completa tus datos para participar</div>
+    <div class="dashboard">
+        <!-- Contenido principal (izquierda) -->
+        <div class="main-content">
+            <div id="contenidoDinamico" class="welcome-message">
+                <h3>¿LISTO PARA LA 10K?</h3>
+                <p>Selecciona una opción del menú lateral para comenzar</p>
+                <div style="margin-top: 2rem;">
+                    <div style="display: inline-block; background: linear-gradient(135deg, #ff6b35, #f7931e); width: 60px; height: 4px; border-radius: 2px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú lateral derecho -->
+        <div class="sidebar">
+            <!-- Tarjeta 1: Registro -->
+            <div class="menu-card" id="menuRegistro">
+                <div class="menu-header">
+                    <div class="menu-header-left">
+                        <div class="menu-icon">📝</div>
+                        <div class="menu-title">Registro de corredor</div>
+                    </div>
+                    <div class="menu-arrow">▼</div>
+                </div>
+                <div class="menu-content">
+                    <form id="formInscripcion">
+                        <div class="form-group">
+                            <label>NOMBRE COMPLETO</label>
+                            <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
+                        </div>
+                        <div class="form-group">
+                            <label>EDAD</label>
+                            <input type="number" id="edad" placeholder="Ej: 25" min="1" max="120">
+                        </div>
+                        <div class="form-group">
+                            <label>GÉNERO</label>
+                            <select id="genero">
+                                <option value="">Selecciona</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>📸 FOTO DE LA BOLETA DEL PAGO PARA LA INSCRIPCION</label>
+                            <div class="photo-area" id="uploadArea">
+                                <div class="camera-icon">📷</div>
+                                <p>Haz clic o arrastra tu foto</p>
+                                <small>JPG, PNG · máx 2MB</small>
+                            </div>
+                            <input type="file" id="foto" accept="image/*" style="display: none;">
+                            <div class="photo-preview" id="previewArea">
+                                <div class="preview-image">
+                                    <img id="previewImg" src="" alt="Vista previa">
+                                    <div>
+                                        <button type="button" class="remove-photo-btn" id="removePhotoBtn" style="display: none;">🗑️ Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">✅ INSCRIBIRME AHORA</button>
+                    </form>
                 </div>
             </div>
 
-            <form id="formInscripcion">
-                <div class="form-group">
-                    <label>NOMBRE COMPLETO</label>
-                    <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
-                </div>
-
-                <div class="form-group">
-                    <label>EDAD</label>
-                    <input type="number" id="edad" placeholder="Ej: 25" min="1" max="120">
-                </div>
-
-                <div class="form-group">
-                    <label>GÉNERO</label>
-                    <select id="genero">
-                        <option value="">Selecciona</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Femenino">Femenino</option>
-                        <option value="Otro">Otro</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>📸 FOTO DE LA BOLETA DE PAGO DE INSCRIPCION</label>
-                    <div class="photo-area" id="uploadArea">
-                        <div class="camera-icon">📷</div>
-                        <p>Haz clic o arrastra tu foto</p>
-                        <small>JPG, PNG · máx 2MB</small>
+            <!-- Tarjeta 2: Información -->
+            <div class="menu-card" id="menuInfo">
+                <div class="menu-header">
+                    <div class="menu-header-left">
+                        <div class="menu-icon">ℹ️</div>
+                        <div class="menu-title">Información de la carrera</div>
                     </div>
-                    <input type="file" id="foto" accept="image/*" style="display: none;">
-                    <div class="photo-preview" id="previewArea">
-                        <div class="preview-image">
-                            <img id="previewImg" src="" alt="Vista previa">
-                            <div>
-                                <button type="button" class="remove-photo-btn" id="removePhotoBtn" style="display: none;">🗑️ Eliminar</button>
+                    <div class="menu-arrow">▼</div>
+                </div>
+                <div class="menu-content">
+                    <ul class="info-list">
+                        <li>
+                            <div class="info-icon">📅</div>
+                            <div class="info-text"><strong>FECHA</strong><span>AGOSTO, 2026</span></div>
+                        </li>
+                        <li>
+                            <div class="info-icon">📍</div>
+                            <div class="info-text"><strong>LUGAR</strong><span>Parque Central</span></div>
+                        </li>
+                        <li>
+                            <div class="info-icon">⏰</div>
+                            <div class="info-text"><strong>SALIDA</strong><span>09:30h</span></div>
+                        </li>
+                        <li>
+                            <div class="info-icon">🏆</div>
+                            <div class="info-text"><strong>DISTANCIA</strong><span>10 K</span></div>
+                        </li>
+                    </ul>
+                    <div style="margin-top: 1rem; padding: 1rem; background: #f0f7ff; border-radius: 12px;">
+                        <p style="font-size: 0.8rem; color: #ff6b35; text-align: center;">🎽 Incluye KIT: refacción, número y medalla</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 3: Organizadores (inicialmente cerrada, requiere login) -->
+            <div class="menu-card" id="menuOrganizador">
+                <div class="menu-header">
+                    <div class="menu-header-left">
+                        <div class="menu-icon">🔐</div>
+                        <div class="menu-title">Acceso organizadores</div>
+                    </div>
+                    <div class="menu-arrow">▼</div>
+                </div>
+                <div class="menu-content">
+                    <div id="contenidoOrganizador">
+                        <div class="admin-stats" id="estadoOrganizador">
+                            <p>🔒 Acceso restringido</p>
+                            <p style="font-size: 0.7rem;">Ingresa la contraseña para acceder al panel</p>
+                        </div>
+                        <div class="btn-group">
+                            <button id="btnMostrarLoginOrganizador" class="btn-outline" style="flex:1;">🔐 INICIAR SESIÓN</button>
+                        </div>
+                        <div id="panelOrganizadorOpciones" style="display: none; margin-top: 1rem;">
+                            <div class="admin-stats">
+                                <p>📊 ACCESO ORGANIZADOR ACTIVO</p>
                             </div>
+                            <div class="btn-group">
+                                <button id="btnExcel" class="btn-outline" style="flex:1;">📊 VER SHEET</button>
+                                <button id="btnVaciarTodo" class="btn-outline" style="flex:1; border-color:#ff4d4d; color:#ff4d4d;">⚠️ VACIAR</button>
+                            </div>
+                            <button id="btnCerrarSesion" class="btn-outline" style="width:100%; margin-top: 0.8rem;">🚪 CERRAR SESIÓN</button>
                         </div>
                     </div>
                 </div>
-
-                <button type="submit" class="btn">✅ INSCRIBIRME AHORA</button>
-            </form>
-        </div>
-
-        <!-- Columna derecha: Info carrera -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-icon">ℹ️</div>
-                <div>
-                    <div class="card-title">Información</div>
-                    <div class="card-subtitle">Detalles de la carrera</div>
-                </div>
             </div>
-
-            <ul class="info-list">
-                <li>
-                    <div class="info-icon">📅</div>
-                    <div class="info-text"><strong>FECHA</strong><span>AGOSTO 2026</span></div>
-                </li>
-                <li>
-                    <div class="info-icon">📍</div>
-                    <div class="info-text"><strong>LUGAR</strong><span>PARQUE CENTRAL</span></div>
-                </li>
-                <li>
-                    <div class="info-icon">⏰</div>
-                    <div class="info-text"><strong>SALIDA</strong><span>09:30h</span></div>
-                </li>
-                <li>
-                    <div class="info-icon">🏆</div>
-                    <div class="info-text"><strong>DISTANCIA</strong><span>10K</span></div>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Botón de organizadores al final de la página -->
-    <div class="organizador-footer">
-        <button id="btnModoOrganizador" class="btn-organizador-footer">🔐 ACCESO ORGANIZADORES</button>
-    </div>
-
-    <!-- Panel organizador (subsección que aparece abajo) -->
-    <div id="panelOrganizador" class="panel-organizador">
-        <div class="panel-header">
-            <span class="panel-title">📋 PANEL DE CONTROL</span>
-            <button id="btnCerrarSesion" style="background: none; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 5px 15px; border-radius: 30px; cursor: pointer;">🚪 Cerrar</button>
-        </div>
-        <div class="admin-stats">
-            <p>📊 ACCESO ORGANIZADOR ACTIVO</p>
-            <p style="font-size: 0.7rem; margin-top: 0.5rem;">Los datos se guardan automáticamente en Google Sheets</p>
-        </div>
-        <div class="btn-group">
-            <button id="btnExcel" class="btn-outline" style="flex:1;">📊 VER GOOGLE SHEET</button>
-            <button id="btnVaciarTodo" class="btn-outline" style="flex:1; border-color:#ff4d4d; color:#ff4d4d;">⚠️ VACIAR INSCRITOS</button>
         </div>
     </div>
 </div>
@@ -578,7 +561,7 @@
 <div id="loginModal" class="modal" style="display: none;">
     <div class="modal-box">
         <h2 style="margin-bottom: 1rem;">🔐 Acceso organizadores</h2>
-        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">Ingresa la contraseña para acceder al panel</p>
+        <p style="font-size: 0.8rem; color: #666;">Ingresa la contraseña</p>
         <input type="password" id="passwordOrganizador" placeholder="Contraseña">
         <div class="btn-group">
             <button id="btnLogin">INGRESAR</button>
@@ -594,11 +577,26 @@
     // ============================================
     const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwMBpzD7m6EjmN6xmNNU74jqlG1U3zJb86TySYMFSP8BhxikioQty9w678MjAEvDqkO/exec';
     const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
-    const CONTRASENA_ORGANIZADOR = "carrera2024";
+    const CONTRASENA_ORGANIZADOR = "carrera2026";
 
     let modoOrganizador = false;
     let imagenBase64 = '';
     let imagenNombre = '';
+
+    // ========== MANEJO DE ACORDEONES ==========
+    const menuCards = document.querySelectorAll('.menu-card');
+    menuCards.forEach(card => {
+        const header = card.querySelector('.menu-header');
+        header.addEventListener('click', (e) => {
+            // Cerrar los demás si se desea comportamiento exclusivo
+            menuCards.forEach(other => {
+                if (other !== card && other.classList.contains('open')) {
+                    other.classList.remove('open');
+                }
+            });
+            card.classList.toggle('open');
+        });
+    });
 
     // ========== MANEJO DE FOTO ==========
     const uploadArea = document.getElementById('uploadArea');
@@ -674,34 +672,32 @@
         verGoogleSheet();
     }
 
-    // ========== PANEL ORGANIZADOR ==========
+    // ========== LOGIN ORGANIZADOR ==========
     const loginModal = document.getElementById('loginModal');
-    const panelOrganizador = document.getElementById('panelOrganizador');
-    const btnOrganizadorFooter = document.getElementById('btnModoOrganizador');
-    
-    function mostrarLogin() { 
-        loginModal.style.display = 'flex'; 
-        document.getElementById('errorLogin').style.display = 'none'; 
-    }
-    
+    const panelOrganizadorOpciones = document.getElementById('panelOrganizadorOpciones');
+    const estadoOrganizador = document.getElementById('estadoOrganizador');
+    const btnMostrarLogin = document.getElementById('btnMostrarLoginOrganizador');
+
+    function mostrarLogin() { loginModal.style.display = 'flex'; document.getElementById('errorLogin').style.display = 'none'; }
     function cerrarLogin() { loginModal.style.display = 'none'; }
-    
     function intentarLogin() {
         const pwd = document.getElementById('passwordOrganizador').value;
         if(pwd === CONTRASENA_ORGANIZADOR) {
             cerrarLogin();
             modoOrganizador = true;
-            panelOrganizador.classList.add('activo');
-            // Desplazar suavemente hacia el panel
-            panelOrganizador.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            panelOrganizadorOpciones.style.display = 'block';
+            estadoOrganizador.innerHTML = '<p>✅ ACCESO CONCEDIDO</p><p style="font-size:0.7rem;">Panel de control activo</p>';
+            btnMostrarLogin.style.display = 'none';
         } else { 
             document.getElementById('errorLogin').style.display = 'block'; 
         }
     }
     
-    function cerrarSesion() {
+    function cerrarSesionOrganizador() {
         modoOrganizador = false;
-        panelOrganizador.classList.remove('activo');
+        panelOrganizadorOpciones.style.display = 'none';
+        estadoOrganizador.innerHTML = '<p>🔒 Acceso restringido</p><p style="font-size:0.7rem;">Ingresa la contraseña para acceder al panel</p>';
+        btnMostrarLogin.style.display = 'block';
         alert('🔐 Sesión de organizador cerrada');
     }
 
@@ -722,10 +718,10 @@
         }
     });
 
-    document.getElementById('btnModoOrganizador').addEventListener('click', mostrarLogin);
+    btnMostrarLogin.addEventListener('click', mostrarLogin);
     document.getElementById('btnLogin').addEventListener('click', intentarLogin);
     document.getElementById('btnCancelarLogin').addEventListener('click', cerrarLogin);
-    document.getElementById('btnCerrarSesion').addEventListener('click', cerrarSesion);
+    document.getElementById('btnCerrarSesion').addEventListener('click', cerrarSesionOrganizador);
     document.getElementById('btnExcel').addEventListener('click', verGoogleSheet);
     document.getElementById('btnVaciarTodo').addEventListener('click', vaciarTodos);
     window.onclick = (e) => { if(e.target === loginModal) cerrarLogin(); };
