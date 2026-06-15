@@ -152,7 +152,6 @@
             box-shadow: 0 0 0 3px rgba(255, 154, 46, 0.2);
         }
 
-        /* ÁREA DE FOTO MEJORADA */
         .photo-container {
             background: rgba(255,255,255,0.03);
             border-radius: 20px;
@@ -393,9 +392,9 @@
 
 <script>
     // ============================================
-    // CONFIGURACIÓN (NUEVA URL ACTUALIZADA)
+    // CONFIGURACIÓN ACTUALIZADA
     // ============================================
-    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbygwmf6uATWuxmdsNn39S1FNUc283anOW_8I00uexgNu-PI-3CBiy7Ldf3mN3BeCV36QA/exec';
+    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwMBpzD7m6EjmN6xmNNU74jqlG1U3zJb86TySYMFSP8BhxikioQty9w678MjAEvDqkO/exec';
     const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
     const CONTRASENA_ORGANIZADOR = "carrera2024";
 
@@ -489,7 +488,12 @@
             const json = await resp.json();
             btn.textContent = original;
             btn.disabled = false;
-            return json.result === 'success';
+            if (json.result === 'success') {
+                return true;
+            } else {
+                alert('Error: ' + (json.error || 'Desconocido'));
+                return false;
+            }
         } catch(e) {
             console.error(e);
             alert('⚠️ Error de conexión. Verifica que la URL de Apps Script sea correcta.');
