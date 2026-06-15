@@ -310,7 +310,6 @@
         <button class="tab-btn" data-tab="organizador" id="tabOrganizadorBtn">🔐 ORGANIZADOR</button>
     </div>
 
-    <!-- Pestaña inscripción -->
     <div id="tabInscripcion" class="tab-content active">
         <div class="section-title">Formulario de inscripción</div>
         <form id="formInscripcion">
@@ -357,7 +356,6 @@
         </form>
     </div>
 
-    <!-- Pestaña información -->
     <div id="tabInfo" class="tab-content">
         <div class="section-title">La carrera</div>
         <div style="margin-bottom: 1.5rem;">
@@ -371,7 +369,6 @@
         </div>
     </div>
 
-    <!-- Pestaña organizador -->
     <div id="tabOrganizador" class="tab-content">
         <div class="section-title">Panel de control</div>
         <div class="stats-card" id="contador">💾 Conectando con Google Sheets...</div>
@@ -382,7 +379,6 @@
     </div>
 </div>
 
-<!-- Modal login -->
 <div id="loginModal" class="modal" style="display: none;">
     <div class="modal-box">
         <h2 style="margin-bottom: 1rem;">🔐 Acceso organizadores</h2>
@@ -397,9 +393,9 @@
 
 <script>
     // ============================================
-    // CONFIGURACIÓN (actualiza tu URL aquí)
+    // CONFIGURACIÓN (NUEVA URL ACTUALIZADA)
     // ============================================
-    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw0ghbjyaAIPyCvAX3TDzQW36NAJUnE9MATaNPtAjFS9f6I3_XsevSDLpGvjT5DGHvOTQ/exec';
+    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwisLqO6N2p6CEQyNh8YpfvTUeRetBxBjruqlGFlTKGn0n2s1S39XDpF59G62h-H-6-/exec';
     const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
     const CONTRASENA_ORGANIZADOR = "carrera2024";
 
@@ -476,7 +472,7 @@
     };
     removePhotoBtn.addEventListener('click', window.eliminarFoto);
 
-    // ========== ENVÍO ==========
+    // ========== ENVÍO A GOOGLE SHEETS ==========
     async function agregarInscrito(nombre, edad, genero) {
         const fd = new FormData();
         fd.append('nombre', nombre.trim());
@@ -525,7 +521,7 @@
         } else { document.getElementById('errorLogin').style.display = 'block'; }
     }
 
-    // ========== FORMULARIO ==========
+    // ========== EVENTO PRINCIPAL ==========
     document.getElementById('formInscripcion').addEventListener('submit', async (e) => {
         e.preventDefault();
         const nombre = document.getElementById('nombre').value;
