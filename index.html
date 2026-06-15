@@ -13,9 +13,9 @@
 
         body {
             font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            background-color: #0f0f0f;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-color: #0a0a0a;
+            background-image: radial-gradient(circle at 25% 50%, rgba(255, 154, 46, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
             color: #ffffff;
             line-height: 1.5;
             min-height: 100vh;
@@ -25,20 +25,18 @@
             padding: 2rem;
         }
 
-        /* Contenedor principal estilo "Dimension" */
         .wrapper {
-            max-width: 900px;
+            max-width: 950px;
             width: 100%;
             margin: 0 auto;
-            background: rgba(20, 20, 30, 0.85);
-            backdrop-filter: blur(2px);
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 15, 25, 0.92);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             padding: 2.5rem;
-            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
         }
 
-        /* Header con logo / título */
         .logo {
             text-align: center;
             margin-bottom: 2rem;
@@ -51,14 +49,21 @@
             background-clip: text;
             color: transparent;
             margin-bottom: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         .logo h1 {
             font-size: 2.5rem;
             font-weight: 700;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: #fff;
-            margin-bottom: 0.25rem;
+            background: linear-gradient(135deg, #fff, #ff9a2e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         .logo .tagline {
             color: rgba(255,255,255,0.5);
@@ -69,15 +74,15 @@
             border-bottom: 1px solid rgba(255,255,255,0.15);
             display: inline-block;
             padding: 0.5rem 1rem;
+            margin-top: 0.5rem;
         }
 
-        /* Navegación estilo pestañas */
         .nav-tabs {
             display: flex;
             justify-content: center;
             gap: 0.5rem;
             margin: 2rem 0 2rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             padding-bottom: 0.5rem;
         }
         .tab-btn {
@@ -89,60 +94,52 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
-            padding: 0.5rem 1.5rem;
+            padding: 0.6rem 1.8rem;
             cursor: pointer;
             transition: all 0.2s;
-            border-radius: 4px;
+            border-radius: 40px;
         }
         .tab-btn:hover {
             color: #ff9a2e;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 154, 46, 0.1);
         }
         .tab-btn.active {
             color: #ff9a2e;
-            border-bottom: 2px solid #ff9a2e;
+            background: rgba(255, 154, 46, 0.15);
         }
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
 
-        /* Contenido de cada tab */
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Títulos de sección */
         .section-title {
             font-size: 1.8rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin-bottom: 1.5rem;
-            color: #fff;
+            margin-bottom: 1.8rem;
+            background: linear-gradient(135deg, #fff, #ff9a2e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             border-left: 4px solid #ff9a2e;
             padding-left: 1rem;
         }
 
-        /* Formulario moderno */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+        .form-group { margin-bottom: 1.8rem; }
         label {
             display: block;
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
             color: rgba(255,255,255,0.7);
         }
         input, select {
             width: 100%;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 4px;
-            padding: 12px 15px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 14px 18px;
             color: #fff;
             font-family: inherit;
             font-size: 1rem;
@@ -151,194 +148,175 @@
         input:focus, select:focus {
             outline: none;
             border-color: #ff9a2e;
-            background: rgba(255,255,255,0.12);
-        }
-        input::placeholder {
-            color: rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 0 0 3px rgba(255, 154, 46, 0.2);
         }
 
-        /* Área de foto estilo "Dimension" */
+        /* ÁREA DE FOTO MEJORADA */
+        .photo-container {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
         .photo-area {
-            border: 1px dashed rgba(255,255,255,0.3);
-            border-radius: 8px;
-            padding: 1.2rem;
+            border: 2px dashed rgba(255, 154, 46, 0.4);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
-            background: rgba(255,255,255,0.03);
+            transition: all 0.3s ease;
+            background: rgba(255, 154, 46, 0.03);
         }
         .photo-area:hover {
             border-color: #ff9a2e;
-            background: rgba(255,255,255,0.06);
+            background: rgba(255, 154, 46, 0.08);
+            transform: scale(1.01);
         }
-        .photo-area p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.6);
+        .photo-area.drag-over {
+            border-color: #ff9a2e;
+            background: rgba(255, 154, 46, 0.15);
+            transform: scale(1.02);
         }
+        .camera-icon {
+            font-size: 3rem;
+            display: inline-block;
+            animation: cameraPulse 1.5s infinite;
+        }
+        @keyframes cameraPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        .photo-area p { margin: 0.5rem 0; font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+        .photo-area small { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+
         .photo-preview {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             text-align: center;
-        }
-        .photo-preview img {
-            max-width: 100px;
-            max-height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #ff9a2e;
-            padding: 2px;
-        }
-        .remove-photo {
-            background: none;
-            border: 1px solid rgba(255,255,255,0.3);
-            color: rgba(255,255,255,0.7);
-            padding: 4px 12px;
-            font-size: 0.7rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.03);
             border-radius: 20px;
-            margin-top: 8px;
+            display: none;
+        }
+        .photo-preview.active { display: block; animation: zoomIn 0.3s ease; }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .preview-image { position: relative; display: inline-block; }
+        .preview-image img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #ff9a2e;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
             cursor: pointer;
         }
-        .remove-photo:hover {
-            border-color: #ff4d4d;
+        .preview-image img:hover { transform: scale(1.08); box-shadow: 0 15px 35px rgba(255, 154, 46, 0.3); }
+        .photo-info { margin-top: 0.8rem; font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+        .remove-photo-btn {
+            background: rgba(255, 77, 77, 0.2);
+            border: 1px solid #ff4d4d;
             color: #ff4d4d;
+            padding: 6px 18px;
+            font-size: 0.7rem;
+            border-radius: 30px;
+            margin-top: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
         }
+        .remove-photo-btn:hover { background: #ff4d4d; color: #fff; }
 
-        /* Botones estilo "Dimension" */
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
+        .btn-group { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
         button {
-            background: none;
-            border: 1px solid #ff9a2e;
-            color: #ff9a2e;
-            padding: 10px 24px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            background: linear-gradient(135deg, #ff4d4d, #ff9a2e);
+            border: none;
+            color: white;
+            padding: 12px 28px;
+            font-size: 0.85rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
-            transition: all 0.2s;
-            border-radius: 4px;
+            transition: all 0.3s;
+            border-radius: 40px;
             font-family: inherit;
+            box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
         }
-        button:hover {
-            background: #ff9a2e;
-            color: #0f0f0f;
-            border-color: #ff9a2e;
+        button:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 154, 46, 0.4); }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #ff9a2e;
+            color: #ff9a2e;
+            box-shadow: none;
         }
-        .btn-outline-light {
-            border-color: rgba(255,255,255,0.4);
-            color: rgba(255,255,255,0.8);
-        }
-        .btn-outline-light:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: #fff;
-            color: #fff;
-        }
-        .btn-danger {
-            border-color: #ff4d4d;
-            color: #ff4d4d;
-        }
-        .btn-danger:hover {
-            background: #ff4d4d;
-            color: #0f0f0f;
-        }
+        .btn-outline:hover { background: #ff9a2e; color: #0f0f0f; transform: translateY(-2px); }
 
-        /* Panel organizador */
-        .admin-panel {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
         .stats-card {
             background: rgba(255,255,255,0.05);
-            border-radius: 6px;
-            padding: 1rem;
+            border-radius: 16px;
+            padding: 1.2rem;
             text-align: center;
-            margin-bottom: 1rem;
-        }
-        .stats-card span {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #ff9a2e;
+            margin-bottom: 1.5rem;
         }
 
-        /* Modal login */
         .modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
         }
         .modal-box {
-            background: #1a1a2a;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 8px;
+            background: linear-gradient(135deg, #1a1a2a, #0f0f1a);
+            border: 1px solid rgba(255,154,46,0.3);
+            border-radius: 24px;
             padding: 2rem;
             width: 90%;
             max-width: 360px;
             text-align: center;
         }
-        .modal-box input {
-            margin: 1rem 0;
-        }
-        .error-msg {
-            color: #ff4d4d;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-            display: none;
-        }
-
+        .error-msg { color: #ff4d4d; font-size: 0.8rem; margin-top: 0.5rem; display: none; }
         .oculto { display: none; }
-        .text-center { text-align: center; }
-        .mt-3 { margin-top: 1rem; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 640px) {
             .wrapper { padding: 1.5rem; }
-            .tab-btn { padding: 0.5rem 0.8rem; font-size: 0.7rem; }
+            .tab-btn { padding: 0.4rem 1rem; font-size: 0.7rem; }
             .section-title { font-size: 1.3rem; }
-            .btn-group button { flex: 1; }
+            .preview-image img { width: 130px; height: 130px; }
         }
     </style>
 </head>
 <body>
 <div class="wrapper">
-    <!-- Logo / Header -->
     <div class="logo">
         <div class="logo-icon">🏃‍♂️⚡🏃‍♀️</div>
         <h1>VALENCIA RACE</h1>
         <div class="tagline">INSCRIPCIONES 2025 · SUPERA TUS LÍMITES</div>
     </div>
 
-    <!-- Navegación tipo pestañas -->
     <div class="nav-tabs">
         <button class="tab-btn active" data-tab="inscripcion">📝 INSCRIBIRME</button>
         <button class="tab-btn" data-tab="info">ℹ️ LA CARRERA</button>
         <button class="tab-btn" data-tab="organizador" id="tabOrganizadorBtn">🔐 ORGANIZADOR</button>
     </div>
 
-    <!-- Pestaña: INSCRIPCIÓN -->
+    <!-- Pestaña inscripción -->
     <div id="tabInscripcion" class="tab-content active">
         <div class="section-title">Formulario de inscripción</div>
         <form id="formInscripcion">
             <div class="form-group">
                 <label>NOMBRE COMPLETO</label>
-                <input type="text" id="nombre" placeholder="Ej: Juan Pérez" autocomplete="off">
+                <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
             </div>
             <div class="form-group">
                 <label>EDAD</label>
@@ -353,58 +331,65 @@
                     <option value="Otro">Otro</option>
                 </select>
             </div>
+
             <div class="form-group">
-                <label>FOTO (opcional)</label>
-                <div class="photo-area" id="uploadArea">
-                    <p>📸 HAZ CLIC PARA SUBIR TU FOTO</p>
-                    <p style="font-size: 0.7rem;">JPG, PNG · máx 2MB</p>
+                <label>📸 FOTO DEL CORREDOR</label>
+                <div class="photo-container">
+                    <div class="photo-area" id="uploadArea">
+                        <div class="camera-icon">📷</div>
+                        <p>Haz clic o arrastra tu foto aquí</p>
+                        <small>JPG, PNG · Máx. 2MB</small>
+                    </div>
+                    <input type="file" id="foto" accept="image/*" style="display: none;">
+                    <div class="photo-preview" id="previewArea">
+                        <div class="preview-image">
+                            <img id="previewImg" src="" alt="Vista previa">
+                            <div class="photo-info" id="photoInfo"></div>
+                            <button type="button" class="remove-photo-btn" id="removePhotoBtn" style="display: none;">🗑️ Eliminar foto</button>
+                        </div>
+                    </div>
                 </div>
-                <input type="file" id="foto" accept="image/*" style="display: none;">
-                <div class="photo-preview" id="previewArea"></div>
             </div>
+
             <div class="btn-group">
-                <button type="submit">✅ INSCRIBIRME</button>
+                <button type="submit">✅ INSCRIBIRME AHORA</button>
             </div>
         </form>
     </div>
 
-    <!-- Pestaña: INFORMACIÓN DE LA CARRERA -->
+    <!-- Pestaña información -->
     <div id="tabInfo" class="tab-content">
         <div class="section-title">La carrera</div>
-        <div style="margin-bottom: 1.2rem;">
+        <div style="margin-bottom: 1.5rem;">
             <p style="margin-bottom: 1rem;">🏆 <strong>VALENCIA IBÉRICA RACE</strong> – 3K | 5K | 9K</p>
             <p>📅 <strong>Fecha:</strong> 15 de Junio, 2025</p>
             <p>📍 <strong>Lugar:</strong> Ciudad de las Artes y las Ciencias, Valencia</p>
             <p>⏰ <strong>Salida:</strong> 09:30h</p>
-            <hr style="border-color: rgba(255,255,255,0.2); margin: 1rem 0;">
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 1rem 0;">
             <p>🎽 Incluye: Dorsal oficial, chip de cronometraje, camiseta técnica y avituallamiento.</p>
             <p>🥇 Premios para los 3 primeros de cada categoría.</p>
         </div>
     </div>
 
-    <!-- Pestaña: ORGANIZADOR (solo se ve tras login) -->
+    <!-- Pestaña organizador -->
     <div id="tabOrganizador" class="tab-content">
         <div class="section-title">Panel de control</div>
         <div class="stats-card" id="contador">💾 Conectando con Google Sheets...</div>
         <div class="btn-group">
-            <button id="btnExcel" class="btn-outline-light">📊 VER GOOGLE SHEET</button>
-            <button id="btnVaciarTodo" class="btn-danger">⚠️ VACIAR INSCRITOS</button>
-        </div>
-        <div class="admin-panel">
-            <p style="font-size: 0.75rem; opacity: 0.6;">✓ Los datos se guardan automáticamente en la nube</p>
-            <p style="font-size: 0.75rem; opacity: 0.6;">✓ Las fotos se almacenan en Google Drive</p>
+            <button id="btnExcel" class="btn-outline">📊 VER GOOGLE SHEET</button>
+            <button id="btnVaciarTodo" class="btn-outline">⚠️ VACIAR INSCRITOS</button>
         </div>
     </div>
 </div>
 
-<!-- Modal para login de organizador -->
+<!-- Modal login -->
 <div id="loginModal" class="modal" style="display: none;">
     <div class="modal-box">
-        <h2 style="margin-bottom: 0.5rem;">🔐 Acceso organizadores</h2>
-        <input type="password" id="passwordOrganizador" placeholder="Contraseña">
+        <h2 style="margin-bottom: 1rem;">🔐 Acceso organizadores</h2>
+        <input type="password" id="passwordOrganizador" placeholder="Contraseña" style="margin-bottom: 1rem;">
         <div class="btn-group" style="justify-content: center;">
             <button id="btnLogin">INGRESAR</button>
-            <button id="btnCancelarLogin" class="btn-outline-light">CANCELAR</button>
+            <button id="btnCancelarLogin" class="btn-outline">CANCELAR</button>
         </div>
         <div id="errorLogin" class="error-msg">❌ Contraseña incorrecta</div>
     </div>
@@ -418,12 +403,11 @@
     const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
     const CONTRASENA_ORGANIZADOR = "carrera2024";
 
-    // Estado
     let modoOrganizador = false;
     let imagenBase64 = '';
     let imagenNombre = '';
 
-    // ========== MANEJO DE TABS ==========
+    // ========== TABS ==========
     const tabs = document.querySelectorAll('.tab-btn');
     const contents = {
         inscripcion: document.getElementById('tabInscripcion'),
@@ -432,9 +416,7 @@
     };
 
     function activateTab(tabId) {
-        Object.keys(contents).forEach(id => {
-            contents[id].classList.remove('active');
-        });
+        Object.keys(contents).forEach(id => contents[id].classList.remove('active'));
         contents[tabId].classList.add('active');
         tabs.forEach(btn => {
             btn.classList.remove('active');
@@ -445,37 +427,56 @@
     tabs.forEach(btn => {
         btn.addEventListener('click', () => {
             const tabId = btn.getAttribute('data-tab');
-            if(tabId === 'organizador' && !modoOrganizador) {
-                mostrarLogin();
-                return;
-            }
+            if(tabId === 'organizador' && !modoOrganizador) { mostrarLogin(); return; }
             activateTab(tabId);
         });
     });
 
-    // ========== SUBIDA DE FOTO ==========
+    // ========== MANEJO DE FOTO ==========
     const uploadArea = document.getElementById('uploadArea');
     const fotoInput = document.getElementById('foto');
-    const previewArea = document.getElementById('previewArea');
+    const previewAreaDiv = document.getElementById('previewArea');
+    const previewImg = document.getElementById('previewImg');
+    const photoInfo = document.getElementById('photoInfo');
+    const removePhotoBtn = document.getElementById('removePhotoBtn');
 
     uploadArea.addEventListener('click', () => fotoInput.click());
-    fotoInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if(!file) return;
-        if(file.size > 2 * 1024 * 1024) { alert('❌ Máximo 2MB'); fotoInput.value = ''; return; }
+    uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
+    uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('drag-over');
+        const file = e.dataTransfer.files[0];
+        if(file && file.type.startsWith('image/')) procesarImagen(file);
+        else alert('❌ Por favor, sube un archivo de imagen válido');
+    });
+
+    fotoInput.addEventListener('change', (e) => { if(e.target.files[0]) procesarImagen(e.target.files[0]); });
+
+    function procesarImagen(file) {
+        if(file.size > 2 * 1024 * 1024) { alert('❌ La imagen no puede superar los 2MB'); fotoInput.value = ''; return; }
+        if(!file.type.startsWith('image/')) { alert('❌ Formato no válido. Usa JPG o PNG'); return; }
         imagenNombre = file.name;
         const reader = new FileReader();
         reader.onload = (ev) => {
             imagenBase64 = ev.target.result.split(',')[1];
-            previewArea.innerHTML = `<img src="${ev.target.result}"><br><button class="remove-photo" onclick="eliminarFoto()">🗑️ Eliminar</button>`;
+            previewImg.src = ev.target.result;
+            previewAreaDiv.classList.add('active');
+            const tamaño = (file.size / 1024).toFixed(1);
+            photoInfo.innerHTML = `📸 ${file.name} · ${tamaño} KB`;
+            removePhotoBtn.style.display = 'inline-block';
         };
         reader.readAsDataURL(file);
-    });
-    window.eliminarFoto = function() {
-        imagenBase64 = ''; imagenNombre = ''; fotoInput.value = ''; previewArea.innerHTML = '';
-    };
+    }
 
-    // ========== ENVÍO A GOOGLE SHEETS ==========
+    window.eliminarFoto = function() {
+        imagenBase64 = ''; imagenNombre = ''; fotoInput.value = '';
+        previewImg.src = ''; previewAreaDiv.classList.remove('active');
+        removePhotoBtn.style.display = 'none'; photoInfo.innerHTML = '';
+    };
+    removePhotoBtn.addEventListener('click', window.eliminarFoto);
+
+    // ========== ENVÍO ==========
     async function agregarInscrito(nombre, edad, genero) {
         const fd = new FormData();
         fd.append('nombre', nombre.trim());
@@ -495,7 +496,7 @@
             return json.result === 'success';
         } catch(e) {
             console.error(e);
-            alert('Error de conexión. Verifica que la URL de Apps Script sea correcta.');
+            alert('⚠️ Error de conexión. Verifica que la URL de Apps Script sea correcta.');
             btn.textContent = original;
             btn.disabled = false;
             return false;
@@ -509,7 +510,7 @@
         verGoogleSheet();
     }
 
-    // ========== LOGIN ORGANIZADOR ==========
+    // ========== LOGIN ==========
     const loginModal = document.getElementById('loginModal');
     function mostrarLogin() { loginModal.style.display = 'flex'; document.getElementById('errorLogin').style.display = 'none'; }
     function cerrarLogin() { loginModal.style.display = 'none'; }
@@ -518,27 +519,21 @@
         if(pwd === CONTRASENA_ORGANIZADOR) {
             cerrarLogin();
             modoOrganizador = true;
-            // Mostrar contenido del organizador
             document.getElementById('tabOrganizadorBtn').classList.remove('oculto');
             activateTab('organizador');
-            // Actualizar contador simulado (podrías leer desde Sheets si quieres)
             document.getElementById('contador').innerHTML = '📊 ACCESO CONCEDIDO · Los datos se guardan en Google Sheets';
-        } else {
-            document.getElementById('errorLogin').style.display = 'block';
-        }
+        } else { document.getElementById('errorLogin').style.display = 'block'; }
     }
 
-    // ========== FORMULARIO PRINCIPAL ==========
+    // ========== FORMULARIO ==========
     document.getElementById('formInscripcion').addEventListener('submit', async (e) => {
         e.preventDefault();
         const nombre = document.getElementById('nombre').value;
         const edad = document.getElementById('edad').value;
         const genero = document.getElementById('genero').value;
-
         if(!nombre || nombre.trim().length < 3) return alert('❌ Nombre válido (mínimo 3 letras)');
         if(!edad || edad < 1 || edad > 120) return alert('❌ Edad entre 1 y 120 años');
         if(!genero) return alert('❌ Selecciona un género');
-
         const ok = await agregarInscrito(nombre, edad, genero);
         if(ok) {
             document.getElementById('formInscripcion').reset();
@@ -548,14 +543,12 @@
         }
     });
 
-    // Eventos de botones
     document.getElementById('btnLogin').addEventListener('click', intentarLogin);
     document.getElementById('btnCancelarLogin').addEventListener('click', cerrarLogin);
     document.getElementById('btnExcel').addEventListener('click', verGoogleSheet);
     document.getElementById('btnVaciarTodo').addEventListener('click', vaciarTodos);
     window.onclick = (e) => { if(e.target === loginModal) cerrarLogin(); };
 
-    // Inicializar
     activateTab('inscripcion');
 </script>
 </body>
