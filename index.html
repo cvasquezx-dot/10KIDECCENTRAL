@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscripción Carrera | Valencia Race</title>
+    <title>Inscripción | Valencia Race</title>
     <style>
         * {
             margin: 0;
@@ -12,529 +12,470 @@
         }
 
         body {
-            font-family: 'Times New Roman', Georgia, 'Playfair Display', serif;
-            background-color: #f5f5f0;
-            color: #1a1a1a;
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background-color: #0f0f0f;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: #ffffff;
             line-height: 1.5;
-            padding: 2rem;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
         }
 
-        .container {
-            max-width: 780px;
+        /* Contenedor principal estilo "Dimension" */
+        .wrapper {
+            max-width: 900px;
+            width: 100%;
             margin: 0 auto;
-            background: #ffffff;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            background: rgba(20, 20, 30, 0.85);
+            backdrop-filter: blur(2px);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.4);
         }
 
-        /* Header tipo revista */
-        .site-header {
-            padding: 3rem 3rem 1rem 3rem;
-            border-bottom: 1px solid #eaeaea;
+        /* Header con logo / título */
+        .logo {
             text-align: center;
+            margin-bottom: 2rem;
         }
-
-        .site-title {
-            font-size: 3rem;
+        .logo-icon {
+            font-size: 4rem;
+            display: inline-block;
+            background: linear-gradient(135deg, #ff4d4d, #ff9a2e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .logo h1 {
+            font-size: 2.5rem;
             font-weight: 700;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: #1a1a1a;
-            margin-bottom: 0.5rem;
-            font-family: 'Times New Roman', Georgia, serif;
+            color: #fff;
+            margin-bottom: 0.25rem;
         }
-
-        .site-subtitle {
-            font-size: 0.75rem;
+        .logo .tagline {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #888;
-            border-top: 1px solid #eaeaea;
-            border-bottom: 1px solid #eaeaea;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.15);
             display: inline-block;
             padding: 0.5rem 1rem;
-            margin-top: 0.5rem;
         }
 
-        /* Navegación tipo blog */
-        .nav-links {
-            padding: 1rem 3rem;
-            border-bottom: 1px solid #eaeaea;
-            text-align: center;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
+        /* Navegación estilo pestañas */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 2rem 0 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
         }
-
-        .nav-links a {
-            color: #1a1a1a;
-            text-decoration: none;
-            margin: 0 1rem;
+        .tab-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.6);
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
             text-transform: uppercase;
-            transition: color 0.2s;
+            letter-spacing: 2px;
+            padding: 0.5rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 4px;
+        }
+        .tab-btn:hover {
+            color: #ff9a2e;
+            background: rgba(255,255,255,0.05);
+        }
+        .tab-btn.active {
+            color: #ff9a2e;
+            border-bottom: 2px solid #ff9a2e;
         }
 
-        .nav-links a:hover {
-            color: #c9a03d;
+        /* Contenido de cada tab */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active {
+            display: block;
         }
 
-        /* Contenido principal */
-        .main-content {
-            padding: 2rem 3rem;
-        }
-
-        /* Artículo / formulario */
-        .post-header {
-            margin-bottom: 2rem;
-            border-left: 4px solid #c9a03d;
-            padding-left: 1.5rem;
-        }
-
-        .post-title {
-            font-size: 2.2rem;
+        /* Títulos de sección */
+        .section-title {
+            font-size: 1.8rem;
             font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 0.5rem;
-            font-family: 'Times New Roman', Georgia, serif;
-        }
-
-        .post-meta {
-            color: #888;
-            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            border-left: 4px solid #ff9a2e;
+            padding-left: 1rem;
         }
 
-        .post-meta span {
-            color: #c9a03d;
-        }
-
-        .featured-image {
-            width: 100%;
-            height: auto;
-            background: #eaeaea;
-            margin-bottom: 2rem;
-            text-align: center;
-            padding: 3rem;
-            color: #aaa;
-            font-style: italic;
-        }
-
-        /* Formulario estilo minimalista */
+        /* Formulario moderno */
         .form-group {
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
         }
-
         label {
             display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             font-weight: 600;
             margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #333;
+            color: rgba(255,255,255,0.7);
         }
-
-        label .required {
-            color: #c9a03d;
-            margin-left: 3px;
-        }
-
         input, select {
             width: 100%;
-            padding: 12px 0;
-            border: none;
-            border-bottom: 1px solid #ddd;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 4px;
+            padding: 12px 15px;
+            color: #fff;
+            font-family: inherit;
             font-size: 1rem;
-            font-family: 'Times New Roman', Georgia, serif;
-            background: transparent;
-            transition: border-color 0.2s;
+            transition: all 0.2s;
         }
-
         input:focus, select:focus {
             outline: none;
-            border-bottom-color: #c9a03d;
+            border-color: #ff9a2e;
+            background: rgba(255,255,255,0.12);
+        }
+        input::placeholder {
+            color: rgba(255,255,255,0.4);
         }
 
-        input.error, select.error {
-            border-bottom-color: #c9a03d;
-        }
-
-        .error-message {
-            color: #c9a03d;
-            font-size: 0.75rem;
-            margin-top: 0.5rem;
-            display: none;
-            font-style: italic;
-        }
-
-        /* Área de foto minimalista */
-        .image-upload-area {
-            border: 1px dashed #ddd;
-            padding: 1.5rem;
+        /* Área de foto estilo "Dimension" */
+        .photo-area {
+            border: 1px dashed rgba(255,255,255,0.3);
+            border-radius: 8px;
+            padding: 1.2rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s;
-            background: #fafaf8;
-            margin-top: 0.5rem;
+            background: rgba(255,255,255,0.03);
         }
-
-        .image-upload-area:hover {
-            border-color: #c9a03d;
-            background: #fcfcf9;
+        .photo-area:hover {
+            border-color: #ff9a2e;
+            background: rgba(255,255,255,0.06);
         }
-
-        .image-upload-area p:first-child {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+        .photo-area p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
         }
-
-        .image-preview {
+        .photo-preview {
             margin-top: 1rem;
             text-align: center;
         }
-
-        .image-preview img {
-            max-width: 120px;
-            max-height: 120px;
+        .photo-preview img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 50%;
             object-fit: cover;
-            border: 1px solid #eaeaea;
-            padding: 4px;
+            border: 2px solid #ff9a2e;
+            padding: 2px;
         }
-
-        .remove-image {
+        .remove-photo {
             background: none;
-            border: 1px solid #ddd;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.7);
             padding: 4px 12px;
             font-size: 0.7rem;
-            margin-top: 0.5rem;
-            display: inline-block;
             border-radius: 20px;
-            color: #888;
+            margin-top: 8px;
             cursor: pointer;
-            font-family: inherit;
+        }
+        .remove-photo:hover {
+            border-color: #ff4d4d;
+            color: #ff4d4d;
         }
 
-        .remove-image:hover {
-            border-color: #c9a03d;
-            color: #c9a03d;
+        /* Botones estilo "Dimension" */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
-
-        /* Botones minimalistas */
         button {
             background: none;
-            border: 1px solid #1a1a1a;
-            padding: 10px 28px;
+            border: 1px solid #ff9a2e;
+            color: #ff9a2e;
+            padding: 10px 24px;
             font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
             transition: all 0.2s;
-            margin-right: 12px;
-            margin-top: 10px;
-            font-family: 'Times New Roman', Georgia, serif;
-            color: #1a1a1a;
+            border-radius: 4px;
+            font-family: inherit;
         }
-
         button:hover {
-            background: #1a1a1a;
-            color: white;
+            background: #ff9a2e;
+            color: #0f0f0f;
+            border-color: #ff9a2e;
         }
-
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .btn-outline-light {
+            border-color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.8);
         }
-
-        .btn-organizador {
-            border-color: #c9a03d;
-            color: #c9a03d;
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #fff;
+            color: #fff;
         }
-
-        .btn-organizador:hover {
-            background: #c9a03d;
-            color: white;
+        .btn-danger {
+            border-color: #ff4d4d;
+            color: #ff4d4d;
         }
-
-        .btn-excel {
-            border-color: #c9a03d;
-            color: #c9a03d;
-        }
-
-        .btn-excel:hover {
-            background: #c9a03d;
-            color: white;
-        }
-
-        .btn-cerrar {
-            border-color: #888;
-            color: #888;
-        }
-
-        .btn-cerrar:hover {
-            background: #888;
-            color: white;
+        .btn-danger:hover {
+            background: #ff4d4d;
+            color: #0f0f0f;
         }
 
         /* Panel organizador */
-        .panel-organizador {
-            display: none;
-            margin-top: 2rem;
+        .admin-panel {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .stats-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .stats-card span {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff9a2e;
         }
 
-        .panel-organizador.activo {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-
-        .oculto {
-            display: none;
-        }
-
-        .login-overlay {
+        /* Modal login */
+        .modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(4px);
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             z-index: 1000;
         }
-
-        .login-box {
-            background: white;
+        .modal-box {
+            background: #1a1a2a;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
             padding: 2rem;
             width: 90%;
-            max-width: 380px;
+            max-width: 360px;
             text-align: center;
-            border: 1px solid #eaeaea;
         }
-
-        .login-box h2 {
-            font-family: 'Times New Roman', Georgia, serif;
-            margin-bottom: 1rem;
-            font-weight: 400;
-        }
-
-        .login-box input {
+        .modal-box input {
             margin: 1rem 0;
         }
-
-        .aviso {
-            color: #c9a03d;
-            margin-top: 1rem;
-            display: none;
+        .error-msg {
+            color: #ff4d4d;
             font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: none;
         }
 
-        .sesion-activa {
-            background: #1a1a1a;
-            color: white;
-            padding: 0.5rem 1rem;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-        }
-
-        .info-box {
-            background: #fafaf8;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            border-left: 3px solid #c9a03d;
-        }
-
-        .info-box p {
-            margin: 0.5rem 0;
-            font-size: 0.85rem;
-        }
-
-        .info-box code {
-            background: #eee;
-            padding: 2px 5px;
-            font-size: 0.75rem;
-        }
-
-        .contador {
-            font-size: 0.9rem;
-            background: #fafaf8;
-            padding: 1rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            border: 1px solid #eaeaea;
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid #eaeaea;
-            margin: 2rem 0;
-        }
+        .oculto { display: none; }
+        .text-center { text-align: center; }
+        .mt-3 { margin-top: 1rem; }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 700px) {
-            body {
-                padding: 1rem;
-            }
-            .main-content {
-                padding: 1.5rem;
-            }
-            .site-header {
-                padding: 2rem 1.5rem;
-            }
-            button {
-                width: 100%;
-                margin-right: 0;
-            }
+        @media (max-width: 640px) {
+            .wrapper { padding: 1.5rem; }
+            .tab-btn { padding: 0.5rem 0.8rem; font-size: 0.7rem; }
+            .section-title { font-size: 1.3rem; }
+            .btn-group button { flex: 1; }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <!-- Header estilo revista -->
-    <div class="site-header">
-        <div class="site-title">VALENCIA RACE</div>
-        <div class="site-subtitle">INSCRIPCIONES 2025</div>
+<div class="wrapper">
+    <!-- Logo / Header -->
+    <div class="logo">
+        <div class="logo-icon">🏃‍♂️⚡🏃‍♀️</div>
+        <h1>VALENCIA RACE</h1>
+        <div class="tagline">INSCRIPCIONES 2025 · SUPERA TUS LÍMITES</div>
     </div>
 
-    <div class="nav-links">
-        <a href="#">INICIO</a>
-        <a href="#">RECORRIDO</a>
-        <a href="#">CATEGORÍAS</a>
-        <a href="#">CONTACTO</a>
+    <!-- Navegación tipo pestañas -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="inscripcion">📝 INSCRIBIRME</button>
+        <button class="tab-btn" data-tab="info">ℹ️ LA CARRERA</button>
+        <button class="tab-btn" data-tab="organizador" id="tabOrganizadorBtn">🔐 ORGANIZADOR</button>
     </div>
 
-    <div class="main-content">
-        <div class="post-header">
-            <div class="post-title">Formulario de inscripción</div>
-            <div class="post-meta">
-                <span>✦</span> Completa tus datos para participar <span>✦</span>
-            </div>
-        </div>
-
-        <div id="indicadorSesion" style="text-align: center; display: none;">
-            <span class="sesion-activa">👑 MODO ORGANIZADOR ACTIVO</span>
-        </div>
-
+    <!-- Pestaña: INSCRIPCIÓN -->
+    <div id="tabInscripcion" class="tab-content active">
+        <div class="section-title">Formulario de inscripción</div>
         <form id="formInscripcion">
             <div class="form-group">
-                <label>NOMBRE COMPLETO <span class="required">*</span></label>
-                <input type="text" id="nombre" required placeholder="Ej: Juan Pérez">
+                <label>NOMBRE COMPLETO</label>
+                <input type="text" id="nombre" placeholder="Ej: Juan Pérez" autocomplete="off">
             </div>
-
             <div class="form-group">
-                <label>EDAD <span class="required">*</span></label>
-                <input type="number" id="edad" required placeholder="Ej: 25" min="1" max="120">
+                <label>EDAD</label>
+                <input type="number" id="edad" placeholder="Ej: 25" min="1" max="120">
             </div>
-
             <div class="form-group">
-                <label>GÉNERO <span class="required">*</span></label>
-                <select id="genero" required>
-                    <option value="">Seleccione...</option>
+                <label>GÉNERO</label>
+                <select id="genero">
+                    <option value="">Selecciona</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>
                     <option value="Otro">Otro</option>
-                    <option value="Prefiero no decir">Prefiero no decir</option>
                 </select>
             </div>
-
             <div class="form-group">
-                <label>FOTO DEL CORREDOR <span style="font-weight: normal;">(opcional)</span></label>
-                <div class="image-upload-area" id="uploadArea">
-                    <p>📷</p>
-                    <p style="font-size: 0.8rem;">Seleccionar imagen</p>
-                    <p style="font-size: 0.7rem; color: #aaa;">JPG, PNG · máx 2MB</p>
+                <label>FOTO (opcional)</label>
+                <div class="photo-area" id="uploadArea">
+                    <p>📸 HAZ CLIC PARA SUBIR TU FOTO</p>
+                    <p style="font-size: 0.7rem;">JPG, PNG · máx 2MB</p>
                 </div>
                 <input type="file" id="foto" accept="image/*" style="display: none;">
-                <div class="image-preview" id="previewArea"></div>
+                <div class="photo-preview" id="previewArea"></div>
             </div>
-
-            <div style="margin-top: 2rem;">
+            <div class="btn-group">
                 <button type="submit">✅ INSCRIBIRME</button>
-                <button type="button" id="btnModoOrganizador" class="btn-organizador">🔐 ORGANIZADORES</button>
             </div>
         </form>
+    </div>
 
-        <hr>
+    <!-- Pestaña: INFORMACIÓN DE LA CARRERA -->
+    <div id="tabInfo" class="tab-content">
+        <div class="section-title">La carrera</div>
+        <div style="margin-bottom: 1.2rem;">
+            <p style="margin-bottom: 1rem;">🏆 <strong>VALENCIA IBÉRICA RACE</strong> – 3K | 5K | 9K</p>
+            <p>📅 <strong>Fecha:</strong> 15 de Junio, 2025</p>
+            <p>📍 <strong>Lugar:</strong> Ciudad de las Artes y las Ciencias, Valencia</p>
+            <p>⏰ <strong>Salida:</strong> 09:30h</p>
+            <hr style="border-color: rgba(255,255,255,0.2); margin: 1rem 0;">
+            <p>🎽 Incluye: Dorsal oficial, chip de cronometraje, camiseta técnica y avituallamiento.</p>
+            <p>🥇 Premios para los 3 primeros de cada categoría.</p>
+        </div>
+    </div>
 
-        <div id="panelOrganizador" class="panel-organizador">
-            <div class="post-header" style="margin-top: 1rem;">
-                <div class="post-title">Panel de control</div>
-            </div>
-            <div class="contador" id="contador">💾 Datos guardados en la nube</div>
-            
-            <button type="button" class="btn-excel" id="btnExcel">📊 VER GOOGLE SHEET</button>
-            <button type="button" id="btnVaciarTodo" class="btn-organizador">⚠️ VACIAR INSCRITOS</button>
-            <button type="button" id="btnCerrarSesion" class="btn-cerrar">🚪 CERRAR SESIÓN</button>
-            
-            <div class="info-box">
-                <p>📌 <strong>Información</strong></p>
-                <p>✓ Los datos se guardan automáticamente en Google Sheets</p>
-                <p>✓ Las fotos se almacenan en Google Drive</p>
-                <p>📸 Para ver fotos en Sheets usa: <code>=IMAGE(celda_con_url)</code></p>
-            </div>
+    <!-- Pestaña: ORGANIZADOR (solo se ve tras login) -->
+    <div id="tabOrganizador" class="tab-content">
+        <div class="section-title">Panel de control</div>
+        <div class="stats-card" id="contador">💾 Conectando con Google Sheets...</div>
+        <div class="btn-group">
+            <button id="btnExcel" class="btn-outline-light">📊 VER GOOGLE SHEET</button>
+            <button id="btnVaciarTodo" class="btn-danger">⚠️ VACIAR INSCRITOS</button>
+        </div>
+        <div class="admin-panel">
+            <p style="font-size: 0.75rem; opacity: 0.6;">✓ Los datos se guardan automáticamente en la nube</p>
+            <p style="font-size: 0.75rem; opacity: 0.6;">✓ Las fotos se almacenan en Google Drive</p>
         </div>
     </div>
 </div>
 
-<!-- Modal login -->
-<div id="loginModal" class="login-overlay" style="display: none;">
-    <div class="login-box">
-        <h2>🔐 Acceso organizadores</h2>
+<!-- Modal para login de organizador -->
+<div id="loginModal" class="modal" style="display: none;">
+    <div class="modal-box">
+        <h2 style="margin-bottom: 0.5rem;">🔐 Acceso organizadores</h2>
         <input type="password" id="passwordOrganizador" placeholder="Contraseña">
-        <button id="btnLogin">INGRESAR</button>
-        <button id="btnCancelarLogin">CANCELAR</button>
-        <div id="errorLogin" class="aviso">❌ Contraseña incorrecta</div>
+        <div class="btn-group" style="justify-content: center;">
+            <button id="btnLogin">INGRESAR</button>
+            <button id="btnCancelarLogin" class="btn-outline-light">CANCELAR</button>
+        </div>
+        <div id="errorLogin" class="error-msg">❌ Contraseña incorrecta</div>
     </div>
 </div>
 
 <script>
     // ============================================
-    // CONFIGURACIÓN (¡reemplaza con tu URL!)
+    // CONFIGURACIÓN (actualiza tu URL aquí)
     // ============================================
     const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw0ghbjyaAIPyCvAX3TDzQW36NAJUnE9MATaNPtAjFS9f6I3_XsevSDLpGvjT5DGHvOTQ/exec';
     const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
     const CONTRASENA_ORGANIZADOR = "carrera2024";
-    
+
+    // Estado
     let modoOrganizador = false;
     let imagenBase64 = '';
     let imagenNombre = '';
 
-    // Validaciones
-    function validarNombre(n) { return n && n.trim().length >= 3; }
-    function validarEdad(e) { let ed = parseInt(e); return !isNaN(ed) && ed >= 1 && ed <= 120; }
-    function validarGenero(g) { return g && g !== ''; }
+    // ========== MANEJO DE TABS ==========
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = {
+        inscripcion: document.getElementById('tabInscripcion'),
+        info: document.getElementById('tabInfo'),
+        organizador: document.getElementById('tabOrganizador')
+    };
 
-    // Manejo imagen
+    function activateTab(tabId) {
+        Object.keys(contents).forEach(id => {
+            contents[id].classList.remove('active');
+        });
+        contents[tabId].classList.add('active');
+        tabs.forEach(btn => {
+            btn.classList.remove('active');
+            if(btn.getAttribute('data-tab') === tabId) btn.classList.add('active');
+        });
+    }
+
+    tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            if(tabId === 'organizador' && !modoOrganizador) {
+                mostrarLogin();
+                return;
+            }
+            activateTab(tabId);
+        });
+    });
+
+    // ========== SUBIDA DE FOTO ==========
     const uploadArea = document.getElementById('uploadArea');
     const fotoInput = document.getElementById('foto');
     const previewArea = document.getElementById('previewArea');
-    
+
     uploadArea.addEventListener('click', () => fotoInput.click());
     fotoInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
-        if (!file) return;
-        if (file.size > 2*1024*1024) { alert('❌ Máx 2MB'); fotoInput.value = ''; return; }
+        if(!file) return;
+        if(file.size > 2 * 1024 * 1024) { alert('❌ Máximo 2MB'); fotoInput.value = ''; return; }
         imagenNombre = file.name;
         const reader = new FileReader();
         reader.onload = (ev) => {
             imagenBase64 = ev.target.result.split(',')[1];
-            previewArea.innerHTML = `<img src="${ev.target.result}"><br><button class="remove-image" onclick="eliminarImagen()">🗑️ Eliminar</button>`;
+            previewArea.innerHTML = `<img src="${ev.target.result}"><br><button class="remove-photo" onclick="eliminarFoto()">🗑️ Eliminar</button>`;
         };
         reader.readAsDataURL(file);
     });
-    window.eliminarImagen = () => {
+    window.eliminarFoto = function() {
         imagenBase64 = ''; imagenNombre = ''; fotoInput.value = ''; previewArea.innerHTML = '';
     };
 
-    // Envío a Google Sheets
+    // ========== ENVÍO A GOOGLE SHEETS ==========
     async function agregarInscrito(nombre, edad, genero) {
         const fd = new FormData();
         fd.append('nombre', nombre.trim());
@@ -554,7 +495,7 @@
             return json.result === 'success';
         } catch(e) {
             console.error(e);
-            alert('Error de conexión. Revisa tu URL de Apps Script.');
+            alert('Error de conexión. Verifica que la URL de Apps Script sea correcta.');
             btn.textContent = original;
             btn.disabled = false;
             return false;
@@ -563,64 +504,59 @@
 
     function verGoogleSheet() { window.open(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/edit`, '_blank'); }
     function vaciarTodos() {
-        if(confirm('⚠️ ¿Eliminar TODOS los inscritos? Las fotos NO se borrarán.'))
+        if(confirm('⚠️ ¿Eliminar TODOS los inscritos? Las fotos NO se eliminarán automáticamente.'))
             alert('📌 Ve a tu Google Sheet y elimina las filas manualmente');
         verGoogleSheet();
     }
 
-    // Modo organizador
-    function mostrarPanel() {
-        modoOrganizador = true;
-        document.getElementById('btnModoOrganizador').classList.add('oculto');
-        document.getElementById('indicadorSesion').style.display = 'block';
-        document.getElementById('panelOrganizador').classList.add('activo');
-    }
-    function ocultarPanel() {
-        modoOrganizador = false;
-        document.getElementById('panelOrganizador').classList.remove('activo');
-        document.getElementById('btnModoOrganizador').classList.remove('oculto');
-        document.getElementById('indicadorSesion').style.display = 'none';
-    }
-    function mostrarLogin() {
-        document.getElementById('loginModal').style.display = 'flex';
-        document.getElementById('passwordOrganizador').value = '';
-        document.getElementById('errorLogin').style.display = 'none';
-    }
-    function cerrarLogin() { document.getElementById('loginModal').style.display = 'none'; }
+    // ========== LOGIN ORGANIZADOR ==========
+    const loginModal = document.getElementById('loginModal');
+    function mostrarLogin() { loginModal.style.display = 'flex'; document.getElementById('errorLogin').style.display = 'none'; }
+    function cerrarLogin() { loginModal.style.display = 'none'; }
     function intentarLogin() {
-        if(document.getElementById('passwordOrganizador').value === CONTRASENA_ORGANIZADOR) {
+        const pwd = document.getElementById('passwordOrganizador').value;
+        if(pwd === CONTRASENA_ORGANIZADOR) {
             cerrarLogin();
-            mostrarPanel();
+            modoOrganizador = true;
+            // Mostrar contenido del organizador
+            document.getElementById('tabOrganizadorBtn').classList.remove('oculto');
+            activateTab('organizador');
+            // Actualizar contador simulado (podrías leer desde Sheets si quieres)
+            document.getElementById('contador').innerHTML = '📊 ACCESO CONCEDIDO · Los datos se guardan en Google Sheets';
         } else {
             document.getElementById('errorLogin').style.display = 'block';
         }
     }
-    function cerrarSesion() { ocultarPanel(); alert('Sesión cerrada'); }
 
-    // Eventos formulario
+    // ========== FORMULARIO PRINCIPAL ==========
     document.getElementById('formInscripcion').addEventListener('submit', async (e) => {
         e.preventDefault();
         const nombre = document.getElementById('nombre').value;
         const edad = document.getElementById('edad').value;
         const genero = document.getElementById('genero').value;
-        if(!validarNombre(nombre)) return alert('❌ Nombre inválido (mínimo 3 letras)');
-        if(!validarEdad(edad)) return alert('❌ Edad inválida (1-120)');
-        if(!validarGenero(genero)) return alert('❌ Selecciona un género');
+
+        if(!nombre || nombre.trim().length < 3) return alert('❌ Nombre válido (mínimo 3 letras)');
+        if(!edad || edad < 1 || edad > 120) return alert('❌ Edad entre 1 y 120 años');
+        if(!genero) return alert('❌ Selecciona un género');
+
         const ok = await agregarInscrito(nombre, edad, genero);
         if(ok) {
             document.getElementById('formInscripcion').reset();
-            window.eliminarImagen();
-            alert(`✅ ¡${nombre} inscrito correctamente!`);
+            window.eliminarFoto();
+            alert(`✅ ¡${nombre} inscrito correctamente! 🏃‍♂️🎉`);
+            activateTab('info');
         }
     });
 
-    document.getElementById('btnModoOrganizador').addEventListener('click', mostrarLogin);
+    // Eventos de botones
     document.getElementById('btnLogin').addEventListener('click', intentarLogin);
     document.getElementById('btnCancelarLogin').addEventListener('click', cerrarLogin);
-    document.getElementById('btnCerrarSesion').addEventListener('click', cerrarSesion);
     document.getElementById('btnExcel').addEventListener('click', verGoogleSheet);
     document.getElementById('btnVaciarTodo').addEventListener('click', vaciarTodos);
-    document.getElementById('loginModal').addEventListener('click', (e) => { if(e.target === document.getElementById('loginModal')) cerrarLogin(); });
+    window.onclick = (e) => { if(e.target === loginModal) cerrarLogin(); };
+
+    // Inicializar
+    activateTab('inscripcion');
 </script>
 </body>
 </html>
