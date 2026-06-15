@@ -61,91 +61,23 @@
             margin: 0 auto;
         }
 
-        /* ========== CARRUSEL ========== */
-        .carousel-container {
-            position: relative;
+        /* Hero image estática */
+        .hero-image {
+            text-align: center;
             margin: 1.5rem 0 2rem 0;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.15);
-            background: #f0f2f5;
         }
 
-        .carousel-slides {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .carousel-slide {
-            min-width: 100%;
-            flex-shrink: 0;
-        }
-
-        .carousel-slide img {
-            width: 100%;
+        .hero-image img {
+            max-width: 100%;
             height: auto;
-            display: block;
-            object-fit: cover;
-            max-height: 450px;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s ease;
         }
 
-        /* Botones de navegación */
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(26, 58, 74, 0.7);
-            color: white;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            z-index: 10;
-        }
-
-        .carousel-btn:hover {
-            background: rgba(26, 58, 74, 0.9);
-            transform: translateY(-50%) scale(1.05);
-        }
-
-        .carousel-btn-prev {
-            left: 20px;
-        }
-
-        .carousel-btn-next {
-            right: 20px;
-        }
-
-        /* Indicadores (puntos) */
-        .carousel-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            z-index: 10;
-        }
-
-        .carousel-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .carousel-dot.active {
-            background: white;
-            transform: scale(1.2);
+        .hero-image img:hover {
+            transform: scale(1.01);
         }
 
         /* Layout principal */
@@ -338,7 +270,6 @@
             .menu-toggle { display: flex; }
             h1 { font-size: 2.2rem; }
             .container { padding: 1rem; }
-            .carousel-btn { width: 35px; height: 35px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -350,12 +281,12 @@
         <button class="close-menu" id="closeMenu">✕</button>
         <div class="sidebar-header">
             <h3>¿LISTO PARA LA 10K?</h3>
-            <p>Menú de navegación</p>
+            <p>Menú</p>
         </div>
         <div class="menu-items">
             <div class="menu-item active" data-section="registro">
                 <div class="menu-icon">📝</div>
-                <div class="menu-text">Registro de Participante</div>
+                <div class="menu-text">Registro de corredor</div>
             </div>
             <div class="menu-item" data-section="info">
                 <div class="menu-icon">ℹ️</div>
@@ -370,27 +301,16 @@
 
     <div class="container">
         <div class="main-header">
-            <div class="logo-badge">🏆 INSCRIPCIONES 2026</div>
+            <div class="logo-badge">🏆 INSCRIPCIONES</div>
             <h1>10K 2026</h1>
             <div class="subtitle">IDEC CENTRAL SAN CRISTOBAL</div>
         </div>
 
-        <!-- CARRUSEL DE IMÁGENES -->
-        <div class="carousel-container" id="carouselContainer">
-            <div class="carousel-slides" id="carouselSlides">
-                <div class="carousel-slide">
-                    <img src="https://i.ibb.co/WWXn7fJy/251209214634265-performer-img-CAT1.jpg" alt="Póster oficial Guat Maltecos">
-                </div>
-                <div class="carousel-slide">
-                    <img src="https://i.ibb.co/dwHpr1ky/ECMI-LOCAL-1.png" alt="ECMI Local - Evento">
-                </div>
-                <div class="carousel-slide">
-                    <img src="https://i.ibb.co/mCwJDw4W/images-1.jpg" alt="Imagen 3">
-                </div>
-            </div>
-            <button class="carousel-btn carousel-btn-prev" id="prevBtn">❮</button>
-            <button class="carousel-btn carousel-btn-next" id="nextBtn">❯</button>
-            <div class="carousel-dots" id="carouselDots"></div>
+        <!-- ✅ IMAGEN ESTÁTICA (la que tú confirmaste) -->
+        <div class="hero-image">
+            <img src="https://i.ibb.co/WWXn7fJy/251209214634265-performer-img-CAT1.jpg"
+                 alt="Póster oficial Guat Maltecos"
+                 loading="lazy">
         </div>
 
         <div class="dashboard">
@@ -413,101 +333,6 @@
     </div>
 
     <script>
-        // ========== CONFIGURACIÓN CARRUSEL ==========
-        let currentIndex = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-        const totalSlides = slides.length;
-        const slidesContainer = document.getElementById('carouselSlides');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const dotsContainer = document.getElementById('carouselDots');
-        let autoSlideInterval;
-
-        // Crear puntos indicadores
-        function createDots() {
-            dotsContainer.innerHTML = '';
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('carousel-dot');
-                if (i === currentIndex) dot.classList.add('active');
-                dot.addEventListener('click', () => goToSlide(i));
-                dotsContainer.appendChild(dot);
-            }
-        }
-
-        // Ir a una slide específica
-        function goToSlide(index) {
-            if (index < 0) index = 0;
-            if (index >= totalSlides) index = totalSlides - 1;
-            currentIndex = index;
-            slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-            
-            // Actualizar dots
-            document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-                if (i === currentIndex) dot.classList.add('active');
-                else dot.classList.remove('active');
-            });
-        }
-
-        // Siguiente slide
-        function nextSlide() {
-            if (currentIndex + 1 < totalSlides) {
-                goToSlide(currentIndex + 1);
-            } else {
-                goToSlide(0); // Volver al inicio
-            }
-        }
-
-        // Anterior slide
-        function prevSlide() {
-            if (currentIndex - 1 >= 0) {
-                goToSlide(currentIndex - 1);
-            } else {
-                goToSlide(totalSlides - 1); // Ir al final
-            }
-        }
-
-        // Iniciar carrusel automático
-        function startAutoSlide() {
-            if (autoSlideInterval) clearInterval(autoSlideInterval);
-            autoSlideInterval = setInterval(() => {
-                nextSlide();
-            }, 5000); // 5 segundos
-        }
-
-        // Detener carrusel automático
-        function stopAutoSlide() {
-            clearInterval(autoSlideInterval);
-        }
-
-        // Configurar eventos del carrusel
-        prevBtn.addEventListener('click', () => {
-            stopAutoSlide();
-            prevSlide();
-            startAutoSlide();
-        });
-        
-        nextBtn.addEventListener('click', () => {
-            stopAutoSlide();
-            nextSlide();
-            startAutoSlide();
-        });
-
-        // Pausar al pasar el mouse sobre el carrusel
-        const carouselContainer = document.getElementById('carouselContainer');
-        carouselContainer.addEventListener('mouseenter', () => {
-            stopAutoSlide();
-        });
-        
-        carouselContainer.addEventListener('mouseleave', () => {
-            startAutoSlide();
-        });
-
-        // Inicializar carrusel
-        createDots();
-        goToSlide(0);
-        startAutoSlide();
-
         // ========== CONFIGURACIÓN GENERAL ==========
         const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwMBpzD7m6EjmN6xmNNU74jqlG1U3zJb86TySYMFSP8BhxikioQty9w678MjAEvDqkO/exec';
         const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
@@ -555,12 +380,12 @@
             mainContent.innerHTML = `
                 <h2>ℹ️ Información de la carrera</h2>
                 <ul class="info-list">
-                    <li><div class="info-icon">📅</div><div class="info-text"><strong>FECHA</strong><span>agosto 2026</span></div></li>
+                    <li><div class="info-icon">📅</div><div class="info-text"><strong>FECHA</strong><span>Agosto 2026</span></div></li>
                     <li><div class="info-icon">📍</div><div class="info-text"><strong>LUGAR</strong><span>Parque Central</span></div></li>
                     <li><div class="info-icon">⏰</div><div class="info-text"><strong>SALIDA</strong><span>09:30h</span></div></li>
                     <li><div class="info-icon">🏆</div><div class="info-text"><strong>DISTANCIA</strong><span>10K</span></div></li>
                 </ul>
-                <div style="margin-top:1.5rem; padding:1rem; background:#eef2f5; border-radius:16px;"><p>🎽 KIT: Refaccion, Playera, Medalla</p></div>
+                <div style="margin-top:1.5rem; padding:1rem; background:#eef2f5; border-radius:16px;"><p>🎽 Dorsal oficial, chip, camiseta técnica y avituallamiento</p></div>
             `;
         }
 
@@ -649,26 +474,6 @@
         }
         menuItems.forEach(i=>i.addEventListener('click',()=>changeSection(i.dataset.section)));
         renderRegistro();
-
-        // Ajustar altura del carrusel para mantener consistencia
-        function adjustCarouselHeight() {
-            const slides = document.querySelectorAll('.carousel-slide img');
-            let maxHeight = 0;
-            slides.forEach(img => {
-                if(img.complete) {
-                    maxHeight = Math.max(maxHeight, img.height);
-                } else {
-                    img.addEventListener('load', () => {
-                        maxHeight = Math.max(maxHeight, img.height);
-                        document.querySelector('.carousel-slides').style.minHeight = maxHeight + 'px';
-                    });
-                }
-            });
-            if(maxHeight > 0) {
-                document.querySelector('.carousel-slides').style.minHeight = maxHeight + 'px';
-            }
-        }
-        setTimeout(adjustCarouselHeight, 100);
     </script>
 </body>
 </html>
