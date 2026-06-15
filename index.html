@@ -12,9 +12,9 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            font-family: 'Poppins', 'Futura', 'Avant Garde', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
             background: #f5f7fa;
-            color: #1a1a2e;
+            color: #1a2a3a;
             min-height: 100vh;
             position: relative;
         }
@@ -27,7 +27,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(255, 107, 53, 0.03) 0%, transparent 60%);
+            background: radial-gradient(circle at 10% 20%, rgba(26, 42, 58, 0.03) 0%, transparent 60%);
             pointer-events: none;
             z-index: 0;
         }
@@ -48,30 +48,34 @@
 
         .logo-badge {
             display: inline-block;
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            background: linear-gradient(135deg, #1a3a4a, #2a5a6a);
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 1rem;
             color: white;
+            font-family: 'Poppins', 'Futura', sans-serif;
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: #1a1a2e;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #1a2a3a;
             margin-bottom: 0.5rem;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
+            font-family: 'Poppins', 'Futura', sans-serif;
         }
 
         .subtitle {
-            color: #666;
-            font-size: 1rem;
+            color: #6a7a8a;
+            font-size: 0.9rem;
             max-width: 600px;
             margin: 0 auto;
+            font-weight: 400;
+            letter-spacing: 1px;
         }
 
         /* Layout con menú lateral derecho */
@@ -118,7 +122,7 @@
         }
 
         .menu-header:hover {
-            background: #f8f9fa;
+            background: #f0f2f5;
         }
 
         .menu-header-left {
@@ -128,18 +132,20 @@
         }
 
         .menu-icon {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
         }
 
         .menu-title {
-            font-weight: 700;
-            font-size: 1rem;
-            color: #1a1a2e;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1a2a3a;
+            letter-spacing: 0.5px;
+            font-family: 'Poppins', 'Futura', sans-serif;
         }
 
         .menu-arrow {
-            font-size: 1.2rem;
-            color: #999;
+            font-size: 1rem;
+            color: #8a9aaa;
             transition: transform 0.3s;
         }
 
@@ -158,7 +164,7 @@
         .menu-card.open .menu-content {
             max-height: 800px;
             padding: 1.5rem;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #e8ecef;
         }
 
         /* Formulario dentro del menú */
@@ -168,62 +174,64 @@
 
         label {
             display: block;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             font-weight: 600;
             margin-bottom: 0.4rem;
-            color: #888;
+            color: #8a9aaa;
+            font-family: 'Poppins', 'Futura', sans-serif;
         }
 
         input, select {
             width: 100%;
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
+            background: #f8f9fb;
+            border: 1px solid #e0e4e8;
             border-radius: 12px;
             padding: 12px 14px;
-            color: #1a1a2e;
-            font-family: inherit;
-            font-size: 0.9rem;
+            color: #1a2a3a;
+            font-family: 'Poppins', 'Futura', sans-serif;
+            font-size: 0.85rem;
             transition: all 0.2s;
         }
 
         input:focus, select:focus {
             outline: none;
-            border-color: #ff9a2e;
+            border-color: #2a5a6a;
             background: white;
-            box-shadow: 0 0 0 3px rgba(255, 154, 46, 0.1);
+            box-shadow: 0 0 0 3px rgba(26, 58, 74, 0.1);
         }
 
         /* Área de foto */
         .photo-area {
-            border: 2px dashed #ddd;
+            border: 2px dashed #d0d6dc;
             border-radius: 16px;
-            padding: 1.2rem;
+            padding: 1rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: #fafafa;
+            background: #fafcfd;
         }
 
         .photo-area:hover {
-            border-color: #ff9a2e;
-            background: #fff8f0;
+            border-color: #2a5a6a;
+            background: #f0f4f6;
         }
 
         .camera-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 0.3rem;
         }
 
         .photo-area p {
-            font-size: 0.8rem;
-            color: #666;
+            font-size: 0.75rem;
+            color: #6a7a8a;
+            font-weight: 400;
         }
 
         .photo-area small {
-            font-size: 0.65rem;
-            color: #999;
+            font-size: 0.6rem;
+            color: #9aaab8;
         }
 
         .photo-preview {
@@ -237,59 +245,62 @@
         }
 
         .preview-image img {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             object-fit: cover;
             border-radius: 50%;
-            border: 3px solid #ff9a2e;
+            border: 2px solid #2a5a6a;
         }
 
         .remove-photo-btn {
             background: none;
-            border: 1px solid #ff4d4d;
-            color: #ff4d4d;
-            padding: 4px 12px;
-            font-size: 0.65rem;
+            border: 1px solid #c0392b;
+            color: #c0392b;
+            padding: 3px 10px;
+            font-size: 0.6rem;
             border-radius: 20px;
             margin-top: 0.5rem;
             cursor: pointer;
+            font-family: 'Poppins', sans-serif;
         }
 
         /* Botones */
         .btn-primary {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            background: linear-gradient(135deg, #1a3a4a, #2a5a6a);
             border: none;
             color: white;
             padding: 12px 24px;
-            font-size: 0.85rem;
-            font-weight: 700;
+            font-size: 0.75rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             cursor: pointer;
             transition: all 0.3s;
             border-radius: 40px;
             width: 100%;
-            font-family: inherit;
+            font-family: 'Poppins', 'Futura', sans-serif;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 8px 20px rgba(26, 58, 74, 0.3);
         }
 
         .btn-outline {
             background: transparent;
-            border: 1px solid #ff9a2e;
-            color: #ff9a2e;
+            border: 1px solid #2a5a6a;
+            color: #2a5a6a;
             padding: 8px 16px;
             border-radius: 40px;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 0.75rem;
+            font-weight: 500;
+            font-size: 0.7rem;
+            transition: all 0.2s;
+            font-family: 'Poppins', 'Futura', sans-serif;
         }
 
         .btn-outline:hover {
-            background: #ff9a2e;
+            background: #2a5a6a;
             color: white;
         }
 
@@ -303,30 +314,32 @@
             align-items: center;
             gap: 1rem;
             padding: 0.8rem 0;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid #e8ecef;
         }
 
         .info-icon {
-            font-size: 1.3rem;
-            width: 35px;
+            font-size: 1.2rem;
+            width: 32px;
         }
 
         .info-text strong {
             display: block;
-            font-size: 0.7rem;
-            color: #999;
+            font-size: 0.65rem;
+            color: #9aaab8;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         .info-text span {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #1a1a2e;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1a2a3a;
         }
 
         /* Panel organizador dentro del menú */
         .admin-stats {
-            background: #f0f7ff;
+            background: #eef2f5;
             border-radius: 12px;
             padding: 1rem;
             text-align: center;
@@ -334,8 +347,9 @@
         }
 
         .admin-stats p {
-            color: #ff6b35;
-            font-size: 0.8rem;
+            color: #1a3a4a;
+            font-size: 0.75rem;
+            font-weight: 500;
         }
 
         .btn-group {
@@ -368,13 +382,19 @@
             text-align: center;
         }
 
+        .modal-box h2 {
+            font-family: 'Poppins', 'Futura', sans-serif;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
         .modal-box input {
             margin: 1rem 0;
         }
 
         .error-msg {
-            color: #ff4d4d;
-            font-size: 0.8rem;
+            color: #c0392b;
+            font-size: 0.75rem;
             margin-top: 0.5rem;
             display: none;
         }
@@ -390,13 +410,25 @@
         }
 
         .welcome-message h3 {
-            font-size: 1.5rem;
-            color: #1a1a2e;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1a2a3a;
             margin-bottom: 0.5rem;
+            font-family: 'Poppins', 'Futura', sans-serif;
         }
 
         .welcome-message p {
-            color: #666;
+            color: #6a7a8a;
+            font-size: 0.85rem;
+        }
+
+        /* Divisor decorativo */
+        .divider {
+            display: inline-block;
+            background: linear-gradient(135deg, #1a3a4a, #2a5a6a);
+            width: 50px;
+            height: 3px;
+            border-radius: 2px;
         }
 
         /* Responsive */
@@ -411,7 +443,7 @@
                 padding: 1rem;
             }
             h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
         }
     </style>
@@ -431,7 +463,7 @@
                 <h3>¿LISTO PARA LA 10K?</h3>
                 <p>Selecciona una opción del menú lateral para comenzar</p>
                 <div style="margin-top: 2rem;">
-                    <div style="display: inline-block; background: linear-gradient(135deg, #ff6b35, #f7931e); width: 60px; height: 4px; border-radius: 2px;"></div>
+                    <div class="divider"></div>
                 </div>
             </div>
         </div>
@@ -501,11 +533,11 @@
                     <ul class="info-list">
                         <li>
                             <div class="info-icon">📅</div>
-                            <div class="info-text"><strong>FECHA</strong><span>AGOSTO, 2026</span></div>
+                            <div class="info-text"><strong>FECHA</strong><span>AGOSTO 2026</span></div>
                         </li>
                         <li>
                             <div class="info-icon">📍</div>
-                            <div class="info-text"><strong>LUGAR</strong><span>Parque Central</span></div>
+                            <div class="info-text"><strong>LUGAR</strong><span>PARQUE CENTRAL</span></div>
                         </li>
                         <li>
                             <div class="info-icon">⏰</div>
@@ -513,16 +545,16 @@
                         </li>
                         <li>
                             <div class="info-icon">🏆</div>
-                            <div class="info-text"><strong>DISTANCIA</strong><span>10 K</span></div>
+                            <div class="info-text"><strong>DISTANCIA</strong><span>10K</span></div>
                         </li>
                     </ul>
-                    <div style="margin-top: 1rem; padding: 1rem; background: #f0f7ff; border-radius: 12px;">
-                        <p style="font-size: 0.8rem; color: #ff6b35; text-align: center;">🎽 Incluye KIT: refacción, número y medalla</p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: #eef2f5; border-radius: 12px;">
+                        <p style="font-size: 0.7rem; color: #1a3a4a; text-align: center; letter-spacing: 0.5px;">🎽 Incluye KIT, NUMERO Y MEDALLA</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Tarjeta 3: Organizadores (inicialmente cerrada, requiere login) -->
+            <!-- Tarjeta 3: Organizadores -->
             <div class="menu-card" id="menuOrganizador">
                 <div class="menu-header">
                     <div class="menu-header-left">
@@ -535,7 +567,7 @@
                     <div id="contenidoOrganizador">
                         <div class="admin-stats" id="estadoOrganizador">
                             <p>🔒 Acceso restringido</p>
-                            <p style="font-size: 0.7rem;">Ingresa la contraseña para acceder al panel</p>
+                            <p style="font-size: 0.65rem;">Ingresa la contraseña para acceder al panel</p>
                         </div>
                         <div class="btn-group">
                             <button id="btnMostrarLoginOrganizador" class="btn-outline" style="flex:1;">🔐 INICIAR SESIÓN</button>
@@ -546,7 +578,7 @@
                             </div>
                             <div class="btn-group">
                                 <button id="btnExcel" class="btn-outline" style="flex:1;">📊 VER SHEET</button>
-                                <button id="btnVaciarTodo" class="btn-outline" style="flex:1; border-color:#ff4d4d; color:#ff4d4d;">⚠️ VACIAR</button>
+                                <button id="btnVaciarTodo" class="btn-outline" style="flex:1; border-color:#c0392b; color:#c0392b;">⚠️ VACIAR</button>
                             </div>
                             <button id="btnCerrarSesion" class="btn-outline" style="width:100%; margin-top: 0.8rem;">🚪 CERRAR SESIÓN</button>
                         </div>
@@ -561,7 +593,7 @@
 <div id="loginModal" class="modal" style="display: none;">
     <div class="modal-box">
         <h2 style="margin-bottom: 1rem;">🔐 Acceso organizadores</h2>
-        <p style="font-size: 0.8rem; color: #666;">Ingresa la contraseña</p>
+        <p style="font-size: 0.75rem; color: #6a7a8a;">Ingresa la contraseña</p>
         <input type="password" id="passwordOrganizador" placeholder="Contraseña">
         <div class="btn-group">
             <button id="btnLogin">INGRESAR</button>
@@ -577,7 +609,7 @@
     // ============================================
     const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwMBpzD7m6EjmN6xmNNU74jqlG1U3zJb86TySYMFSP8BhxikioQty9w678MjAEvDqkO/exec';
     const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
-    const CONTRASENA_ORGANIZADOR = "carrera2026";
+    const CONTRASENA_ORGANIZADOR = "carrera2024";
 
     let modoOrganizador = false;
     let imagenBase64 = '';
@@ -588,7 +620,6 @@
     menuCards.forEach(card => {
         const header = card.querySelector('.menu-header');
         header.addEventListener('click', (e) => {
-            // Cerrar los demás si se desea comportamiento exclusivo
             menuCards.forEach(other => {
                 if (other !== card && other.classList.contains('open')) {
                     other.classList.remove('open');
@@ -686,7 +717,7 @@
             cerrarLogin();
             modoOrganizador = true;
             panelOrganizadorOpciones.style.display = 'block';
-            estadoOrganizador.innerHTML = '<p>✅ ACCESO CONCEDIDO</p><p style="font-size:0.7rem;">Panel de control activo</p>';
+            estadoOrganizador.innerHTML = '<p>✅ ACCESO CONCEDIDO</p><p style="font-size:0.65rem;">Panel de control activo</p>';
             btnMostrarLogin.style.display = 'none';
         } else { 
             document.getElementById('errorLogin').style.display = 'block'; 
@@ -696,7 +727,7 @@
     function cerrarSesionOrganizador() {
         modoOrganizador = false;
         panelOrganizadorOpciones.style.display = 'none';
-        estadoOrganizador.innerHTML = '<p>🔒 Acceso restringido</p><p style="font-size:0.7rem;">Ingresa la contraseña para acceder al panel</p>';
+        estadoOrganizador.innerHTML = '<p>🔒 Acceso restringido</p><p style="font-size:0.65rem;">Ingresa la contraseña para acceder al panel</p>';
         btnMostrarLogin.style.display = 'block';
         alert('🔐 Sesión de organizador cerrada');
     }
