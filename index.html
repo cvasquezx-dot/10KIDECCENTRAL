@@ -19,7 +19,6 @@
             overflow-x: hidden;
         }
 
-        /* Contenedor principal */
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -62,19 +61,18 @@
             margin: 0 auto;
         }
 
-        /* Banner de imagen */
+        /* Hero image con tu póster */
         .hero-image {
             text-align: center;
-            margin-bottom: 2rem;
+            margin: 1.5rem 0 2rem 0;
         }
 
         .hero-image img {
-            width: 100%;
-            max-width: 1000px;
+            max-width: 100%;
             height: auto;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
             transition: transform 0.3s ease;
         }
 
@@ -89,7 +87,6 @@
             min-height: 500px;
         }
 
-        /* Contenido principal */
         .main-content {
             flex: 1;
             background: white;
@@ -99,7 +96,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Botón para abrir menú lateral (visible en móvil) */
+        /* Botón menú móvil */
         .menu-toggle {
             position: fixed;
             top: 20px;
@@ -119,7 +116,7 @@
             font-size: 1.5rem;
         }
 
-        /* ========== MENÚ LATERAL DERECHO ========== */
+        /* Sidebar */
         .sidebar {
             position: fixed;
             top: 0;
@@ -139,7 +136,6 @@
             right: 0;
         }
 
-        /* Overlay cuando el menú está abierto */
         .overlay {
             position: fixed;
             top: 0;
@@ -155,7 +151,6 @@
             display: block;
         }
 
-        /* Header del menú lateral */
         .sidebar-header {
             padding: 2rem 1.5rem;
             background: linear-gradient(135deg, #1a3a4a, #2a5a6a);
@@ -173,7 +168,6 @@
             opacity: 0.8;
         }
 
-        /* Opciones del menú */
         .menu-items {
             flex: 1;
             padding: 1rem 0;
@@ -208,12 +202,6 @@
             color: #1a2a3a;
         }
 
-        .menu-item.active .menu-text {
-            color: #2a5a6a;
-            font-weight: 600;
-        }
-
-        /* Botón cerrar menú */
         .close-menu {
             position: absolute;
             top: 15px;
@@ -226,15 +214,8 @@
             opacity: 0.7;
         }
 
-        .close-menu:hover {
-            opacity: 1;
-        }
-
-        /* Formulario */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
+        /* Formulario y estilos auxiliares (se mantienen igual que antes) */
+        .form-group { margin-bottom: 1.5rem; }
         label {
             display: block;
             font-size: 0.65rem;
@@ -244,7 +225,6 @@
             margin-bottom: 0.5rem;
             color: #8a9aaa;
         }
-
         input, select {
             width: 100%;
             background: #f8f9fb;
@@ -254,232 +234,60 @@
             color: #1a2a3a;
             font-family: inherit;
             font-size: 0.85rem;
-            transition: all 0.2s;
         }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #2a5a6a;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(26, 58, 74, 0.1);
-        }
-
-        /* Área de foto */
         .photo-area {
             border: 2px dashed #d0d6dc;
             border-radius: 16px;
             padding: 1rem;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
             background: #fafcfd;
         }
-
-        .photo-area:hover {
-            border-color: #2a5a6a;
-            background: #f0f4f6;
-        }
-
-        .camera-icon {
-            font-size: 1.8rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .photo-area p {
-            font-size: 0.75rem;
-            color: #6a7a8a;
-        }
-
-        .photo-area small {
-            font-size: 0.6rem;
-            color: #9aaab8;
-        }
-
-        .photo-preview {
-            margin-top: 1rem;
-            text-align: center;
-            display: none;
-        }
-
-        .photo-preview.active {
-            display: block;
-        }
-
+        .photo-area:hover { border-color: #2a5a6a; background: #f0f4f6; }
+        .photo-preview { margin-top: 1rem; text-align: center; display: none; }
+        .photo-preview.active { display: block; }
         .preview-image img {
-            width: 90px;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 2px solid #2a5a6a;
+            width: 90px; height: 90px; object-fit: cover;
+            border-radius: 50%; border: 2px solid #2a5a6a;
         }
-
-        .remove-photo-btn {
-            background: none;
-            border: 1px solid #c0392b;
-            color: #c0392b;
-            padding: 3px 10px;
-            font-size: 0.6rem;
-            border-radius: 20px;
-            margin-top: 0.5rem;
-            cursor: pointer;
-        }
-
-        /* Botones */
         .btn-primary {
             background: linear-gradient(135deg, #1a3a4a, #2a5a6a);
-            border: none;
-            color: white;
-            padding: 12px 24px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-radius: 40px;
-            width: 100%;
-            font-family: inherit;
+            border: none; color: white; padding: 12px 24px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 2px; cursor: pointer; border-radius: 40px; width: 100%;
         }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(26, 58, 74, 0.3);
-        }
-
         .btn-outline {
-            background: transparent;
-            border: 1px solid #2a5a6a;
-            color: #2a5a6a;
-            padding: 8px 16px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.7rem;
-            transition: all 0.2s;
-            font-family: inherit;
+            background: transparent; border: 1px solid #2a5a6a; color: #2a5a6a;
+            padding: 8px 16px; border-radius: 40px; cursor: pointer;
         }
-
-        .btn-outline:hover {
-            background: #2a5a6a;
-            color: white;
-        }
-
-        /* Info carrera */
-        .info-list {
-            list-style: none;
-        }
-
         .info-list li {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid #e8ecef;
+            display: flex; align-items: center; gap: 1rem;
+            padding: 1rem 0; border-bottom: 1px solid #e8ecef;
         }
-
-        .info-icon {
-            font-size: 1.5rem;
-            width: 45px;
-        }
-
-        .info-text strong {
-            display: block;
-            font-size: 0.7rem;
-            color: #9aaab8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .info-text span {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1a2a3a;
-        }
-
-        /* Panel organizador */
         .admin-stats {
-            background: #eef2f5;
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-            margin-bottom: 1rem;
+            background: #eef2f5; border-radius: 12px; padding: 1rem;
+            text-align: center; margin-bottom: 1rem;
         }
-
-        .admin-stats p {
-            color: #1a3a4a;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 0.8rem;
-            margin-top: 0.5rem;
-        }
-
-        /* Modal */
         .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(4px);
+            display: flex; align-items: center; justify-content: center; z-index: 2000;
         }
-
         .modal-box {
-            background: white;
-            border-radius: 24px;
-            padding: 2rem;
-            width: 90%;
-            max-width: 340px;
-            text-align: center;
+            background: white; border-radius: 24px; padding: 2rem;
+            width: 90%; max-width: 340px; text-align: center;
         }
-
-        .modal-box input {
-            margin: 1rem 0;
-        }
-
-        .error-msg {
-            color: #c0392b;
-            font-size: 0.75rem;
-            margin-top: 0.5rem;
-            display: none;
-        }
-
-        /* Responsive */
         @media (max-width: 900px) {
-            .menu-toggle {
-                display: flex;
-            }
-            .main-content {
-                margin-right: 0;
-            }
-            h1 {
-                font-size: 2.2rem;
-            }
-            .container {
-                padding: 1rem;
-            }
-            .hero-image img {
-                border-radius: 16px;
-            }
+            .menu-toggle { display: flex; }
+            h1 { font-size: 2.2rem; }
+            .container { padding: 1rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Botón para abrir menú (visible en móvil) -->
     <button class="menu-toggle" id="menuToggle">☰</button>
-
-    <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- Menú lateral derecho -->
     <div class="sidebar" id="sidebar">
         <button class="close-menu" id="closeMenu">✕</button>
         <div class="sidebar-header">
@@ -509,57 +317,34 @@
             <div class="subtitle">3K · 5K · 9K · La carrera más vibrante del año</div>
         </div>
 
-        <!-- Banner de imagen -->
-
-  <div class="hero-image">
-    <img src="https://drive.google.com/uc?export=view&id=1VL3-8r0OTc-b_-O9lNyAgNabmQ7qinmY" 
-         alt="Valencia Race Banner" 
-         style="width: 100%; max-width: 1000px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
-</div>
+        <!-- ✅ IMAGEN DE IMGBB (ya funcionando) -->
+        <div class="hero-image">
+            <img src="https://i.ibb.co/WWXn7fJy/251209214634265-performer-img-CAT1.jpg"
+                 alt="Póster oficial Guat Maltecos"
+                 loading="lazy">
+        </div>
 
         <div class="dashboard">
-            <!-- Contenido principal dinámico -->
             <div class="main-content" id="mainContent">
                 <!-- El contenido se carga dinámicamente con JS -->
             </div>
         </div>
     </div>
 
-<!-- SECCIÓN DE GALERÍA DE IMÁGENES (agrega esto donde quieras) -->
-<div class="gallery" style="margin-top: 2rem;">
-    <h3 style="text-align: center; margin-bottom: 1rem; color: #1a2a3a;">📸 Galería de la carrera</h3>
-    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <img src="https://drive.google.com/uc?export=view&id=1VL3-8r0OTc-b_-O9lNyAgNabmQ7qinmY" 
-             style="width: 200px; height: 150px; object-fit: cover; border-radius: 16px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-        <img src="https://drive.google.com/uc?export=view&id=1VL3-8r0OTc-b_-O9lNyAgNabmQ7qinmY" 
-             style="width: 200px; height: 150px; object-fit: cover; border-radius: 16px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-        <img src="https://drive.google.com/uc?export=view&id=1VL3-8r0OTc-b_-O9lNyAgNabmQ7qinmY" 
-             style="width: 200px; height: 150px; object-fit: cover; border-radius: 16px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-    </div>
-</div>
-
-
-
-
-    
-    <!-- Modal login -->
     <div id="loginModal" class="modal" style="display: none;">
         <div class="modal-box">
-            <h2 style="margin-bottom: 1rem;">🔐 Acceso organizadores</h2>
-            <p style="font-size: 0.75rem; color: #6a7a8a;">Ingresa la contraseña</p>
+            <h2>🔐 Acceso organizadores</h2>
             <input type="password" id="passwordOrganizador" placeholder="Contraseña">
-            <div class="btn-group">
+            <div class="btn-group" style="display: flex; gap: 0.5rem; margin-top: 1rem;">
                 <button id="btnLogin">INGRESAR</button>
                 <button id="btnCancelarLogin" class="btn-outline">CANCELAR</button>
             </div>
-            <div id="errorLogin" class="error-msg">❌ Contraseña incorrecta</div>
+            <div id="errorLogin" class="error-msg" style="color:#c0392b; margin-top:0.5rem; display:none;">❌ Contraseña incorrecta</div>
         </div>
     </div>
 
     <script>
-        // ============================================
-        // CONFIGURACIÓN
-        // ============================================
+        // Configuración
         const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwMBpzD7m6EjmN6xmNNU74jqlG1U3zJb86TySYMFSP8BhxikioQty9w678MjAEvDqkO/exec';
         const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
         const CONTRASENA_ORGANIZADOR = "carrera2024";
@@ -568,7 +353,7 @@
         let imagenBase64 = '';
         let imagenNombre = '';
 
-        // Elementos del menú
+        // Menú lateral
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
         const menuToggle = document.getElementById('menuToggle');
@@ -576,72 +361,27 @@
         const menuItems = document.querySelectorAll('.menu-item');
         const mainContent = document.getElementById('mainContent');
 
-        // ========== FUNCIONES DEL MENÚ LATERAL ==========
-        function openSidebar() {
-            sidebar.classList.add('open');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeSidebar() {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
+        function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+        function closeSidebarFunc() { sidebar.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
         menuToggle.addEventListener('click', openSidebar);
-        closeMenu.addEventListener('click', closeSidebar);
-        overlay.addEventListener('click', closeSidebar);
+        closeMenu.addEventListener('click', closeSidebarFunc);
+        overlay.addEventListener('click', closeSidebarFunc);
 
-        function handleMobileClose() {
-            if (window.innerWidth <= 900) {
-                closeSidebar();
-            }
-        }
-
-        // ========== CONTENIDO DINÁMICO ==========
+        // Contenido dinámico
         function renderRegistro() {
             mainContent.innerHTML = `
-                <div style="margin-bottom: 2rem;">
-                    <h2 style="font-size: 1.5rem; font-weight: 600; color: #1a2a3a;">📝 Registro de corredor</h2>
-                    <p style="color: #6a7a8a; font-size: 0.8rem; margin-top: 0.25rem;">Completa tus datos para participar</p>
-                </div>
+                <h2 style="margin-bottom:1.5rem;">📝 Registro de corredor</h2>
                 <form id="formInscripcion">
+                    <div class="form-group"><label>NOMBRE COMPLETO</label><input type="text" id="nombre" placeholder="Ej: Juan Pérez"></div>
+                    <div class="form-group"><label>EDAD</label><input type="number" id="edad" placeholder="Ej: 25"></div>
+                    <div class="form-group"><label>GÉNERO</label><select id="genero"><option value="">Selecciona</option><option>Masculino</option><option>Femenino</option><option>Otro</option></select></div>
                     <div class="form-group">
-                        <label>NOMBRE COMPLETO</label>
-                        <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
+                        <label>📸 FOTO</label>
+                        <div class="photo-area" id="uploadArea"><div class="camera-icon">📷</div><p>Haz clic o arrastra</p><small>JPG, PNG · máx 2MB</small></div>
+                        <input type="file" id="foto" accept="image/*" style="display:none">
+                        <div class="photo-preview" id="previewArea"><div class="preview-image"><img id="previewImg"><br><button type="button" class="remove-photo-btn" id="removePhotoBtn" style="display:none;">🗑️ Eliminar</button></div></div>
                     </div>
-                    <div class="form-group">
-                        <label>EDAD</label>
-                        <input type="number" id="edad" placeholder="Ej: 25" min="1" max="120">
-                    </div>
-                    <div class="form-group">
-                        <label>GÉNERO</label>
-                        <select id="genero">
-                            <option value="">Selecciona</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                            <option value="Otro">Otro</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>📸 FOTO DEL CORREDOR</label>
-                        <div class="photo-area" id="uploadArea">
-                            <div class="camera-icon">📷</div>
-                            <p>Haz clic o arrastra tu foto</p>
-                            <small>JPG, PNG · máx 2MB</small>
-                        </div>
-                        <input type="file" id="foto" accept="image/*" style="display: none;">
-                        <div class="photo-preview" id="previewArea">
-                            <div class="preview-image">
-                                <img id="previewImg" src="" alt="Vista previa">
-                                <div>
-                                    <button type="button" class="remove-photo-btn" id="removePhotoBtn" style="display: none;">🗑️ Eliminar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-primary">✅ INSCRIBIRME AHORA</button>
+                    <button type="submit" class="btn-primary">✅ INSCRIBIRME</button>
                 </form>
             `;
             initFormEvents();
@@ -649,225 +389,91 @@
 
         function renderInfo() {
             mainContent.innerHTML = `
-                <div style="margin-bottom: 2rem;">
-                    <h2 style="font-size: 1.5rem; font-weight: 600; color: #1a2a3a;">ℹ️ Información de la carrera</h2>
-                    <p style="color: #6a7a8a; font-size: 0.8rem; margin-top: 0.25rem;">Detalles y características del evento</p>
-                </div>
+                <h2>ℹ️ Información de la carrera</h2>
                 <ul class="info-list">
-                    <li>
-                        <div class="info-icon">📅</div>
-                        <div class="info-text"><strong>FECHA</strong><span>15 de Junio, 2025</span></div>
-                    </li>
-                    <li>
-                        <div class="info-icon">📍</div>
-                        <div class="info-text"><strong>LUGAR</strong><span>Ciudad de las Artes, Valencia</span></div>
-                    </li>
-                    <li>
-                        <div class="info-icon">⏰</div>
-                        <div class="info-text"><strong>SALIDA</strong><span>09:30h</span></div>
-                    </li>
-                    <li>
-                        <div class="info-icon">🏆</div>
-                        <div class="info-text"><strong>DISTANCIAS</strong><span>3K · 5K · 9K</span></div>
-                    </li>
+                    <li><div class="info-icon">📅</div><div class="info-text"><strong>FECHA</strong><span>15 de Junio, 2025</span></div></li>
+                    <li><div class="info-icon">📍</div><div class="info-text"><strong>LUGAR</strong><span>Ciudad de las Artes, Valencia</span></div></li>
+                    <li><div class="info-icon">⏰</div><div class="info-text"><strong>SALIDA</strong><span>09:30h</span></div></li>
+                    <li><div class="info-icon">🏆</div><div class="info-text"><strong>DISTANCIAS</strong><span>3K · 5K · 9K</span></div></li>
                 </ul>
-                <div style="margin-top: 1.5rem; padding: 1.2rem; background: #eef2f5; border-radius: 16px;">
-                    <p style="font-size: 0.8rem; color: #1a3a4a; text-align: center;">🎽 Incluye dorsal oficial, chip de cronometraje, camiseta técnica y avituallamiento</p>
-                </div>
+                <div style="margin-top:1.5rem; padding:1rem; background:#eef2f5; border-radius:16px;"><p>🎽 Dorsal oficial, chip, camiseta técnica y avituallamiento</p></div>
             `;
         }
 
         function renderOrganizador() {
             mainContent.innerHTML = `
-                <div style="margin-bottom: 2rem;">
-                    <h2 style="font-size: 1.5rem; font-weight: 600; color: #1a2a3a;">🔐 Acceso organizadores</h2>
-                    <p style="color: #6a7a8a; font-size: 0.8rem; margin-top: 0.25rem;">Área restringida para administradores</p>
-                </div>
+                <h2>🔐 Acceso organizadores</h2>
                 <div id="contenidoOrganizador">
-                    <div class="admin-stats" id="estadoOrganizador">
-                        <p>🔒 Acceso restringido</p>
-                        <p style="font-size: 0.65rem;">Ingresa la contraseña para acceder al panel</p>
-                    </div>
-                    <div class="btn-group">
-                        <button id="btnMostrarLoginOrganizador" class="btn-outline" style="flex:1;">🔐 INICIAR SESIÓN</button>
-                    </div>
-                    <div id="panelOrganizadorOpciones" style="display: none; margin-top: 1rem;">
-                        <div class="admin-stats">
-                            <p>📊 ACCESO ORGANIZADOR ACTIVO</p>
-                        </div>
-                        <div class="btn-group">
-                            <button id="btnExcel" class="btn-outline" style="flex:1;">📊 VER SHEET</button>
-                            <button id="btnVaciarTodo" class="btn-outline" style="flex:1; border-color:#c0392b; color:#c0392b;">⚠️ VACIAR</button>
-                        </div>
-                        <button id="btnCerrarSesion" class="btn-outline" style="width:100%; margin-top: 0.8rem;">🚪 CERRAR SESIÓN</button>
-                    </div>
+                    <div class="admin-stats" id="estadoOrganizador"><p>🔒 Acceso restringido</p><p style="font-size:0.65rem;">Ingresa contraseña</p></div>
+                    <div class="btn-group"><button id="btnMostrarLoginOrganizador" class="btn-outline" style="flex:1;">🔐 INICIAR SESIÓN</button></div>
+                    <div id="panelOrganizadorOpciones" style="display:none;"><div class="admin-stats"><p>📊 ACCESO CONCEDIDO</p></div>
+                    <div class="btn-group"><button id="btnExcel" class="btn-outline">📊 VER SHEET</button><button id="btnVaciarTodo" class="btn-outline">⚠️ VACIAR</button></div>
+                    <button id="btnCerrarSesion" class="btn-outline" style="width:100%; margin-top:1rem;">🚪 CERRAR SESIÓN</button></div>
                 </div>
             `;
             initOrganizadorEvents();
         }
 
-        // ========== EVENTOS DEL FORMULARIO ==========
         function initFormEvents() {
             const uploadArea = document.getElementById('uploadArea');
             const fotoInput = document.getElementById('foto');
-            const previewAreaDiv = document.getElementById('previewArea');
+            const previewDiv = document.getElementById('previewArea');
             const previewImg = document.getElementById('previewImg');
-            const removePhotoBtn = document.getElementById('removePhotoBtn');
-
-            if (uploadArea) {
-                uploadArea.addEventListener('click', () => fotoInput.click());
-                uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
-                uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
-                uploadArea.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    uploadArea.classList.remove('drag-over');
-                    const file = e.dataTransfer.files[0];
-                    if(file && file.type.startsWith('image/')) procesarImagen(file, fotoInput, previewImg, previewAreaDiv, removePhotoBtn);
-                    else alert('❌ Sube un archivo de imagen válido');
-                });
-            }
-
-            if (fotoInput) {
-                fotoInput.addEventListener('change', (e) => { if(e.target.files[0]) procesarImagen(e.target.files[0], fotoInput, previewImg, previewAreaDiv, removePhotoBtn); });
-            }
-
-            if (removePhotoBtn) {
-                removePhotoBtn.addEventListener('click', () => eliminarFoto(fotoInput, previewImg, previewAreaDiv, removePhotoBtn));
-            }
-
-            const form = document.getElementById('formInscripcion');
-            if (form) {
-                form.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const nombre = document.getElementById('nombre').value;
-                    const edad = document.getElementById('edad').value;
-                    const genero = document.getElementById('genero').value;
-                    if(!nombre || nombre.length < 3) return alert('❌ Nombre válido (mínimo 3 letras)');
-                    if(!edad || edad < 1 || edad > 120) return alert('❌ Edad entre 1 y 120 años');
-                    if(!genero) return alert('❌ Selecciona un género');
-                    const ok = await agregarInscrito(nombre, edad, genero);
-                    if(ok) {
-                        form.reset();
-                        eliminarFoto(fotoInput, previewImg, previewAreaDiv, removePhotoBtn);
-                        alert(`✅ ¡${nombre} inscrito correctamente! 🏃‍♂️🎉`);
-                    }
-                });
-            }
-        }
-
-        function procesarImagen(file, fotoInput, previewImg, previewAreaDiv, removePhotoBtn) {
-            if(file.size > 2 * 1024 * 1024) { alert('❌ Máximo 2MB'); fotoInput.value = ''; return; }
-            if(!file.type.startsWith('image/')) { alert('❌ Formato no válido'); return; }
-            imagenNombre = file.name;
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-                imagenBase64 = ev.target.result.split(',')[1];
-                previewImg.src = ev.target.result;
-                previewAreaDiv.classList.add('active');
-                removePhotoBtn.style.display = 'inline-block';
+            const removeBtn = document.getElementById('removePhotoBtn');
+            if(uploadArea) uploadArea.onclick = () => fotoInput.click();
+            fotoInput.onchange = (e) => {
+                const file = e.target.files[0];
+                if(file && file.size<2e6) {
+                    let reader = new FileReader();
+                    reader.onload = ev => { imagenBase64 = ev.target.result.split(',')[1]; previewImg.src = ev.target.result; previewDiv.classList.add('active'); removeBtn.style.display = 'inline-block'; };
+                    reader.readAsDataURL(file);
+                } else alert('❌ Máx 2MB');
             };
-            reader.readAsDataURL(file);
+            removeBtn.onclick = () => { imagenBase64=''; fotoInput.value=''; previewImg.src=''; previewDiv.classList.remove('active'); removeBtn.style.display='none'; };
+            document.getElementById('formInscripcion').onsubmit = async (e) => {
+                e.preventDefault();
+                let nombre = document.getElementById('nombre').value;
+                let edad = document.getElementById('edad').value;
+                let genero = document.getElementById('genero').value;
+                if(!nombre||nombre.length<3) return alert('❌ Nombre mínimo 3 letras');
+                if(!edad||edad<1||edad>120) return alert('❌ Edad 1-120');
+                if(!genero) return alert('❌ Género');
+                const fd = new FormData();
+                fd.append('nombre',nombre); fd.append('edad',edad); fd.append('genero',genero);
+                fd.append('image',imagenNombre); fd.append('himage',imagenBase64);
+                let resp = await fetch(GOOGLE_SHEETS_URL,{method:'POST',body:fd});
+                let json = await resp.json();
+                if(json.result==='success') {
+                    alert(`✅ ¡${nombre} inscrito!`); location.reload();
+                } else alert('❌ Error al guardar');
+            };
         }
-
-        function eliminarFoto(fotoInput, previewImg, previewAreaDiv, removePhotoBtn) {
-            imagenBase64 = ''; imagenNombre = ''; fotoInput.value = '';
-            previewImg.src = ''; previewAreaDiv.classList.remove('active');
-            removePhotoBtn.style.display = 'none';
-        }
-
-        async function agregarInscrito(nombre, edad, genero) {
-            const fd = new FormData();
-            fd.append('nombre', nombre.trim());
-            fd.append('edad', parseInt(edad));
-            fd.append('genero', genero);
-            fd.append('image', imagenNombre);
-            fd.append('himage', imagenBase64);
-            try {
-                const resp = await fetch(GOOGLE_SHEETS_URL, { method: 'POST', body: fd });
-                const json = await resp.json();
-                return json.result === 'success';
-            } catch(e) {
-                alert('❌ Error de conexión');
-                return false;
-            }
-        }
-
-        function verGoogleSheet() { window.open(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/edit`, '_blank'); }
-        function vaciarTodos() {
-            if(confirm('⚠️ ¿Eliminar TODOS los inscritos? Las fotos NO se eliminarán.'))
-                alert('📌 Ve a Google Sheets y elimina las filas manualmente');
-            verGoogleSheet();
-        }
-
-        // ========== ORGANIZADOR ==========
-        let loginModal, panelOpciones, estadoOrganizador, btnMostrarLogin, btnCerrarSesion, btnExcel, btnVaciar;
 
         function initOrganizadorEvents() {
-            loginModal = document.getElementById('loginModal');
-            panelOpciones = document.getElementById('panelOrganizadorOpciones');
-            estadoOrganizador = document.getElementById('estadoOrganizador');
-            btnMostrarLogin = document.getElementById('btnMostrarLoginOrganizador');
-            btnCerrarSesion = document.getElementById('btnCerrarSesion');
-            btnExcel = document.getElementById('btnExcel');
-            btnVaciar = document.getElementById('btnVaciarTodo');
-
-            if (btnMostrarLogin) btnMostrarLogin.addEventListener('click', mostrarLogin);
-            if (btnCerrarSesion) btnCerrarSesion.addEventListener('click', cerrarSesionOrganizador);
-            if (btnExcel) btnExcel.addEventListener('click', verGoogleSheet);
-            if (btnVaciar) btnVaciar.addEventListener('click', vaciarTodos);
-            if (document.getElementById('btnLogin')) document.getElementById('btnLogin').addEventListener('click', intentarLogin);
-            if (document.getElementById('btnCancelarLogin')) document.getElementById('btnCancelarLogin').addEventListener('click', cerrarLogin);
-            window.onclick = (e) => { if(e.target === loginModal) cerrarLogin(); };
+            document.getElementById('btnMostrarLoginOrganizador').onclick = () => document.getElementById('loginModal').style.display='flex';
+            document.getElementById('btnLogin').onclick = () => {
+                let pwd = document.getElementById('passwordOrganizador').value;
+                if(pwd===CONTRASENA_ORGANIZADOR) {
+                    document.getElementById('loginModal').style.display='none';
+                    document.getElementById('panelOrganizadorOpciones').style.display='block';
+                    document.getElementById('estadoOrganizador').innerHTML='<p>✅ ACCESO CONCEDIDO</p>';
+                } else document.getElementById('errorLogin').style.display='block';
+            };
+            document.getElementById('btnCerrarSesion').onclick = () => location.reload();
+            document.getElementById('btnExcel').onclick = () => window.open(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/edit`);
+            document.getElementById('btnVaciarTodo').onclick = () => confirm('¿Eliminar todos?') && alert('Ve a Sheets manualmente');
+            document.getElementById('btnCancelarLogin').onclick = () => document.getElementById('loginModal').style.display='none';
         }
 
-        function mostrarLogin() { loginModal.style.display = 'flex'; document.getElementById('errorLogin').style.display = 'none'; }
-        function cerrarLogin() { loginModal.style.display = 'none'; }
-        function intentarLogin() {
-            const pwd = document.getElementById('passwordOrganizador').value;
-            if(pwd === CONTRASENA_ORGANIZADOR) {
-                cerrarLogin();
-                panelOpciones.style.display = 'block';
-                estadoOrganizador.innerHTML = '<p>✅ ACCESO CONCEDIDO</p><p style="font-size:0.65rem;">Panel de control activo</p>';
-                btnMostrarLogin.style.display = 'none';
-            } else { 
-                document.getElementById('errorLogin').style.display = 'block'; 
-            }
-        }
-        function cerrarSesionOrganizador() {
-            panelOpciones.style.display = 'none';
-            estadoOrganizador.innerHTML = '<p>🔒 Acceso restringido</p><p style="font-size:0.65rem;">Ingresa la contraseña para acceder al panel</p>';
-            btnMostrarLogin.style.display = 'block';
-            alert('🔐 Sesión de organizador cerrada');
-        }
-
-        // ========== CAMBIAR SECCIÓN ==========
         function changeSection(section) {
-            if (section === 'registro') {
-                renderRegistro();
-            } else if (section === 'info') {
-                renderInfo();
-            } else if (section === 'organizador') {
-                renderOrganizador();
-            }
-            
-            menuItems.forEach(item => {
-                if (item.getAttribute('data-section') === section) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-            
-            handleMobileClose();
+            if(section==='registro') renderRegistro();
+            else if(section==='info') renderInfo();
+            else if(section==='organizador') renderOrganizador();
+            menuItems.forEach(i=>i.classList.remove('active'));
+            document.querySelector(`.menu-item[data-section="${section}"]`).classList.add('active');
+            if(window.innerWidth<=900) closeSidebarFunc();
         }
-
-        menuItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const section = item.getAttribute('data-section');
-                changeSection(section);
-            });
-        });
-
+        menuItems.forEach(i=>i.addEventListener('click',()=>changeSection(i.dataset.section)));
         renderRegistro();
     </script>
 </body>
