@@ -64,15 +64,16 @@
         /* ========== CARRUSEL ========== */
         .carousel-container {
             position: relative;
-            margin: 1.5rem 0 0.5rem 0;
+            margin: 1.5rem 0 2rem 0;
             border-radius: 28px;
             overflow: hidden;
-            box-shadow: 0 20px 5px -10px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.15);
+            background: #f0f2f5;
         }
 
         .carousel-slides {
             display: flex;
-            transition: transform 0.4s ease-in-out;
+            transition: transform 0.5s ease-in-out;
         }
 
         .carousel-slide {
@@ -91,7 +92,7 @@
         /* Botones de navegación */
         .carousel-btn {
             position: absolute;
-            top: 80%;
+            top: 50%;
             transform: translateY(-50%);
             background: rgba(26, 58, 74, 0.7);
             color: white;
@@ -380,12 +381,11 @@
                 <div class="carousel-slide">
                     <img src="https://i.ibb.co/WWXn7fJy/251209214634265-performer-img-CAT1.jpg" alt="Póster oficial Guat Maltecos">
                 </div>
-                <!-- 🔽 AÑADE MÁS IMÁGENES AQUÍ (reemplaza los enlaces) 🔽 -->
                 <div class="carousel-slide">
-                    <img src="https://i.ibb.co/mCwJDw4W/images-1.jpg" alt="Imagen 2">
+                    <img src="https://i.ibb.co/dwHpr1ky/ECMI-LOCAL-1.png" alt="ECMI Local - Evento">
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://i.ibb.co/dwHpr1ky/ECMI-LOCAL-1.png" alt="Imagen 3">
+                    <img src="https://i.ibb.co/mCwJDw4W/images-1.jpg" alt="Imagen 3">
                 </div>
             </div>
             <button class="carousel-btn carousel-btn-prev" id="prevBtn">❮</button>
@@ -469,6 +469,7 @@
 
         // Iniciar carrusel automático
         function startAutoSlide() {
+            if (autoSlideInterval) clearInterval(autoSlideInterval);
             autoSlideInterval = setInterval(() => {
                 nextSlide();
             }, 5000); // 5 segundos
@@ -649,7 +650,7 @@
         menuItems.forEach(i=>i.addEventListener('click',()=>changeSection(i.dataset.section)));
         renderRegistro();
 
-        // Ajustar estilos del carrusel para que no se superpongan los botones al contenido
+        // Ajustar altura del carrusel para mantener consistencia
         function adjustCarouselHeight() {
             const slides = document.querySelectorAll('.carousel-slide img');
             let maxHeight = 0;
