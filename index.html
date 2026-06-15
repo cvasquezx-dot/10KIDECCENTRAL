@@ -93,6 +93,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
+            margin-bottom: 3rem;
         }
 
         /* Tarjetas estilo AUTOMY */
@@ -180,7 +181,7 @@
             color: rgba(255,255,255,0.3);
         }
 
-        /* Área de foto mejorada */
+        /* Área de foto */
         .photo-area {
             border: 2px dashed rgba(255, 154, 46, 0.4);
             border-radius: 16px;
@@ -253,7 +254,7 @@
             color: #fff;
         }
 
-        /* Botones */
+        /* Botón principal */
         .btn {
             background: linear-gradient(135deg, #ff6b35, #ff9a2e);
             border: none;
@@ -288,6 +289,35 @@
             color: #0a0a0a;
         }
 
+        /* Botón organizador al final de la página */
+        .organizador-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-organizador-footer {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.6);
+            padding: 12px 28px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 40px;
+            font-family: inherit;
+        }
+
+        .btn-organizador-footer:hover {
+            border-color: #ff9a2e;
+            color: #ff9a2e;
+            background: rgba(255, 154, 46, 0.1);
+        }
+
         /* Info carrera */
         .info-list {
             list-style: none;
@@ -319,7 +349,48 @@
             font-weight: 600;
         }
 
-        /* Panel organizador */
+        /* Panel organizador (subsección que aparece) */
+        .panel-organizador {
+            display: none;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(20, 20, 35, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 154, 46, 0.3);
+            animation: slideUp 0.4s ease;
+        }
+
+        .panel-organizador.activo {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .panel-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ff9a2e;
+        }
+
         .admin-stats {
             background: rgba(255, 154, 46, 0.1);
             border-radius: 16px;
@@ -329,9 +400,10 @@
             border: 1px solid rgba(255, 154, 46, 0.2);
         }
 
-        .admin-stats p {
-            font-size: 0.85rem;
-            color: #ff9a2e;
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
         }
 
         /* Modal */
@@ -370,13 +442,9 @@
             display: none;
         }
 
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
+        .oculto {
+            display: none;
         }
-
-        .oculto { display: none; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.9); }
@@ -387,6 +455,7 @@
             .grid-2 { grid-template-columns: 1fr; }
             h1 { font-size: 2.5rem; }
             body { padding: 1rem; }
+            .btn-group { flex-direction: column; }
         }
     </style>
 </head>
@@ -394,8 +463,8 @@
 <div class="container">
     <div class="main-header">
         <div class="logo-badge">🏆 INSCRIPCIONES 2026</div>
-        <h1>10K 2026 IDEC CENTRAL SAN CRISTOBAL</h1>
-        <div class="subtitle">3K · 5K · 9K · La carrera más vibrante del año</div>
+        <h1>10K 2026 IDEC CENTRAL SAN CRITOBAL</h1>
+        <div class="subtitle">10K · La carrera más vibrante del año</div>
     </div>
 
     <div class="grid-2">
@@ -431,7 +500,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>📸 FOTO DEL CORREDOR</label>
+                    <label>📸 FOTO DE LA BOLETA DE PAGO DE INSCRIPCION</label>
                     <div class="photo-area" id="uploadArea">
                         <div class="camera-icon">📷</div>
                         <p>Haz clic o arrastra tu foto</p>
@@ -449,11 +518,10 @@
                 </div>
 
                 <button type="submit" class="btn">✅ INSCRIBIRME AHORA</button>
-                <button type="button" id="btnModoOrganizador" class="btn btn-outline" style="margin-top: 1rem;">🔐 ORGANIZADORES</button>
             </form>
         </div>
 
-        <!-- Columna derecha: Info carrera + Panel organizador -->
+        <!-- Columna derecha: Info carrera -->
         <div class="card">
             <div class="card-header">
                 <div class="card-icon">ℹ️</div>
@@ -481,19 +549,27 @@
                     <div class="info-text"><strong>DISTANCIAS</strong><span>3K · 5K · 9K</span></div>
                 </li>
             </ul>
+        </div>
+    </div>
 
-            <!-- Panel organizador (oculto inicialmente) -->
-            <div id="panelOrganizador" style="margin-top: 1.5rem; display: none;">
-                <div class="admin-stats">
-                    <p>📊 ACCESO ORGANIZADOR ACTIVO</p>
-                    <p style="font-size: 0.7rem; margin-top: 0.5rem;">Los datos se guardan automáticamente en Google Sheets</p>
-                </div>
-                <div class="btn-group">
-                    <button id="btnExcel" class="btn-outline" style="flex:1;">📊 VER SHEET</button>
-                    <button id="btnVaciarTodo" class="btn-outline" style="flex:1; border-color:#ff4d4d; color:#ff4d4d;">⚠️ VACIAR</button>
-                </div>
-                <button id="btnCerrarSesion" class="btn-outline" style="width:100%; margin-top: 1rem;">🚪 CERRAR SESIÓN</button>
-            </div>
+    <!-- Botón de organizadores al final de la página -->
+    <div class="organizador-footer">
+        <button id="btnModoOrganizador" class="btn-organizador-footer">🔐 ACCESO ORGANIZADORES</button>
+    </div>
+
+    <!-- Panel organizador (subsección que aparece abajo) -->
+    <div id="panelOrganizador" class="panel-organizador">
+        <div class="panel-header">
+            <span class="panel-title">📋 PANEL DE CONTROL</span>
+            <button id="btnCerrarSesion" style="background: none; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 5px 15px; border-radius: 30px; cursor: pointer;">🚪 Cerrar</button>
+        </div>
+        <div class="admin-stats">
+            <p>📊 ACCESO ORGANIZADOR ACTIVO</p>
+            <p style="font-size: 0.7rem; margin-top: 0.5rem;">Los datos se guardan automáticamente en Google Sheets</p>
+        </div>
+        <div class="btn-group">
+            <button id="btnExcel" class="btn-outline" style="flex:1;">📊 VER GOOGLE SHEET</button>
+            <button id="btnVaciarTodo" class="btn-outline" style="flex:1; border-color:#ff4d4d; color:#ff4d4d;">⚠️ VACIAR INSCRITOS</button>
         </div>
     </div>
 </div>
@@ -502,6 +578,7 @@
 <div id="loginModal" class="modal" style="display: none;">
     <div class="modal-box">
         <h2 style="margin-bottom: 1rem;">🔐 Acceso organizadores</h2>
+        <p style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">Ingresa la contraseña para acceder al panel</p>
         <input type="password" id="passwordOrganizador" placeholder="Contraseña">
         <div class="btn-group">
             <button id="btnLogin">INGRESAR</button>
@@ -592,27 +669,40 @@
 
     function verGoogleSheet() { window.open(`https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/edit`, '_blank'); }
     function vaciarTodos() {
-        if(confirm('⚠️ ¿Eliminar TODOS los inscritos?')) alert('📌 Ve a Google Sheets y elimina las filas manualmente');
+        if(confirm('⚠️ ¿Eliminar TODOS los inscritos? Las fotos NO se eliminarán.'))
+            alert('📌 Ve a Google Sheets y elimina las filas manualmente');
         verGoogleSheet();
     }
 
-    // ========== LOGIN ==========
+    // ========== PANEL ORGANIZADOR ==========
     const loginModal = document.getElementById('loginModal');
     const panelOrganizador = document.getElementById('panelOrganizador');
-    function mostrarLogin() { loginModal.style.display = 'flex'; document.getElementById('errorLogin').style.display = 'none'; }
+    const btnOrganizadorFooter = document.getElementById('btnModoOrganizador');
+    
+    function mostrarLogin() { 
+        loginModal.style.display = 'flex'; 
+        document.getElementById('errorLogin').style.display = 'none'; 
+    }
+    
     function cerrarLogin() { loginModal.style.display = 'none'; }
+    
     function intentarLogin() {
-        if(document.getElementById('passwordOrganizador').value === CONTRASENA_ORGANIZADOR) {
+        const pwd = document.getElementById('passwordOrganizador').value;
+        if(pwd === CONTRASENA_ORGANIZADOR) {
             cerrarLogin();
             modoOrganizador = true;
-            panelOrganizador.style.display = 'block';
-            document.getElementById('btnModoOrganizador').classList.add('oculto');
-        } else { document.getElementById('errorLogin').style.display = 'block'; }
+            panelOrganizador.classList.add('activo');
+            // Desplazar suavemente hacia el panel
+            panelOrganizador.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else { 
+            document.getElementById('errorLogin').style.display = 'block'; 
+        }
     }
+    
     function cerrarSesion() {
         modoOrganizador = false;
-        panelOrganizador.style.display = 'none';
-        document.getElementById('btnModoOrganizador').classList.remove('oculto');
+        panelOrganizador.classList.remove('activo');
+        alert('🔐 Sesión de organizador cerrada');
     }
 
     // ========== EVENTOS ==========
@@ -621,14 +711,14 @@
         const nombre = document.getElementById('nombre').value;
         const edad = document.getElementById('edad').value;
         const genero = document.getElementById('genero').value;
-        if(!nombre || nombre.length < 3) return alert('❌ Nombre válido');
-        if(!edad || edad < 1 || edad > 120) return alert('❌ Edad válida');
-        if(!genero) return alert('❌ Selecciona género');
+        if(!nombre || nombre.length < 3) return alert('❌ Nombre válido (mínimo 3 letras)');
+        if(!edad || edad < 1 || edad > 120) return alert('❌ Edad entre 1 y 120 años');
+        if(!genero) return alert('❌ Selecciona un género');
         const ok = await agregarInscrito(nombre, edad, genero);
         if(ok) {
             document.getElementById('formInscripcion').reset();
             window.eliminarFoto();
-            alert(`✅ ¡${nombre} inscrito correctamente! 🏃‍♂️`);
+            alert(`✅ ¡${nombre} inscrito correctamente! 🏃‍♂️🎉`);
         }
     });
 
