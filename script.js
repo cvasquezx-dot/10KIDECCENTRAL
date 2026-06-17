@@ -90,7 +90,7 @@ function renderRegistro() {
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn-primary"> ¡¡INSCRIBITE AHORA MISMO!!</button>
+            <button type="submit" class="btn-primary"> ¡¡INSCRIBETE AHORA MISMO!!</button>
         </form>
     `;
     initFormEvents();
@@ -241,7 +241,7 @@ function initFormEvents() {
                 btn.disabled = false;
 
                 if (json.result === 'success') {
-                    alert(`✅ ¡${nombre} , TE HAZ INSCRITO CORRECTAMENTE!\n\nESTADO DE PAGO: ${estadoPago}`);
+                    alert(`✅ ¡${nombre} , TE HAS INSCRITO CORRECTAMENTE!\n\nESTADO DE PAGO: ${estadoPago}`);
                     form.reset();
                     if (removeBtn) removeBtn.click();
                     document.getElementById('photoSection').classList.remove('visible');
