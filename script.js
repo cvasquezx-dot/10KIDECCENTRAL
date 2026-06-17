@@ -3,7 +3,7 @@
 // ============================================
 
 // Configuración
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwMBpzD7m6EjmN6xmNNU74jqlG1U3zJb86TySYMFSP8BhxikioQty9w678MjAEvDqkO/exec';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycby3pTNXnCPhmanaphttU7eXr6w3ggA9YqTwwY_x31WZ-_s7nCr-RABVCI-mlKE8quM/exec';
 const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
 const CONTRASENA_ORGANIZADOR = "carrera2024";
 
