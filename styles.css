@@ -3,6 +3,21 @@
    Moderno · Glassmorphism · Vibrante
    ============================================ */
 
+/* ---------- FUENTE SAMSUNGONE ---------- */
+@font-face {
+    font-family: 'SamsungOne';
+    src: url('https://cdn.jsdelivr.net/gh/samsung-cn/fonts/SamsungOne-400.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SamsungOne';
+    src: url('https://cdn.jsdelivr.net/gh/samsung-cn/fonts/SamsungOne-700.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
 /* ---------- RESET Y BASE ---------- */
 * {
     margin: 0;
@@ -61,7 +76,7 @@ body::before {
 
 .logo-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #00a8e8, #7b2ffc);
+    background: linear-gradient(135deg, #00B4FF, #0077FF);
     padding: 0.4rem 1.5rem;
     border-radius: 30px;
     font-size: 0.65rem;
@@ -70,13 +85,13 @@ body::before {
     text-transform: uppercase;
     margin-bottom: 1rem;
     color: white;
-    box-shadow: 0 4px 20px rgba(0, 168, 232, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 180, 255, 0.3);
 }
 
 h1 {
     font-size: 3.8rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #ffffff 30%, #00a8e8 60%, #7b2ffc 100%);
+    background: linear-gradient(135deg, #ffffff 30%, #00B4FF 60%, #0077FF 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -111,7 +126,7 @@ h1 {
 
 .hero-image img:hover {
     transform: scale(1.01);
-    box-shadow: 0 35px 80px rgba(0, 168, 232, 0.15);
+    box-shadow: 0 35px 80px rgba(0, 180, 255, 0.15);
 }
 
 /* ---------- DASHBOARD ---------- */
@@ -202,7 +217,7 @@ h1 {
     font-weight: 700;
     margin-bottom: 0.2rem;
     color: #ffffff;
-    background: linear-gradient(135deg, #ffffff, #00a8e8);
+    background: linear-gradient(135deg, #ffffff, #00B4FF);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -238,8 +253,8 @@ h1 {
 }
 
 .menu-item.active {
-    background: rgba(0, 168, 232, 0.1);
-    border-left-color: #00a8e8;
+    background: rgba(0, 180, 255, 0.1);
+    border-left-color: #00B4FF;
     color: #ffffff;
 }
 
@@ -314,9 +329,9 @@ select {
 input:focus,
 select:focus {
     outline: none;
-    border-color: #00a8e8;
+    border-color: #00B4FF;
     background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 3px rgba(0, 168, 232, 0.15);
+    box-shadow: 0 0 0 3px rgba(0, 180, 255, 0.15);
 }
 
 input::placeholder {
@@ -359,13 +374,13 @@ input[type="tel"] {
 }
 
 .photo-area:hover {
-    border-color: #00a8e8;
+    border-color: #00B4FF;
     background: rgba(255, 255, 255, 0.05);
 }
 
 .photo-area.drag-over {
-    border-color: #00a8e8;
-    background: rgba(0, 168, 232, 0.08);
+    border-color: #00B4FF;
+    background: rgba(0, 180, 255, 0.08);
 }
 
 .photo-area .camera-icon {
@@ -399,7 +414,7 @@ input[type="tel"] {
     height: 80px;
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid #00a8e8;
+    border: 2px solid #00B4FF;
 }
 
 .remove-photo-btn {
@@ -419,8 +434,9 @@ input[type="tel"] {
     background: rgba(255, 59, 48, 0.25);
 }
 
-/* ---------- BOTONES ---------- */
-/* ---------- BOTONES ---------- */
+/* ============================================
+   BOTONES - ESTILO SAMSUNG
+   ============================================ */
 .btn-primary {
     background: linear-gradient(135deg, #00B4FF, #0077FF);
     border: none;
@@ -580,6 +596,205 @@ input[type="tel"] {
     margin-top: 0.5rem;
     display: none;
     font-weight: 500;
+}
+
+/* ============================================
+   MODAL DE CONFIRMACIÓN - ESTILO TICKET PREMIUM
+   ============================================ */
+
+.ticket-modal {
+    max-width: 420px !important;
+    padding: 0 !important;
+    overflow: hidden;
+    border: none !important;
+    background: linear-gradient(145deg, #0d1117, #161b22) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* --- Cabecera del ticket --- */
+.ticket-header {
+    background: linear-gradient(135deg, #00B4FF, #0077FF);
+    padding: 1.8rem 2rem 1.2rem 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.ticket-header::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: radial-gradient(circle at 20px 0, transparent 15px, #00B4FF 15px);
+    background-size: 30px 30px;
+    opacity: 0.3;
+}
+
+.ticket-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0.3rem 1.2rem;
+    border-radius: 30px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ticket-number {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: white;
+    margin-top: 0.3rem;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    font-family: 'SamsungOne', 'Courier New', monospace;
+    letter-spacing: 2px;
+}
+
+/* --- Cuerpo del ticket --- */
+.ticket-body {
+    padding: 2rem 2rem 1.5rem 2rem;
+    text-align: left;
+}
+
+.ticket-body .ticket-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ticket-body .ticket-row:last-child {
+    border-bottom: none;
+}
+
+.ticket-body .ticket-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.ticket-body .ticket-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: right;
+    max-width: 60%;
+    word-break: break-word;
+}
+
+.ticket-body .ticket-value.highlight {
+    color: #00B4FF;
+}
+
+.ticket-body .ticket-value .status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    border-radius: 30px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.ticket-body .ticket-value .status-badge.pending {
+    background: rgba(255, 193, 7, 0.2);
+    color: #FFC107;
+    border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.ticket-body .ticket-value .status-badge.paid {
+    background: rgba(0, 230, 118, 0.15);
+    color: #00E676;
+    border: 1px solid rgba(0, 230, 118, 0.2);
+}
+
+/* --- Pie del ticket --- */
+.ticket-footer {
+    padding: 1.5rem 2rem 2rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ticket-status {
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.ticket-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.ticket-btn-confirm {
+    width: 100% !important;
+    background: linear-gradient(135deg, #00B4FF, #0077FF) !important;
+    padding: 14px !important;
+    font-size: 0.85rem !important;
+    border-radius: 40px !important;
+    box-shadow: 0 4px 25px rgba(0, 180, 255, 0.3) !important;
+}
+
+.ticket-btn-confirm:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 35px rgba(0, 180, 255, 0.4) !important;
+}
+
+.ticket-btn-cancel {
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    padding: 12px !important;
+}
+
+.ticket-btn-cancel:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: white !important;
+}
+
+/* --- Animación del ticket --- */
+.ticket-modal {
+    animation: ticketPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes ticketPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+    .ticket-body {
+        padding: 1.5rem;
+    }
+    .ticket-header {
+        padding: 1.5rem 1.5rem 1rem 1.5rem;
+    }
+    .ticket-number {
+        font-size: 2.2rem;
+    }
+    .ticket-footer {
+        padding: 1.2rem 1.5rem 1.5rem 1.5rem;
+    }
 }
 
 /* ---------- UTILIDADES ---------- */
