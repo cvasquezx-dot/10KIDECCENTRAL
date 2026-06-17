@@ -1,5 +1,5 @@
 /* ============================================
-   styles.css - TODOS LOS ESTILOS VISUALES
+   styles.css - ESTILOS VISUALES
    ============================================ */
 
 /* ---------- RESET Y BASE ---------- */
@@ -11,8 +11,8 @@
 
 body {
     font-family: 'Poppins', 'Futura', 'Avant Garde', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
-    background: #f5f7fa;
-    color: #1a2a3a;
+    background: #F5F0EB;
+    color: #1A252F;
     min-height: 100vh;
     overflow-x: hidden;
 }
@@ -30,34 +30,42 @@ body {
 .main-header {
     text-align: center;
     margin-bottom: 1.5rem;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #1A252F 0%, #6C1B3C 100%);
+    border-radius: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .logo-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #1a3a4a, #2a5a6a);
+    background: #D4AF37;
     padding: 0.5rem 1.5rem;
     border-radius: 50px;
     font-size: 0.7rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    margin-bottom: 1rem;
-    color: white;
+    margin-bottom: 0.8rem;
+    color: #1A252F;
+    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
 }
 
 h1 {
     font-size: 4rem;
     font-weight: 700;
-    color: #1a2a3a;
-    margin-bottom: 0.5rem;
+    color: #FFFFFF;
+    margin-bottom: 0.3rem;
     letter-spacing: -0.5px;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
 
 .subtitle {
-    color: #6a7a8a;
-    font-size: 0.9rem;
+    color: #D4AF37;
+    font-size: 1rem;
     max-width: 600px;
     margin: 0 auto;
+    font-weight: 500;
+    letter-spacing: 2px;
 }
 
 /* ---------- BANNER / HERO IMAGE ---------- */
@@ -70,16 +78,17 @@ h1 {
     max-width: 100%;
     height: auto;
     border-radius: 28px;
-    box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    transition: transform 0.3s ease;
+    box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.2);
+    border: 3px solid #D4AF37;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hero-image img:hover {
     transform: scale(1.01);
+    box-shadow: 0 25px 45px -10px rgba(212, 175, 55, 0.3);
 }
 
-/* ---------- DASHBOARD (contenido principal + menú) ---------- */
+/* ---------- DASHBOARD ---------- */
 .dashboard {
     display: flex;
     gap: 2rem;
@@ -88,19 +97,22 @@ h1 {
 
 .main-content {
     flex: 1;
-    background: white;
+    background: #FFFFFF;
     border-radius: 24px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
     padding: 2rem;
     transition: all 0.3s ease;
+    border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
-/* ---------- MENÚ LATERAL ---------- */
+/* ============================================
+   MENÚ LATERAL
+   ============================================ */
 .menu-toggle {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: #1a3a4a;
+    background: #6C1B3C;
     color: white;
     width: 50px;
     height: 50px;
@@ -110,18 +122,18 @@ h1 {
     justify-content: center;
     cursor: pointer;
     z-index: 100;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border: none;
+    box-shadow: 0 4px 15px rgba(108, 27, 60, 0.3);
+    border: 2px solid #D4AF37;
     font-size: 1.5rem;
 }
 
 .sidebar {
     position: fixed;
     top: 0;
-    right: -320px;
+    right: 0;
     width: 320px;
     height: 100vh;
-    background: white;
+    background: #FFFFFF;
     box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     transition: right 0.3s ease;
@@ -130,17 +142,14 @@ h1 {
     overflow-y: auto;
 }
 
-.sidebar.open {
-    right: 0;
-}
-
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(26, 37, 47, 0.7);
+    backdrop-filter: blur(4px);
     z-index: 999;
     display: none;
 }
@@ -151,19 +160,22 @@ h1 {
 
 .sidebar-header {
     padding: 2rem 1.5rem;
-    background: linear-gradient(135deg, #1a3a4a, #2a5a6a);
+    background: linear-gradient(135deg, #1A252F, #6C1B3C);
     color: white;
+    border-bottom: 3px solid #D4AF37;
 }
 
 .sidebar-header h3 {
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 0.25rem;
+    color: #D4AF37;
 }
 
 .sidebar-header p {
     font-size: 0.7rem;
-    opacity: 0.8;
+    opacity: 0.7;
+    letter-spacing: 1px;
 }
 
 .menu-items {
@@ -179,15 +191,17 @@ h1 {
     cursor: pointer;
     transition: all 0.2s;
     border-left: 3px solid transparent;
+    font-weight: 500;
 }
 
 .menu-item:hover {
-    background: #f0f2f5;
+    background: #F5F0EB;
+    border-left-color: #D4AF37;
 }
 
 .menu-item.active {
-    background: #eef2f5;
-    border-left-color: #2a5a6a;
+    background: #F5F0EB;
+    border-left-color: #6C1B3C;
 }
 
 .menu-icon {
@@ -196,13 +210,14 @@ h1 {
 
 .menu-text {
     font-weight: 500;
-    font-size: 0.9rem;
-    color: #1a2a3a;
+    font-size: 0.85rem;
+    color: #1A252F;
+    letter-spacing: 0.5px;
 }
 
 .menu-item.active .menu-text {
-    color: #2a5a6a;
-    font-weight: 600;
+    color: #6C1B3C;
+    font-weight: 700;
 }
 
 .close-menu {
@@ -213,8 +228,9 @@ h1 {
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: white;
+    color: #D4AF37;
     opacity: 0.7;
+    transition: opacity 0.2s;
 }
 
 .close-menu:hover {
@@ -228,33 +244,33 @@ h1 {
 
 label {
     display: block;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #8a9aaa;
+    color: #6C1B3C;
 }
 
 input,
 select {
     width: 100%;
-    background: #f8f9fb;
-    border: 1px solid #e0e4e8;
+    background: #FAF8F6;
+    border: 2px solid #E8E0D8;
     border-radius: 12px;
     padding: 12px 14px;
-    color: #1a2a3a;
+    color: #1A252F;
     font-family: inherit;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     transition: all 0.2s;
 }
 
 input:focus,
 select:focus {
     outline: none;
-    border-color: #2a5a6a;
+    border-color: #D4AF37;
     background: white;
-    box-shadow: 0 0 0 3px rgba(26, 58, 74, 0.1);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
 }
 
 input[type="tel"] {
@@ -283,38 +299,39 @@ input[type="tel"] {
 }
 
 .photo-area {
-    border: 2px dashed #d0d6dc;
+    border: 2px dashed #D4AF37;
     border-radius: 16px;
-    padding: 1rem;
+    padding: 1.5rem;
     text-align: center;
     cursor: pointer;
-    background: #fafcfd;
+    background: #FAF8F6;
     transition: all 0.3s ease;
 }
 
 .photo-area:hover {
-    border-color: #2a5a6a;
-    background: #f0f4f6;
+    border-color: #6C1B3C;
+    background: #F5F0EB;
 }
 
 .photo-area.drag-over {
-    border-color: #2a5a6a;
-    background: #e0ecf0;
+    border-color: #6C1B3C;
+    background: #EDE5DC;
 }
 
 .photo-area .camera-icon {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 0.3rem;
 }
 
 .photo-area p {
-    font-size: 0.75rem;
-    color: #6a7a8a;
+    font-size: 0.8rem;
+    color: #6C1B3C;
+    font-weight: 500;
 }
 
 .photo-area small {
-    font-size: 0.6rem;
-    color: #9aaab8;
+    font-size: 0.65rem;
+    color: #8A7A6A;
 }
 
 .photo-preview {
@@ -332,15 +349,16 @@ input[type="tel"] {
     height: 90px;
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid #2a5a6a;
+    border: 3px solid #D4AF37;
 }
 
 .remove-photo-btn {
     background: none;
-    border: 1px solid #c0392b;
-    color: #c0392b;
-    padding: 3px 10px;
-    font-size: 0.6rem;
+    border: 1px solid #C0392B;
+    color: #C0392B;
+    padding: 3px 12px;
+    font-size: 0.65rem;
+    font-weight: 600;
     border-radius: 20px;
     margin-top: 0.5rem;
     cursor: pointer;
@@ -348,18 +366,18 @@ input[type="tel"] {
 }
 
 .remove-photo-btn:hover {
-    background: #c0392b;
+    background: #C0392B;
     color: white;
 }
 
 /* ---------- BOTONES ---------- */
 .btn-primary {
-    background: linear-gradient(135deg, #1a3a4a, #2a5a6a);
+    background: linear-gradient(135deg, #6C1B3C, #8B2A50);
     border: none;
     color: white;
-    padding: 12px 24px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    padding: 14px 28px;
+    font-size: 0.85rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
     cursor: pointer;
@@ -367,11 +385,12 @@ input[type="tel"] {
     border-radius: 40px;
     width: 100%;
     font-family: inherit;
+    box-shadow: 0 4px 15px rgba(108, 27, 60, 0.3);
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(26, 58, 74, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(108, 27, 60, 0.4);
 }
 
 .btn-primary:disabled {
@@ -382,29 +401,29 @@ input[type="tel"] {
 
 .btn-outline {
     background: transparent;
-    border: 1px solid #2a5a6a;
-    color: #2a5a6a;
+    border: 2px solid #6C1B3C;
+    color: #6C1B3C;
     padding: 8px 16px;
     border-radius: 40px;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.7rem;
     transition: all 0.2s;
     font-family: inherit;
 }
 
 .btn-outline:hover {
-    background: #2a5a6a;
+    background: #6C1B3C;
     color: white;
 }
 
 .btn-danger {
-    border-color: #c0392b;
-    color: #c0392b;
+    border-color: #C0392B;
+    color: #C0392B;
 }
 
 .btn-danger:hover {
-    background: #c0392b;
+    background: #C0392B;
     color: white;
 }
 
@@ -418,7 +437,7 @@ input[type="tel"] {
     align-items: center;
     gap: 1rem;
     padding: 1rem 0;
-    border-bottom: 1px solid #e8ecef;
+    border-bottom: 1px solid #EDE5DC;
 }
 
 .info-icon {
@@ -428,31 +447,33 @@ input[type="tel"] {
 
 .info-text strong {
     display: block;
-    font-size: 0.7rem;
-    color: #9aaab8;
+    font-size: 0.65rem;
+    color: #8A7A6A;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-weight: 700;
 }
 
 .info-text span {
     font-size: 1rem;
     font-weight: 600;
-    color: #1a2a3a;
+    color: #1A252F;
 }
 
 /* ---------- PANEL ORGANIZADOR ---------- */
 .admin-stats {
-    background: #eef2f5;
+    background: #F5F0EB;
     border-radius: 12px;
     padding: 1rem;
     text-align: center;
     margin-bottom: 1rem;
+    border: 1px solid #D4AF37;
 }
 
 .admin-stats p {
-    color: #1a3a4a;
+    color: #6C1B3C;
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .btn-group {
@@ -469,8 +490,8 @@ input[type="tel"] {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(4px);
+    background: rgba(26, 37, 47, 0.9);
+    backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -480,10 +501,18 @@ input[type="tel"] {
 .modal-box {
     background: white;
     border-radius: 24px;
-    padding: 2rem;
+    padding: 2.5rem;
     width: 90%;
-    max-width: 340px;
+    max-width: 360px;
     text-align: center;
+    border: 2px solid #D4AF37;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.modal-box h2 {
+    color: #6C1B3C;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
 }
 
 .modal-box input {
@@ -491,10 +520,11 @@ input[type="tel"] {
 }
 
 .error-msg {
-    color: #c0392b;
+    color: #C0392B;
     font-size: 0.75rem;
     margin-top: 0.5rem;
     display: none;
+    font-weight: 600;
 }
 
 /* ---------- UTILIDADES ---------- */
@@ -503,23 +533,91 @@ input[type="tel"] {
 }
 
 /* ---------- RESPONSIVE ---------- */
+
+/* Móvil: menú oculto con botón hamburguesa */
 @media (max-width: 900px) {
     .menu-toggle {
         display: flex;
     }
-    h1 {
-        font-size: 2.2rem;
+    
+    .sidebar {
+        right: -320px;
     }
+    
+    .sidebar.open {
+        right: 0;
+    }
+    
     .container {
         padding: 1rem;
+        padding-right: 1rem;
     }
+    
     .dashboard {
         flex-direction: column;
     }
+    
     .btn-group {
         flex-direction: column;
     }
+    
     .btn-group button {
         width: 100%;
+    }
+    
+    .main-header {
+        padding: 1.5rem 1rem;
+        border-radius: 20px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    .logo-badge {
+        font-size: 0.6rem;
+        padding: 0.4rem 1rem;
+    }
+    
+    .subtitle {
+        font-size: 0.85rem;
+    }
+}
+
+/* Desktop: menú siempre visible a la derecha */
+@media (min-width: 901px) {
+    .sidebar {
+        right: 0;
+    }
+    
+    .overlay {
+        display: none !important;
+    }
+    
+    .container {
+        padding-right: 360px; /* Espacio para el menú lateral */
+    }
+    
+    .menu-toggle {
+        display: none !important;
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-image img {
+        border-radius: 16px;
+    }
+    
+    .main-content {
+        padding: 1.2rem;
+    }
+    
+    .sidebar {
+        width: 280px;
     }
 }
