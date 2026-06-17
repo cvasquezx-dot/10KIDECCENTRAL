@@ -1,16 +1,19 @@
 // ============================================
-// script.js - TODA LA LÓGICA (NO MODIFICAR)
+// script.js - TODA LA LÓGICA
 // ============================================
 
 // Configuración
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycby3pTNXnCPhmanaphttU7eXr6w3ggA9YqTwwY_x31WZ-_s7nCr-RABVCI-mlKE8quM/exec';
+// ⚠️ ACTUALIZA ESTA URL CON LA QUE TE DÉ GOOGLE APPS SCRIPT
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwMBpzD7m6EjmN6xmNNU74jqlG1U3zJb86TySYMFSP8BhxikioQty9w678MjAEvDqkO/exec';
 const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
 const CONTRASENA_ORGANIZADOR = "carrera2024";
 
 let imagenBase64 = '';
 let imagenNombre = '';
 
-// Menú lateral
+// ============================================
+// MENÚ LATERAL
+// ============================================
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('overlay');
 const menuToggle = document.getElementById('menuToggle');
@@ -34,7 +37,9 @@ menuToggle.addEventListener('click', openSidebar);
 closeMenu.addEventListener('click', closeSidebarFunc);
 overlay.addEventListener('click', closeSidebarFunc);
 
-// Renderizar Registro
+// ============================================
+// RENDERIZAR REGISTRO
+// ============================================
 function renderRegistro() {
     mainContent.innerHTML = `
         <h2 style="margin-bottom:1.5rem;">📝 Registro de corredor</h2>
@@ -92,7 +97,9 @@ function renderRegistro() {
     initPagoLogic();
 }
 
-// Lógica de pago
+// ============================================
+// LÓGICA DE PAGO (mostrar/ocultar foto)
+// ============================================
 function initPagoLogic() {
     const formaPago = document.getElementById('formaPago');
     const photoSection = document.getElementById('photoSection');
@@ -123,7 +130,9 @@ function initPagoLogic() {
     });
 }
 
-// Eventos del formulario
+// ============================================
+// EVENTOS DEL FORMULARIO
+// ============================================
 function initFormEvents() {
     const uploadArea = document.getElementById('uploadArea');
     const fotoInput = document.getElementById('foto');
@@ -248,7 +257,9 @@ function initFormEvents() {
     }
 }
 
-// Información
+// ============================================
+// INFORMACIÓN
+// ============================================
 function renderInfo() {
     mainContent.innerHTML = `
         <h2 style="margin-bottom:1.5rem;">ℹ️ Información de la carrera</h2>
@@ -265,7 +276,9 @@ function renderInfo() {
     `;
 }
 
-// Organizador
+// ============================================
+// ORGANIZADOR
+// ============================================
 function renderOrganizador() {
     mainContent.innerHTML = `
         <h2 style="margin-bottom:1.5rem;">🔐 Acceso organizadores</h2>
@@ -340,7 +353,9 @@ function initOrganizadorEvents() {
     };
 }
 
-// Cambiar sección
+// ============================================
+// CAMBIAR SECCIÓN
+// ============================================
 function changeSection(section) {
     if (section === 'registro') renderRegistro();
     else if (section === 'info') renderInfo();
