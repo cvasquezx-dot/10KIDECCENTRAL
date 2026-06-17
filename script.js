@@ -42,43 +42,43 @@ overlay.addEventListener('click', closeSidebarFunc);
 // ============================================
 function renderRegistro() {
     mainContent.innerHTML = `
-        <h2 style="margin-bottom:1.5rem;">📝 Registro de corredor</h2>
+        <h2 style="margin-bottom:1.5rem;">DATOS PARA LA INSCRIPCIÓN</h2>
         <form id="formInscripcion">
             <div class="form-group">
                 <label>NOMBRE COMPLETO</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej: PETER PARKER" required>
             </div>
             <div class="form-group">
                 <label>EDAD</label>
-                <input type="number" id="edad" name="edad" placeholder="Ej: 25" min="1" max="120" required>
+                <input type="number" id="edad" name="edad" placeholder="Ej: 25" min="1" max="99" required>
             </div>
             <div class="form-group">
                 <label>GÉNERO</label>
                 <select id="genero" name="genero" required>
-                    <option value="">Selecciona</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
+                    <option value="">SELECCIONA</option>
+                    <option value="MASCULINO">Masculino</option>
+                    <option value="FEMENINO">Femenino</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>NÚMERO DE TELÉFONO</label>
                 <input type="tel" id="telefono" name="telefono" placeholder="Ej: 12345678" maxlength="8" pattern="[0-9]{8}" required>
-                <small style="color: #9aaab8; font-size: 0.65rem;">📌 Debe tener exactamente 8 dígitos</small>
+                <small style="color: #9aaab8; font-size: 0.65rem;">Debe tener 8 dígitos</small>
             </div>
             <div class="form-group">
                 <label>FORMA DE PAGO</label>
                 <select id="formaPago" name="formaPago" required>
                     <option value="">Selecciona</option>
-                    <option value="Efectivo">💵 Efectivo</option>
-                    <option value="Depósito">🏦 Depósito</option>
-                    <option value="Transferencia">💳 Transferencia</option>
+                    <option value="Efectivo">💵 EFECTIVO </option>
+                    <option value="Depósito">🏦 DEPÓSITO </option>
+                    <option value="Transferencia">💳 TRANSFERENCIA </option>
                 </select>
             </div>
             <div class="form-group photo-section" id="photoSection">
-                <label>📸 COMPROBANTE DE PAGO <span style="color:#c0392b;">*</span></label>
+                <label>COMPROBANTE DE PAGO <span style="color:#c0392b;">*</span></label>
                 <div class="photo-area" id="uploadArea">
                     <div class="camera-icon">📷</div>
-                    <p>Haz clic o arrastra tu comprobante</p>
+                    <p> Suba el comprobante de pago del deposito o transferencia</p>
                     <small>JPG, PNG · máx 5MB</small>
                 </div>
                 <input type="file" id="foto" accept="image/*" style="display:none">
@@ -86,11 +86,11 @@ function renderRegistro() {
                     <div class="preview-image">
                         <img id="previewImg" src="" alt="Vista previa">
                         <br>
-                        <button type="button" class="remove-photo-btn" id="removePhotoBtn" style="display:none;">🗑️ Eliminar</button>
+                        <button type="button" class="remove-photo-btn" id="removePhotoBtn" style="display:none;">ELIMINAR</button>
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn-primary">✅ INSCRIBIRME</button>
+            <button type="submit" class="btn-primary"> ¡¡INSCRIBITE AHORA MISMO!!</button>
         </form>
     `;
     initFormEvents();
@@ -205,14 +205,14 @@ function initFormEvents() {
             const telefono = document.getElementById('telefono').value;
             const formaPago = document.getElementById('formaPago').value;
 
-            if (!nombre || nombre.length < 3) return alert('❌ Nombre mínimo 3 letras');
-            if (!edad || edad < 1 || edad > 120) return alert('❌ Edad entre 1 y 120');
-            if (!genero) return alert('❌ Selecciona un género');
-            if (!/^[0-9]{8}$/.test(telefono)) return alert('❌ El teléfono debe tener exactamente 8 dígitos');
-            if (!formaPago) return alert('❌ Selecciona una forma de pago');
+            if (!nombre || nombre.length < 3) return alert('❌ INGRESE SU NOMBRE CORRECTAMENTE');
+            if (!edad || edad < 1 || edad > 120) return alert('❌ INGRESE SU EDAD CORRECTAMENTE');
+            if (!genero) return alert('❌ SELECCIONE SU GENERO');
+            if (!/^[0-9]{8}$/.test(telefono)) return alert('❌ INGRESE SU NUMERO DE TELEFONO CORRECTAMENTE');
+            if (!formaPago) return alert('❌ SELECCIONE SU FORMA DE PAGO');
 
             if ((formaPago === 'Depósito' || formaPago === 'Transferencia') && !imagenBase64) {
-                alert('❌ Debes subir el comprobante de pago');
+                alert('❌ SUBA SU COMPROBANTE DE PAGO');
                 return;
             }
 
@@ -231,7 +231,7 @@ function initFormEvents() {
             try {
                 const btn = document.querySelector('#formInscripcion button[type="submit"]');
                 const originalText = btn.textContent;
-                btn.textContent = '⏳ ENVIANDO...';
+                btn.textContent = '⏳ ENVIANDO... ESPERE UN MOMENTO';
                 btn.disabled = true;
 
                 const resp = await fetch(GOOGLE_SHEETS_URL, { method: 'POST', body: fd });
@@ -241,16 +241,16 @@ function initFormEvents() {
                 btn.disabled = false;
 
                 if (json.result === 'success') {
-                    alert(`✅ ¡${nombre} inscrito correctamente!\n\nEstado de pago: ${estadoPago}`);
+                    alert(`✅ ¡${nombre} , TE HAZ INSCRITO CORRECTAMENTE!\n\nESTADO DE PAGO: ${estadoPago}`);
                     form.reset();
                     if (removeBtn) removeBtn.click();
                     document.getElementById('photoSection').classList.remove('visible');
                     document.getElementById('formaPago').value = '';
                 } else {
-                    alert('❌ Error al guardar: ' + (json.error || 'Desconocido'));
+                    alert('❌ ERROR AL GUARDAR ' + (json.error || 'Desconocido'));
                 }
             } catch (err) {
-                alert('❌ Error de conexión. Verifica tu internet.');
+                alert('❌ ERROR DE CONEXION, VERIFICA TU INTERNET O COMUNICATE CON LOS ORGANIZADORES.');
                 console.error(err);
             }
         });
@@ -262,16 +262,16 @@ function initFormEvents() {
 // ============================================
 function renderInfo() {
     mainContent.innerHTML = `
-        <h2 style="margin-bottom:1.5rem;">ℹ️ Información de la carrera</h2>
+        <h2 style="margin-bottom:1.5rem;">INFORMACION DE LA CARRERA</h2>
         <ul class="info-list">
-            <li><div class="info-icon">📅</div><div class="info-text"><strong>FECHA</strong><span>15 de Junio, 2025</span></div></li>
-            <li><div class="info-icon">📍</div><div class="info-text"><strong>LUGAR</strong><span>Ciudad de las Artes, Valencia</span></div></li>
+            <li><div class="info-icon">📅</div><div class="info-text"><strong>FECHA</strong><span>AGOSTO 2026</span></div></li>
+            <li><div class="info-icon">📍</div><div class="info-text"><strong>LUGAR</strong><span>PARQUE CENTRAL</span></div></li>
             <li><div class="info-icon">⏰</div><div class="info-text"><strong>SALIDA</strong><span>09:30h</span></div></li>
-            <li><div class="info-icon">🏆</div><div class="info-text"><strong>DISTANCIAS</strong><span>3K · 5K · 9K</span></div></li>
+            <li><div class="info-icon">🏆</div><div class="info-text"><strong>DISTANCIA</strong><span>10K</span></div></li>
         </ul>
         <div style="margin-top:1.5rem; padding:1rem; background:#eef2f5; border-radius:16px;">
-            <p style="font-weight:500;">🎽 Incluye: Dorsal oficial, chip, camiseta técnica y avituallamiento</p>
-            <p style="font-size:0.8rem; margin-top:0.5rem; color:#1a3a4a;">💰 Formas de pago: Efectivo · Depósito · Transferencia</p>
+            <p style="font-weight:500;">🎽 Incluye KIT: Playera, Refacción y Medalla</p>
+            <p style="font-size:0.8rem; margin-top:0.5rem; color:#1a3a4a;">💰 FORMAS DE PAGO: Efectivo · Depósito · Transferencia</p>
         </div>
     `;
 }
@@ -281,10 +281,10 @@ function renderInfo() {
 // ============================================
 function renderOrganizador() {
     mainContent.innerHTML = `
-        <h2 style="margin-bottom:1.5rem;">🔐 Acceso organizadores</h2>
+        <h2 style="margin-bottom:1.5rem;">🔐 ACCESO ORGANIZADORES</h2>
         <div id="contenidoOrganizador">
             <div class="admin-stats" id="estadoOrganizador">
-                <p>🔒 Acceso restringido</p>
+                <p>🔒 ACCESO RESTRINGUIDO</p>
                 <p style="font-size:0.65rem;">Ingresa la contraseña para acceder al panel</p>
             </div>
             <div class="btn-group">
