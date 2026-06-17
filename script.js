@@ -63,7 +63,7 @@ function renderRegistro() {
             <div class="form-group">
                 <label>NÚMERO DE TELÉFONO</label>
                 <input type="tel" id="telefono" name="telefono" placeholder="Ej: 12345678" maxlength="8" pattern="[0-9]{8}" required>
-                <small style="color: #9aaab8; font-size: 0.65rem;">Debe tener 8 dígitos</small>
+                <small style="color: rgba(255,255,255,0.4); font-size: 0.65rem;">Debe tener 8 dígitos</small>
             </div>
             <div class="form-group">
                 <label>FORMA DE PAGO</label>
@@ -75,7 +75,7 @@ function renderRegistro() {
                 </select>
             </div>
             <div class="form-group photo-section" id="photoSection">
-                <label>COMPROBANTE DE PAGO <span style="color:#c0392b;">*</span></label>
+                <label>COMPROBANTE DE PAGO <span style="color:#ff3b30;">*</span></label>
                 <div class="photo-area" id="uploadArea">
                     <div class="camera-icon">📷</div>
                     <p> Suba el comprobante de pago del deposito o transferencia</p>
@@ -90,7 +90,7 @@ function renderRegistro() {
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn-primary"> ¡¡INSCRIBETE AHORA MISMO!!</button>
+            <button type="submit" class="btn-primary"> ¡¡INSCRIBITE AHORA MISMO!!</button>
         </form>
     `;
     initFormEvents();
@@ -140,6 +140,7 @@ function initFormEvents() {
     const previewImg = document.getElementById('previewImg');
     const removeBtn = document.getElementById('removePhotoBtn');
 
+    // === MANEJO DE FOTO ===
     if (uploadArea) {
         uploadArea.addEventListener('click', () => fotoInput.click());
         uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
@@ -194,6 +195,33 @@ function initFormEvents() {
         reader.readAsDataURL(file);
     }
 
+    // === FUNCIÓN PARA VERIFICAR DUPLICADOS ===
+    async function verificarDuplicado(nombre, telefono) {
+        try {
+            // Usamos Google Sheets API para buscar coincidencias
+            const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json`;
+            const response = await fetch(url);
+            const text = await response.text();
+            const json = JSON.parse(text.substr(47).slice(0, -2));
+            
+            const rows = json.table.rows;
+            for (let row of rows) {
+                if (row.c && row.c.length > 0) {
+                    const nombreExistente = row.c[1] ? row.c[1].v : '';
+                    const telefonoExistente = row.c[4] ? row.c[4].v : '';
+                    if (nombreExistente === nombre && telefonoExistente === telefono) {
+                        return true; // Ya existe un duplicado
+                    }
+                }
+            }
+            return false;
+        } catch (error) {
+            console.error('Error al verificar duplicados:', error);
+            return false; // Si hay error, permitimos el envío
+        }
+    }
+
+    // === MANEJO DEL ENVÍO ===
     const form = document.getElementById('formInscripcion');
     if (form) {
         form.addEventListener('submit', async (e) => {
@@ -205,10 +233,11 @@ function initFormEvents() {
             const telefono = document.getElementById('telefono').value;
             const formaPago = document.getElementById('formaPago').value;
 
+            // Validaciones básicas
             if (!nombre || nombre.length < 3) return alert('❌ INGRESE SU NOMBRE CORRECTAMENTE');
             if (!edad || edad < 1 || edad > 120) return alert('❌ INGRESE SU EDAD CORRECTAMENTE');
             if (!genero) return alert('❌ SELECCIONE SU GENERO');
-            if (!/^[0-9]{8}$/.test(telefono)) return alert('❌ INGRESE SU NUMERO DE TELEFONO CORRECTAMENTE');
+            if (!/^[0-9]{8}$/.test(telefono)) return alert('❌ INGRESE SU NUMERO DE TELEFONO CORRECTAMENTE (8 dígitos)');
             if (!formaPago) return alert('❌ SELECCIONE SU FORMA DE PAGO');
 
             if ((formaPago === 'Depósito' || formaPago === 'Transferencia') && !imagenBase64) {
@@ -216,44 +245,99 @@ function initFormEvents() {
                 return;
             }
 
-            let estadoPago = (formaPago === 'Efectivo') ? 'PENDIENTE' : 'CANCELADO';
+            // Verificar duplicados
+            const esDuplicado = await verificarDuplicado(nombre, telefono);
+            if (esDuplicado) {
+                alert('⚠️ YA EXISTE UN INSCRITO CON ESTE NOMBRE Y TELÉFONO.\n\nSi crees que es un error, contacta a los organizadores.');
+                return;
+            }
 
-            const fd = new FormData();
-            fd.append('nombre', nombre);
-            fd.append('edad', edad);
-            fd.append('genero', genero);
-            fd.append('telefono', telefono);
-            fd.append('formaPago', formaPago);
-            fd.append('estadoPago', estadoPago);
-            fd.append('image', imagenNombre);
-            fd.append('himage', imagenBase64);
+            // Mostrar modal de confirmación
+            mostrarConfirmacion(nombre, edad, genero, telefono, formaPago);
+        });
+    }
+
+    // === FUNCIÓN PARA MOSTRAR MODAL DE CONFIRMACIÓN ===
+    function mostrarConfirmacion(nombre, edad, genero, telefono, formaPago) {
+        const confirmModal = document.getElementById('confirmModal');
+        const confirmData = document.getElementById('confirmData');
+        const btnConfirm = document.getElementById('btnConfirmSend');
+        const btnCancel = document.getElementById('btnCancelSend');
+        const errorMsg = document.getElementById('errorConfirm');
+
+        // Llenar los datos en el modal
+        confirmData.innerHTML = `
+            <p><strong>👤 Nombre:</strong> ${nombre}</p>
+            <p><strong>🎂 Edad:</strong> ${edad} años</p>
+            <p><strong>⚧ Género:</strong> ${genero}</p>
+            <p><strong>📱 Teléfono:</strong> ${telefono}</p>
+            <p><strong>💰 Forma de pago:</strong> ${formaPago}</p>
+            ${imagenBase64 ? '<p><strong>📸 Comprobante:</strong> <span style="color: #00B4FF;">Adjuntado ✅</span></p>' : ''}
+        `;
+
+        // Mostrar modal
+        confirmModal.style.display = 'flex';
+        errorMsg.style.display = 'none';
+
+        // Configurar botón de confirmación
+        btnConfirm.onclick = async function() {
+            btnConfirm.disabled = true;
+            btnConfirm.textContent = '⏳ ENVIANDO...';
+            errorMsg.style.display = 'none';
 
             try {
-                const btn = document.querySelector('#formInscripcion button[type="submit"]');
-                const originalText = btn.textContent;
-                btn.textContent = '⏳ ENVIANDO... ESPERE UN MOMENTO';
-                btn.disabled = true;
+                const estadoPago = (formaPago === 'Efectivo') ? 'PENDIENTE' : 'CANCELADO';
+
+                const fd = new FormData();
+                fd.append('nombre', nombre);
+                fd.append('edad', edad);
+                fd.append('genero', genero);
+                fd.append('telefono', telefono);
+                fd.append('formaPago', formaPago);
+                fd.append('estadoPago', estadoPago);
+                fd.append('image', imagenNombre);
+                fd.append('himage', imagenBase64);
 
                 const resp = await fetch(GOOGLE_SHEETS_URL, { method: 'POST', body: fd });
                 const json = await resp.json();
 
-                btn.textContent = originalText;
-                btn.disabled = false;
+                btnConfirm.disabled = false;
+                btnConfirm.textContent = '✅ SÍ, ENVIAR INSCRIPCIÓN';
 
                 if (json.result === 'success') {
-                    alert(`✅ ¡${nombre} , TE HAS INSCRITO CORRECTAMENTE!\n\nESTADO DE PAGO: ${estadoPago}`);
+                    confirmModal.style.display = 'none';
+                    alert(`✅ ¡${nombre}, TE HAZ INSCRITO CORRECTAMENTE!\n\nESTADO DE PAGO: ${estadoPago}`);
                     form.reset();
                     if (removeBtn) removeBtn.click();
                     document.getElementById('photoSection').classList.remove('visible');
                     document.getElementById('formaPago').value = '';
+                    // Resetear imagenBase64
+                    imagenBase64 = '';
+                    imagenNombre = '';
                 } else {
-                    alert('❌ ERROR AL GUARDAR ' + (json.error || 'Desconocido'));
+                    errorMsg.style.display = 'block';
+                    errorMsg.textContent = '❌ Error al guardar: ' + (json.error || 'Desconocido');
                 }
             } catch (err) {
-                alert('❌ ERROR DE CONEXION, VERIFICA TU INTERNET O COMUNICATE CON LOS ORGANIZADORES.');
+                btnConfirm.disabled = false;
+                btnConfirm.textContent = '✅ SÍ, ENVIAR INSCRIPCIÓN';
+                errorMsg.style.display = 'block';
+                errorMsg.textContent = '❌ ERROR DE CONEXION, VERIFICA TU INTERNET';
                 console.error(err);
             }
-        });
+        };
+
+        // Cancelar
+        btnCancel.onclick = function() {
+            confirmModal.style.display = 'none';
+        };
+
+        // Cerrar al hacer clic fuera
+        confirmModal.onclick = function(e) {
+            if (e.target === confirmModal) {
+                confirmModal.style.display = 'none';
+            }
+        };
     }
 }
 
@@ -269,9 +353,9 @@ function renderInfo() {
             <li><div class="info-icon">⏰</div><div class="info-text"><strong>SALIDA</strong><span>09:30h</span></div></li>
             <li><div class="info-icon">🏆</div><div class="info-text"><strong>DISTANCIA</strong><span>10K</span></div></li>
         </ul>
-        <div style="margin-top:1.5rem; padding:1rem; background:#eef2f5; border-radius:16px;">
-            <p style="font-weight:500;">🎽 Incluye KIT: Playera, Refacción y Medalla</p>
-            <p style="font-size:0.8rem; margin-top:0.5rem; color:#1a3a4a;">💰 FORMAS DE PAGO: Efectivo · Depósito · Transferencia</p>
+        <div style="margin-top:1.5rem; padding:1rem; background:rgba(255,255,255,0.05); border-radius:16px; border: 1px solid rgba(255,255,255,0.08);">
+            <p style="font-weight:500; color: #ffffff;">🎽 Incluye KIT: Playera, Refacción y Medalla</p>
+            <p style="font-size:0.8rem; margin-top:0.5rem; color: rgba(255,255,255,0.6);">💰 FORMAS DE PAGO: Efectivo · Depósito · Transferencia</p>
         </div>
     `;
 }
