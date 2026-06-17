@@ -3,7 +3,6 @@
 // ============================================
 
 // Configuración
-// ⚠️ ACTUALIZA ESTA URL CON LA QUE TE DÉ GOOGLE APPS SCRIPT
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxHdlF600JtEEGCWlXb-Obp1wIbb_S3HTzIR3NqLrmkGd0mAYjHvez-Xjvf3-jdDCH6/exec';
 const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
 const CONTRASENA_ORGANIZADOR = "carrera2024";
@@ -140,7 +139,6 @@ function initFormEvents() {
     const previewImg = document.getElementById('previewImg');
     const removeBtn = document.getElementById('removePhotoBtn');
 
-    // === MANEJO DE FOTO ===
     if (uploadArea) {
         uploadArea.addEventListener('click', () => fotoInput.click());
         uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
@@ -208,7 +206,6 @@ function initFormEvents() {
             const rows = json.table.rows;
             for (let row of rows) {
                 if (row.c && row.c.length > 0) {
-                    // NOMBRE está en la columna C (índice 2)
                     const nombreExistente = row.c[2] ? row.c[2].v : '';
                     const nombreExistenteLimpio = nombreExistente.trim().toUpperCase();
                     if (nombreExistenteLimpio === nombreLimpio) {
@@ -235,7 +232,6 @@ function initFormEvents() {
             const telefono = document.getElementById('telefono').value;
             const formaPago = document.getElementById('formaPago').value;
 
-            // Validaciones básicas
             if (!nombre || nombre.length < 3) return alert('❌ INGRESE SU NOMBRE CORRECTAMENTE');
             if (!edad || edad < 1 || edad > 120) return alert('❌ INGRESE SU EDAD CORRECTAMENTE');
             if (!genero) return alert('❌ SELECCIONE SU GENERO');
@@ -247,19 +243,17 @@ function initFormEvents() {
                 return;
             }
 
-            // === VERIFICAR DUPLICADO POR NOMBRE ===
             const esDuplicado = await verificarDuplicado(nombre);
             if (esDuplicado) {
                 alert(`⚠️ EL NOMBRE "${nombre.trim().toUpperCase()}" YA ESTÁ REGISTRADO.\n\nNo puedes inscribirte dos veces con el mismo nombre. Si crees que es un error, contacta a los organizadores.`);
                 return;
             }
 
-            // Mostrar modal de confirmación
             mostrarConfirmacion(nombre, edad, genero, telefono, formaPago);
         });
     }
 
-    // === FUNCIÓN PARA MOSTRAR MODAL DE CONFIRMACIÓN (VERSIÓN TICKET PREMIUM) ===
+    // === FUNCIÓN PARA MOSTRAR MODAL DE CONFIRMACIÓN ===
     function mostrarConfirmacion(nombre, edad, genero, telefono, formaPago) {
         const confirmModal = document.getElementById('confirmModal');
         const confirmData = document.getElementById('confirmData');
@@ -269,17 +263,13 @@ function initFormEvents() {
         const ticketDisplay = document.getElementById('ticketDisplay');
         const ticketStatus = document.getElementById('ticketStatus');
 
-        // Mostrar "Generando..." en el ticket
         ticketDisplay.textContent = '⏳ ...';
         ticketStatus.textContent = '⏳ VERIFICANDO DATOS...';
         ticketStatus.style.color = '#FFC107';
 
-        // Determinar estado de pago para mostrar en el modal
-        const estadoPagoPreview = (formaPago === 'Efectivo') ? 'PENDIENTE' : 'CANCELADO';
         const estadoPagoClass = (formaPago === 'Efectivo') ? 'pending' : 'paid';
         const estadoPagoText = (formaPago === 'Efectivo') ? '⏳ PENDIENTE' : '✅ CANCELADO';
 
-        // Llenar los datos en el modal (formato ticket)
         confirmData.innerHTML = `
             <div class="ticket-row">
                 <span class="ticket-label">👤 NOMBRE</span>
@@ -312,11 +302,9 @@ function initFormEvents() {
             </div>` : ''}
         `;
 
-        // Mostrar modal
         confirmModal.style.display = 'flex';
         errorMsg.style.display = 'none';
 
-        // Simular generación de ticket (para dar efecto visual)
         let counter = 0;
         const ticketInterval = setInterval(() => {
             counter++;
@@ -330,7 +318,6 @@ function initFormEvents() {
             }
         }, 120);
 
-        // Configurar botón de confirmación
         btnConfirm.onclick = async function() {
             btnConfirm.disabled = true;
             btnConfirm.textContent = '⏳ ENVIANDO...';
@@ -358,13 +345,11 @@ function initFormEvents() {
                 btnConfirm.textContent = '✅ CONFIRMAR INSCRIPCIÓN';
 
                 if (json.result === 'success') {
-                    // Actualizar ticket con el número real
                     const ticketReal = String(json.ticket).padStart(4, '0');
                     ticketDisplay.textContent = `#${ticketReal}`;
                     ticketStatus.textContent = '✅ INSCRIPCIÓN COMPLETADA';
                     ticketStatus.style.color = '#00E676';
 
-                    // Esperar 1.5 segundos para que se vea el ticket final
                     await new Promise(resolve => setTimeout(resolve, 1500));
 
                     confirmModal.style.display = 'none';
@@ -393,13 +378,11 @@ function initFormEvents() {
             }
         };
 
-        // Cancelar
         btnCancel.onclick = function() {
             clearInterval(ticketInterval);
             confirmModal.style.display = 'none';
         };
 
-        // Cerrar al hacer clic fuera
         confirmModal.onclick = function(e) {
             if (e.target === confirmModal) {
                 clearInterval(ticketInterval);
