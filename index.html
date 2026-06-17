@@ -40,7 +40,7 @@
     <div class="container">
         <!-- Header -->
         <div class="main-header">
-            <div class="logo-badge">IDEC CENTRAL SAN CRISTOBAL</div>
+            <div class="logo-badge">IDEC CENTRAL SAN CRISTOBA</div>
             <h1>10K EDICION 2026</h1>
             <div class="subtitle">INSCRIBETE PARA ESTA GRAN CARRERA DE LA FÉ</div>
         </div>
@@ -71,19 +71,29 @@
         </div>
     </div>
 
-    <!-- Modal de confirmación antes de enviar -->
+    <!-- Modal de confirmación - Estilo Ticket Premium -->
     <div id="confirmModal" class="modal" style="display: none;">
-        <div class="modal-box">
-            <h2>📋 CONFIRMA TUS DATOS</h2>
-            <p style="font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-bottom: 1.5rem;">Verifica que toda la información sea correcta antes de enviar</p>
-            <div id="confirmData" style="text-align: left; font-size: 0.9rem; margin-bottom: 1.5rem; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px;">
+        <div class="modal-box ticket-modal">
+            <!-- Cabecera del ticket -->
+            <div class="ticket-header">
+                <div class="ticket-badge">🎫 INSCRIPCIÓN</div>
+                <div class="ticket-number" id="ticketDisplay">#0000</div>
+            </div>
+            
+            <!-- Cuerpo del ticket -->
+            <div class="ticket-body" id="confirmData">
                 <!-- Los datos se llenan dinámicamente -->
             </div>
-            <div class="btn-group" style="flex-direction: column; gap: 0.8rem;">
-                <button id="btnConfirmSend" class="btn-primary" style="width: 100%;">✅ SÍ, ENVIAR INSCRIPCIÓN</button>
-                <button id="btnCancelSend" class="btn-outline" style="width: 100%;">✖️ CANCELAR</button>
+            
+            <!-- Pie del ticket -->
+            <div class="ticket-footer">
+                <div class="ticket-status" id="ticketStatus">⏳ VERIFICANDO...</div>
+                <div class="ticket-actions">
+                    <button id="btnConfirmSend" class="btn-primary ticket-btn-confirm">✅ CONFIRMAR INSCRIPCIÓN</button>
+                    <button id="btnCancelSend" class="btn-outline ticket-btn-cancel">✖️ CANCELAR</button>
+                </div>
+                <div id="errorConfirm" class="error-msg" style="display: none;">❌ Error al enviar, intenta de nuevo</div>
             </div>
-            <div id="errorConfirm" class="error-msg" style="display: none;">❌ Error al enviar, intenta de nuevo</div>
         </div>
     </div>
 
