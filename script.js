@@ -4,7 +4,7 @@
 
 // Configuración
 // ⚠️ ACTUALIZA ESTA URL CON LA QUE TE DÉ GOOGLE APPS SCRIPT
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyUZmZ5JCrUSCpfw0MONDU74EI7YNLr5q3wfk25vurxZZ-xDxQawXm95FZ4RKDU2cY/exec';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxHdlF600JtEEGCWlXb-Obp1wIbb_S3HTzIR3NqLrmkGd0mAYjHvez-Xjvf3-jdDCH6/exec';
 const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
 const CONTRASENA_ORGANIZADOR = "carrera2024";
 
