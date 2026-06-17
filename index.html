@@ -827,7 +827,7 @@
                     try {
                         const btn = document.querySelector('#formInscripcion button[type="submit"]');
                         const originalText = btn.textContent;
-                        btn.textContent = '⏳ ENVIANDO...';
+                        btn.textContent = '⏳ ENVIANDO...ESPERE UN MOMENTO';
                         btn.disabled = true;
 
                         const resp = await fetch(GOOGLE_SHEETS_URL, { method: 'POST', body: fd });
@@ -849,7 +849,7 @@
                             alert('❌ Error al guardar: ' + (json.error || 'Desconocido'));
                         }
                     } catch (err) {
-                        alert('❌ Error de conexión. Verifica tu internet.');
+                        alert('❌ Error de conexión. Verifica tu internet o comunicque con Los Organizadores');
                         console.error(err);
                     }
                 });
