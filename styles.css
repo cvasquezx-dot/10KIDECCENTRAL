@@ -1,0 +1,525 @@
+/* ============================================
+   styles.css - TODOS LOS ESTILOS VISUALES
+   ============================================ */
+
+/* ---------- RESET Y BASE ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Futura', 'Avant Garde', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
+    background: #f5f7fa;
+    color: #1a2a3a;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ---------- CONTENEDOR PRINCIPAL ---------- */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* ---------- HEADER ---------- */
+.main-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.logo-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #1a3a4a, #2a5a6a);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #1a2a3a;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    color: #6a7a8a;
+    font-size: 0.9rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ---------- BANNER / HERO IMAGE ---------- */
+.hero-image {
+    text-align: center;
+    margin: 1.5rem 0 2rem 0;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 28px;
+    box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.hero-image img:hover {
+    transform: scale(1.01);
+}
+
+/* ---------- DASHBOARD (contenido principal + menú) ---------- */
+.dashboard {
+    display: flex;
+    gap: 2rem;
+    min-height: 500px;
+}
+
+.main-content {
+    flex: 1;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+/* ---------- MENÚ LATERAL ---------- */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #1a3a4a;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: none;
+    font-size: 1.5rem;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100vh;
+    background: white;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.sidebar.open {
+    right: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+}
+
+.sidebar-header {
+    padding: 2rem 1.5rem;
+    background: linear-gradient(135deg, #1a3a4a, #2a5a6a);
+    color: white;
+}
+
+.sidebar-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-header p {
+    font-size: 0.7rem;
+    opacity: 0.8;
+}
+
+.menu-items {
+    flex: 1;
+    padding: 1rem 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.menu-item:hover {
+    background: #f0f2f5;
+}
+
+.menu-item.active {
+    background: #eef2f5;
+    border-left-color: #2a5a6a;
+}
+
+.menu-icon {
+    font-size: 1.5rem;
+}
+
+.menu-text {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #1a2a3a;
+}
+
+.menu-item.active .menu-text {
+    color: #2a5a6a;
+    font-weight: 600;
+}
+
+.close-menu {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+    opacity: 0.7;
+}
+
+.close-menu:hover {
+    opacity: 1;
+}
+
+/* ---------- FORMULARIO ---------- */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #8a9aaa;
+}
+
+input,
+select {
+    width: 100%;
+    background: #f8f9fb;
+    border: 1px solid #e0e4e8;
+    border-radius: 12px;
+    padding: 12px 14px;
+    color: #1a2a3a;
+    font-family: inherit;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #2a5a6a;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(26, 58, 74, 0.1);
+}
+
+input[type="tel"] {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ---------- SECCIÓN FOTO CONDICIONAL ---------- */
+.photo-section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.photo-section.visible {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.photo-area {
+    border: 2px dashed #d0d6dc;
+    border-radius: 16px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    background: #fafcfd;
+    transition: all 0.3s ease;
+}
+
+.photo-area:hover {
+    border-color: #2a5a6a;
+    background: #f0f4f6;
+}
+
+.photo-area.drag-over {
+    border-color: #2a5a6a;
+    background: #e0ecf0;
+}
+
+.photo-area .camera-icon {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+}
+
+.photo-area p {
+    font-size: 0.75rem;
+    color: #6a7a8a;
+}
+
+.photo-area small {
+    font-size: 0.6rem;
+    color: #9aaab8;
+}
+
+.photo-preview {
+    margin-top: 1rem;
+    text-align: center;
+    display: none;
+}
+
+.photo-preview.active {
+    display: block;
+}
+
+.preview-image img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #2a5a6a;
+}
+
+.remove-photo-btn {
+    background: none;
+    border: 1px solid #c0392b;
+    color: #c0392b;
+    padding: 3px 10px;
+    font-size: 0.6rem;
+    border-radius: 20px;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.remove-photo-btn:hover {
+    background: #c0392b;
+    color: white;
+}
+
+/* ---------- BOTONES ---------- */
+.btn-primary {
+    background: linear-gradient(135deg, #1a3a4a, #2a5a6a);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 40px;
+    width: 100%;
+    font-family: inherit;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(26, 58, 74, 0.3);
+}
+
+.btn-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid #2a5a6a;
+    color: #2a5a6a;
+    padding: 8px 16px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.7rem;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.btn-outline:hover {
+    background: #2a5a6a;
+    color: white;
+}
+
+.btn-danger {
+    border-color: #c0392b;
+    color: #c0392b;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+    color: white;
+}
+
+/* ---------- INFORMACIÓN ---------- */
+.info-list {
+    list-style: none;
+}
+
+.info-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e8ecef;
+}
+
+.info-icon {
+    font-size: 1.5rem;
+    width: 45px;
+}
+
+.info-text strong {
+    display: block;
+    font-size: 0.7rem;
+    color: #9aaab8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-text span {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a2a3a;
+}
+
+/* ---------- PANEL ORGANIZADOR ---------- */
+.admin-stats {
+    background: #eef2f5;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.admin-stats p {
+    color: #1a3a4a;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.btn-group {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* ---------- MODAL ---------- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-box {
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 340px;
+    text-align: center;
+}
+
+.modal-box input {
+    margin: 1rem 0;
+}
+
+.error-msg {
+    color: #c0392b;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+/* ---------- UTILIDADES ---------- */
+.oculto {
+    display: none;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+    .menu-toggle {
+        display: flex;
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+    .container {
+        padding: 1rem;
+    }
+    .dashboard {
+        flex-direction: column;
+    }
+    .btn-group {
+        flex-direction: column;
+    }
+    .btn-group button {
+        width: 100%;
+    }
+}
