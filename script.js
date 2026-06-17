@@ -4,7 +4,7 @@
 
 // Configuración
 // ⚠️ ACTUALIZA ESTA URL CON LA QUE TE DÉ GOOGLE APPS SCRIPT
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyUZmZ5JCrUSCpfw0MONDU74EI7YNLr5q3wfk25vurxZZ-xDxQawXm95FZ4RKDU2cY/exec';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxHdlF600JtEEGCWlXb-Obp1wIbb_S3HTzIR3NqLrmkGd0mAYjHvez-Xjvf3-jdDCH6/exec';
 const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
 const CONTRASENA_ORGANIZADOR = "carrera2024";
 
@@ -69,16 +69,16 @@ function renderRegistro() {
                 <label>FORMA DE PAGO</label>
                 <select id="formaPago" name="formaPago" required>
                     <option value="">Selecciona</option>
-                    <option value="Efectivo">💵 EFECTIVO </option>
-                    <option value="Depósito">🏦 DEPÓSITO </option>
-                    <option value="Transferencia">💳 TRANSFERENCIA </option>
+                    <option value="Efectivo">💵 EFECTIVO</option>
+                    <option value="Depósito">🏦 DEPÓSITO</option>
+                    <option value="Transferencia">💳 TRANSFERENCIA</option>
                 </select>
             </div>
             <div class="form-group photo-section" id="photoSection">
                 <label>COMPROBANTE DE PAGO <span style="color:#ff3b30;">*</span></label>
                 <div class="photo-area" id="uploadArea">
                     <div class="camera-icon">📷</div>
-                    <p> Suba el comprobante de pago del deposito o transferencia</p>
+                    <p>Suba el comprobante de pago del depósito o transferencia</p>
                     <small>JPG, PNG · máx 5MB</small>
                 </div>
                 <input type="file" id="foto" accept="image/*" style="display:none">
@@ -90,7 +90,7 @@ function renderRegistro() {
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn-primary"> ¡¡INSCRIBITE AHORA MISMO!!</button>
+            <button type="submit" class="btn-primary">¡¡INSCRIBITE AHORA MISMO!!</button>
         </form>
     `;
     initFormEvents();
@@ -198,7 +198,6 @@ function initFormEvents() {
     // === FUNCIÓN PARA VERIFICAR DUPLICADOS (SOLO POR NOMBRE) ===
     async function verificarDuplicado(nombre) {
         try {
-            // Limpiar el nombre para comparación (mayúsculas, sin espacios extra)
             const nombreLimpio = nombre.trim().toUpperCase();
             
             const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json`;
@@ -209,17 +208,18 @@ function initFormEvents() {
             const rows = json.table.rows;
             for (let row of rows) {
                 if (row.c && row.c.length > 0) {
-                    const nombreExistente = row.c[1] ? row.c[1].v : '';
+                    // NOMBRE está en la columna C (índice 2)
+                    const nombreExistente = row.c[2] ? row.c[2].v : '';
                     const nombreExistenteLimpio = nombreExistente.trim().toUpperCase();
                     if (nombreExistenteLimpio === nombreLimpio) {
-                        return true; // Ya existe un duplicado por nombre
+                        return true;
                     }
                 }
             }
             return false;
         } catch (error) {
             console.error('Error al verificar duplicados:', error);
-            return false; // Si hay error, permitimos el envío
+            return false;
         }
     }
 
@@ -267,8 +267,9 @@ function initFormEvents() {
         const btnCancel = document.getElementById('btnCancelSend');
         const errorMsg = document.getElementById('errorConfirm');
 
-        // Llenar los datos en el modal
+        // Mostrar los datos con el ticket en generación
         confirmData.innerHTML = `
+            <p><strong>🎫 Número de ticket:</strong> <span style="color: #00B4FF;">⏳ Generando...</span></p>
             <p><strong>👤 Nombre:</strong> ${nombre}</p>
             <p><strong>🎂 Edad:</strong> ${edad} años</p>
             <p><strong>⚧ Género:</strong> ${genero}</p>
@@ -308,7 +309,8 @@ function initFormEvents() {
 
                 if (json.result === 'success') {
                     confirmModal.style.display = 'none';
-                    alert(`✅ ¡${nombre}, TE HAZ INSCRITO CORRECTAMENTE!\n\nESTADO DE PAGO: ${estadoPago}`);
+                    // Mostrar el ticket generado
+                    alert(`✅ ¡${nombre}, TE HAZ INSCRITO CORRECTAMENTE!\n\n🎫 TICKET: #${String(json.ticket).padStart(4, '0')}\n💰 ESTADO DE PAGO: ${estadoPago}`);
                     form.reset();
                     if (removeBtn) removeBtn.click();
                     document.getElementById('photoSection').classList.remove('visible');
@@ -379,7 +381,7 @@ function renderOrganizador() {
             <div id="panelOrganizadorOpciones" style="display:none; margin-top:1rem;">
                 <div class="admin-stats">
                     <p>✅ ACCESO CONCEDIDO</p>
-                    <p style="font-size:0.7rem;">Los datos incluyen estado de pago</p>
+                    <p style="font-size:0.7rem;">Los datos incluyen estado de pago y ticket</p>
                 </div>
                 <div class="btn-group">
                     <button id="btnExcel" class="btn-outline" style="flex:1;">📊 VER SHEET</button>
