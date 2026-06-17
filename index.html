@@ -152,6 +152,17 @@
             color: white;
         }
 
+        .sidebar-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-header p {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+
         .menu-items {
             flex: 1;
             padding: 1rem 0;
@@ -198,6 +209,11 @@
             opacity: 0.7;
         }
 
+        .close-menu:hover {
+            opacity: 1;
+        }
+
+        /* ========== ESTILOS DEL FORMULARIO ========== */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -222,6 +238,7 @@
             color: #1a2a3a;
             font-family: inherit;
             font-size: 0.85rem;
+            transition: all 0.2s;
         }
 
         input:focus,
@@ -230,6 +247,10 @@
             border-color: #2a5a6a;
             background: white;
             box-shadow: 0 0 0 3px rgba(26, 58, 74, 0.1);
+        }
+
+        input[type="tel"] {
+            font-family: 'Poppins', sans-serif;
         }
 
         /* ========== SECCIÓN FOTO CONDICIONAL ========== */
@@ -315,6 +336,12 @@
             border-radius: 20px;
             margin-top: 0.5rem;
             cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .remove-photo-btn:hover {
+            background: #c0392b;
+            color: white;
         }
 
         .btn-primary {
@@ -338,6 +365,12 @@
             box-shadow: 0 8px 20px rgba(26, 58, 74, 0.3);
         }
 
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .btn-outline {
             background: transparent;
             border: 1px solid #2a5a6a;
@@ -353,6 +386,16 @@
 
         .btn-outline:hover {
             background: #2a5a6a;
+            color: white;
+        }
+
+        .btn-danger {
+            border-color: #c0392b;
+            color: #c0392b;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
             color: white;
         }
 
@@ -405,6 +448,7 @@
             display: flex;
             gap: 0.8rem;
             margin-top: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .modal {
@@ -458,6 +502,12 @@
             }
             .dashboard {
                 flex-direction: column;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            .btn-group button {
+                width: 100%;
             }
         }
     </style>
@@ -519,15 +569,19 @@
     </div>
 
     <script>
-        // ========== CONFIGURACIÓN ==========
-        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwMOniwau1U4YDFspAjKl2O3bFLlJns5X2PB94Fiw0dMIQCO6iWA2ky_vMfCfADDtux/exec';
+        // ============================================
+        // CONFIGURACIÓN
+        // ============================================
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycby3pTNXnCPhmanaphttU7eXr6w3ggA9YqTwwY_x31WZ-_s7nCr-RABVCI-mlKE8quM/exec';
         const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
         const CONTRASENA_ORGANIZADOR = "carrera2024";
 
         let imagenBase64 = '';
         let imagenNombre = '';
 
-        // ========== MENÚ LATERAL ==========
+        // ============================================
+        // MENÚ LATERAL
+        // ============================================
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
         const menuToggle = document.getElementById('menuToggle');
@@ -535,18 +589,25 @@
         const menuItems = document.querySelectorAll('.menu-item');
         const mainContent = document.getElementById('mainContent');
 
-        function openSidebar() { sidebar.classList.add('open');
+        function openSidebar() {
+            sidebar.classList.add('open');
             overlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; }
+            document.body.style.overflow = 'hidden';
+        }
 
-        function closeSidebarFunc() { sidebar.classList.remove('open');
+        function closeSidebarFunc() {
+            sidebar.classList.remove('open');
             overlay.classList.remove('active');
-            document.body.style.overflow = ''; }
+            document.body.style.overflow = '';
+        }
+
         menuToggle.addEventListener('click', openSidebar);
         closeMenu.addEventListener('click', closeSidebarFunc);
         overlay.addEventListener('click', closeSidebarFunc);
 
-        // ========== RENDERIZAR REGISTRO ==========
+        // ============================================
+        // RENDERIZAR REGISTRO
+        // ============================================
         function renderRegistro() {
             mainContent.innerHTML = `
                 <h2 style="margin-bottom:1.5rem;">📝 Registro de corredor</h2>
@@ -554,19 +615,19 @@
                     <!-- NOMBRE -->
                     <div class="form-group">
                         <label>NOMBRE COMPLETO</label>
-                        <input type="text" id="nombre" placeholder="Ej: Juan Pérez" required>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
                     </div>
 
                     <!-- EDAD -->
                     <div class="form-group">
                         <label>EDAD</label>
-                        <input type="number" id="edad" placeholder="Ej: 25" min="1" max="120" required>
+                        <input type="number" id="edad" name="edad" placeholder="Ej: 25" min="1" max="120" required>
                     </div>
 
-                    <!-- GÉNERO (solo Masculino/Femenino) -->
+                    <!-- GÉNERO -->
                     <div class="form-group">
                         <label>GÉNERO</label>
-                        <select id="genero" required>
+                        <select id="genero" name="genero" required>
                             <option value="">Selecciona</option>
                             <option value="Masculino">Masculino</option>
                             <option value="Femenino">Femenino</option>
@@ -576,13 +637,14 @@
                     <!-- TELÉFONO -->
                     <div class="form-group">
                         <label>NÚMERO DE TELÉFONO</label>
-                        <input type="tel" id="telefono" placeholder="Ej: 12345678" required>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Ej: 12345678" maxlength="8" pattern="[0-9]{8}" required>
+                        <small style="color: #9aaab8; font-size: 0.65rem;">📌 Debe tener exactamente 8 dígitos</small>
                     </div>
 
                     <!-- FORMA DE PAGO -->
                     <div class="form-group">
                         <label>FORMA DE PAGO</label>
-                        <select id="formaPago" required>
+                        <select id="formaPago" name="formaPago" required>
                             <option value="">Selecciona</option>
                             <option value="Efectivo">💵 Efectivo</option>
                             <option value="Depósito">🏦 Depósito</option>
@@ -612,28 +674,27 @@
                 </form>
             `;
 
-            // Inicializar eventos del formulario
             initFormEvents();
-            // Inicializar lógica de pago
             initPagoLogic();
         }
 
-        // ========== LÓGICA DE PAGO ==========
+        // ============================================
+        // LÓGICA DE PAGO (mostrar/ocultar foto)
+        // ============================================
         function initPagoLogic() {
             const formaPago = document.getElementById('formaPago');
             const photoSection = document.getElementById('photoSection');
             const fotoInput = document.getElementById('foto');
 
+            if (!formaPago) return;
+
             formaPago.addEventListener('change', function() {
                 const valor = this.value;
-                // Depósito o Transferencia → mostrar foto
                 if (valor === 'Depósito' || valor === 'Transferencia') {
                     photoSection.classList.add('visible');
-                    // Hacer el campo foto obligatorio
                     fotoInput.setAttribute('required', 'required');
                 } else {
                     photoSection.classList.remove('visible');
-                    // Quitar required
                     fotoInput.removeAttribute('required');
                     // Limpiar foto si está visible
                     const previewDiv = document.getElementById('previewArea');
@@ -651,7 +712,9 @@
             });
         }
 
-        // ========== EVENTOS DEL FORMULARIO ==========
+        // ============================================
+        // EVENTOS DEL FORMULARIO
+        // ============================================
         function initFormEvents() {
             const uploadArea = document.getElementById('uploadArea');
             const fotoInput = document.getElementById('foto');
@@ -738,22 +801,17 @@
                     if (!nombre || nombre.length < 3) return alert('❌ Nombre mínimo 3 letras');
                     if (!edad || edad < 1 || edad > 120) return alert('❌ Edad entre 1 y 120');
                     if (!genero) return alert('❌ Selecciona un género');
-                    if (!telefono || telefono.length < 8) return alert('❌ Teléfono inválido (mínimo 8 dígitos)');
+                    if (!/^[0-9]{8}$/.test(telefono)) return alert('❌ El teléfono debe tener exactamente 8 dígitos');
                     if (!formaPago) return alert('❌ Selecciona una forma de pago');
 
-                    // Si es Depósito o Transferencia, validar foto
+                    // Validar foto si es Depósito o Transferencia
                     if ((formaPago === 'Depósito' || formaPago === 'Transferencia') && !imagenBase64) {
                         alert('❌ Debes subir el comprobante de pago');
                         return;
                     }
 
                     // Determinar estado de pago
-                    let estadoPago = '';
-                    if (formaPago === 'Efectivo') {
-                        estadoPago = 'PENDIENTE';
-                    } else {
-                        estadoPago = 'CANCELADO';
-                    }
+                    let estadoPago = (formaPago === 'Efectivo') ? 'PENDIENTE' : 'CANCELADO';
 
                     // Enviar a Google Sheets
                     const fd = new FormData();
@@ -783,7 +841,7 @@
                             form.reset();
                             // Limpiar foto
                             if (removeBtn) removeBtn.click();
-                            // Ocultar sección foto si estaba visible
+                            // Ocultar sección foto
                             document.getElementById('photoSection').classList.remove('visible');
                             // Resetear select de pago
                             document.getElementById('formaPago').value = '';
@@ -798,42 +856,56 @@
             }
         }
 
-        // ========== SECCIONES: INFO Y ORGANIZADOR ==========
+        // ============================================
+        // SECCIONES: INFO Y ORGANIZADOR
+        // ============================================
         function renderInfo() {
             mainContent.innerHTML = `
-                <h2>ℹ️ Información de la carrera</h2>
+                <h2 style="margin-bottom:1.5rem;">ℹ️ Información de la carrera</h2>
                 <ul class="info-list">
-                    <li><div class="info-icon">📅</div><div class="info-text"><strong>FECHA</strong><span>15 de Junio, 2025</span></div></li>
-                    <li><div class="info-icon">📍</div><div class="info-text"><strong>LUGAR</strong><span>Ciudad de las Artes, Valencia</span></div></li>
-                    <li><div class="info-icon">⏰</div><div class="info-text"><strong>SALIDA</strong><span>09:30h</span></div></li>
-                    <li><div class="info-icon">🏆</div><div class="info-text"><strong>DISTANCIAS</strong><span>3K · 5K · 9K</span></div></li>
+                    <li>
+                        <div class="info-icon">📅</div>
+                        <div class="info-text"><strong>FECHA</strong><span>15 de Junio, 2025</span></div>
+                    </li>
+                    <li>
+                        <div class="info-icon">📍</div>
+                        <div class="info-text"><strong>LUGAR</strong><span>Ciudad de las Artes, Valencia</span></div>
+                    </li>
+                    <li>
+                        <div class="info-icon">⏰</div>
+                        <div class="info-text"><strong>SALIDA</strong><span>09:30h</span></div>
+                    </li>
+                    <li>
+                        <div class="info-icon">🏆</div>
+                        <div class="info-text"><strong>DISTANCIAS</strong><span>3K · 5K · 9K</span></div>
+                    </li>
                 </ul>
                 <div style="margin-top:1.5rem; padding:1rem; background:#eef2f5; border-radius:16px;">
-                    <p>🎽 Dorsal oficial, chip, camiseta técnica y avituallamiento</p>
-                    <p style="font-size:0.8rem; margin-top:0.5rem;">💰 Formas de pago: Efectivo · Depósito · Transferencia</p>
+                    <p style="font-weight:500;">🎽 Incluye: Dorsal oficial, chip, camiseta técnica y avituallamiento</p>
+                    <p style="font-size:0.8rem; margin-top:0.5rem; color:#1a3a4a;">💰 Formas de pago: Efectivo · Depósito · Transferencia</p>
                 </div>
             `;
         }
 
         function renderOrganizador() {
             mainContent.innerHTML = `
-                <h2>🔐 Acceso organizadores</h2>
+                <h2 style="margin-bottom:1.5rem;">🔐 Acceso organizadores</h2>
                 <div id="contenidoOrganizador">
                     <div class="admin-stats" id="estadoOrganizador">
                         <p>🔒 Acceso restringido</p>
-                        <p style="font-size:0.65rem;">Ingresa contraseña</p>
+                        <p style="font-size:0.65rem;">Ingresa la contraseña para acceder al panel</p>
                     </div>
                     <div class="btn-group">
                         <button id="btnMostrarLoginOrganizador" class="btn-outline" style="flex:1;">🔐 INICIAR SESIÓN</button>
                     </div>
                     <div id="panelOrganizadorOpciones" style="display:none; margin-top:1rem;">
                         <div class="admin-stats">
-                            <p>📊 ACCESO CONCEDIDO</p>
+                            <p>✅ ACCESO CONCEDIDO</p>
                             <p style="font-size:0.7rem;">Los datos incluyen estado de pago</p>
                         </div>
                         <div class="btn-group">
                             <button id="btnExcel" class="btn-outline" style="flex:1;">📊 VER SHEET</button>
-                            <button id="btnVaciarTodo" class="btn-outline" style="flex:1; border-color:#c0392b; color:#c0392b;">⚠️ VACIAR</button>
+                            <button id="btnVaciarTodo" class="btn-outline btn-danger" style="flex:1;">⚠️ VACIAR</button>
                         </div>
                         <button id="btnCerrarSesion" class="btn-outline" style="width:100%; margin-top:0.8rem;">🚪 CERRAR SESIÓN</button>
                     </div>
@@ -842,7 +914,9 @@
             initOrganizadorEvents();
         }
 
-        // ========== ORGANIZADOR EVENTOS ==========
+        // ============================================
+        // ORGANIZADOR - EVENTOS
+        // ============================================
         function initOrganizadorEvents() {
             const loginModal = document.getElementById('loginModal');
 
@@ -872,7 +946,7 @@
                 document.getElementById('panelOrganizadorOpciones').style.display = 'none';
                 document.getElementById('estadoOrganizador').innerHTML = '<p>🔒 Acceso restringido</p><p style="font-size:0.65rem;">Ingresa contraseña</p>';
                 document.getElementById('btnMostrarLoginOrganizador').style.display = 'block';
-                alert('🔐 Sesión cerrada');
+                alert('🔐 Sesión de organizador cerrada');
             };
 
             document.getElementById('btnExcel').onclick = () => {
@@ -891,7 +965,9 @@
             };
         }
 
-        // ========== CAMBIAR SECCIÓN ==========
+        // ============================================
+        // CAMBIAR SECCIÓN
+        // ============================================
         function changeSection(section) {
             if (section === 'registro') renderRegistro();
             else if (section === 'info') renderInfo();
