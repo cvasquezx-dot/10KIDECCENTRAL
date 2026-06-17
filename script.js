@@ -195,10 +195,12 @@ function initFormEvents() {
         reader.readAsDataURL(file);
     }
 
-    // === FUNCIÓN PARA VERIFICAR DUPLICADOS ===
-    async function verificarDuplicado(nombre, telefono) {
+    // === FUNCIÓN PARA VERIFICAR DUPLICADOS (SOLO POR NOMBRE) ===
+    async function verificarDuplicado(nombre) {
         try {
-            // Usamos Google Sheets API para buscar coincidencias
+            // Limpiar el nombre para comparación (mayúsculas, sin espacios extra)
+            const nombreLimpio = nombre.trim().toUpperCase();
+            
             const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json`;
             const response = await fetch(url);
             const text = await response.text();
@@ -208,9 +210,9 @@ function initFormEvents() {
             for (let row of rows) {
                 if (row.c && row.c.length > 0) {
                     const nombreExistente = row.c[1] ? row.c[1].v : '';
-                    const telefonoExistente = row.c[4] ? row.c[4].v : '';
-                    if (nombreExistente === nombre && telefonoExistente === telefono) {
-                        return true; // Ya existe un duplicado
+                    const nombreExistenteLimpio = nombreExistente.trim().toUpperCase();
+                    if (nombreExistenteLimpio === nombreLimpio) {
+                        return true; // Ya existe un duplicado por nombre
                     }
                 }
             }
@@ -245,10 +247,10 @@ function initFormEvents() {
                 return;
             }
 
-            // Verificar duplicados
-            const esDuplicado = await verificarDuplicado(nombre, telefono);
+            // === VERIFICAR DUPLICADO POR NOMBRE ===
+            const esDuplicado = await verificarDuplicado(nombre);
             if (esDuplicado) {
-                alert('⚠️ YA EXISTE UN INSCRITO CON ESTE NOMBRE Y TELÉFONO.\n\nSi crees que es un error, contacta a los organizadores.');
+                alert(`⚠️ EL NOMBRE "${nombre.trim().toUpperCase()}" YA ESTÁ REGISTRADO.\n\nNo puedes inscribirte dos veces con el mismo nombre. Si crees que es un error, contacta a los organizadores.`);
                 return;
             }
 
