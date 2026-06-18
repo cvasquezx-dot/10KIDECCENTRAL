@@ -8,6 +8,7 @@ const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
 const CONTRASENA_ORGANIZADOR = "carrera2026";
 // ============================================
 
+
 let imagenBase64 = '';
 let imagenNombre = '';
 
@@ -264,8 +265,9 @@ function initFormEvents() {
         const ticketDisplay = document.getElementById('ticketDisplay');
         const ticketStatus = document.getElementById('ticketStatus');
 
-        ticketDisplay.textContent = '⏳ ...';
-        ticketStatus.textContent = '⏳ VERIFICANDO DATOS...';
+        // Mostrar placeholder del ticket mientras se genera
+        ticketDisplay.textContent = '# - - - - -';
+        ticketStatus.textContent = '⏳ GENERANDO TICKET...';
         ticketStatus.style.color = '#FFC107';
 
         const estadoPagoClass = (formaPago === 'Efectivo') ? 'pending' : 'paid';
@@ -306,19 +308,6 @@ function initFormEvents() {
         confirmModal.style.display = 'flex';
         errorMsg.style.display = 'none';
 
-        let counter = 0;
-        const ticketInterval = setInterval(() => {
-            counter++;
-            const randomNum = Math.floor(Math.random() * 9000 + 1000);
-            ticketDisplay.textContent = `#${String(randomNum).padStart(4, '0')}`;
-            if (counter > 8) {
-                clearInterval(ticketInterval);
-                ticketDisplay.textContent = `#${String( Math.floor(Math.random() * 9000 + 1000) ).padStart(4, '0')}`;
-                ticketStatus.textContent = '✅ LISTO PARA ENVIAR';
-                ticketStatus.style.color = '#00E676';
-            }
-        }, 120);
-
         btnConfirm.onclick = async function() {
             btnConfirm.disabled = true;
             btnConfirm.textContent = '⏳ ENVIANDO...';
@@ -351,13 +340,10 @@ function initFormEvents() {
                     ticketStatus.textContent = '✅ INSCRIPCIÓN COMPLETADA';
                     ticketStatus.style.color = '#00E676';
 
-                    // Esperar 1.5 segundos para que el usuario vea el ticket final
                     await new Promise(resolve => setTimeout(resolve, 1500));
 
-                    // Cerrar el modal SIN mostrar alerta adicional
                     confirmModal.style.display = 'none';
                     
-                    // Resetear formulario
                     form.reset();
                     if (removeBtn) removeBtn.click();
                     document.getElementById('photoSection').classList.remove('visible');
@@ -382,13 +368,11 @@ function initFormEvents() {
         };
 
         btnCancel.onclick = function() {
-            clearInterval(ticketInterval);
             confirmModal.style.display = 'none';
         };
 
         confirmModal.onclick = function(e) {
             if (e.target === confirmModal) {
-                clearInterval(ticketInterval);
                 confirmModal.style.display = 'none';
             }
         };
