@@ -612,10 +612,22 @@ input[type="tel"] {
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
 }
 
+/* --- Logo en la parte superior --- */
+.ticket-logo {
+    text-align: center;
+    padding: 1.5rem 1.5rem 0 1.5rem;
+}
+
+.ticket-logo img {
+    max-width: 120px;
+    height: auto;
+    border-radius: 12px;
+}
+
 /* --- Cabecera del ticket --- */
 .ticket-header {
     background: linear-gradient(135deg, #00B4FF, #0077FF);
-    padding: 1.8rem 2rem 1.2rem 2rem;
+    padding: 1.2rem 2rem 1.2rem 2rem;
     text-align: center;
     position: relative;
 }
@@ -658,7 +670,7 @@ input[type="tel"] {
 
 /* --- Cuerpo del ticket --- */
 .ticket-body {
-    padding: 2rem 2rem 1.5rem 2rem;
+    padding: 1.5rem 2rem 1.5rem 2rem;
     text-align: left;
 }
 
@@ -666,7 +678,7 @@ input[type="tel"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.6rem 0;
+    padding: 0.5rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -675,7 +687,7 @@ input[type="tel"] {
 }
 
 .ticket-body .ticket-label {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -683,7 +695,7 @@ input[type="tel"] {
 }
 
 .ticket-body .ticket-value {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: #ffffff;
     text-align: right;
@@ -716,9 +728,31 @@ input[type="tel"] {
     border: 1px solid rgba(0, 230, 118, 0.2);
 }
 
+/* --- Versículo en la parte inferior --- */
+.ticket-verse {
+    text-align: center;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin: 0 2rem;
+}
+
+.ticket-verse p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    font-style: italic;
+    margin: 0.3rem 0;
+    line-height: 1.4;
+}
+
+.ticket-verse p:last-child {
+    font-size: 0.6rem;
+    opacity: 0.5;
+    font-style: normal;
+}
+
 /* --- Pie del ticket --- */
 .ticket-footer {
-    padding: 1.5rem 2rem 2rem 2rem;
+    padding: 1.2rem 2rem 1.5rem 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -783,17 +817,27 @@ input[type="tel"] {
 
 /* --- Responsive --- */
 @media (max-width: 600px) {
+    .ticket-logo img {
+        max-width: 80px;
+    }
+    .ticket-verse {
+        padding: 0.5rem 1rem;
+        margin: 0 1rem;
+    }
+    .ticket-verse p {
+        font-size: 0.7rem;
+    }
     .ticket-body {
-        padding: 1.5rem;
+        padding: 1.2rem 1.2rem;
     }
     .ticket-header {
-        padding: 1.5rem 1.5rem 1rem 1.5rem;
+        padding: 1.2rem 1.2rem 1rem 1.2rem;
     }
     .ticket-number {
         font-size: 2.2rem;
     }
     .ticket-footer {
-        padding: 1.2rem 1.5rem 1.5rem 1.5rem;
+        padding: 1rem 1.2rem 1.2rem 1.2rem;
     }
 }
 
