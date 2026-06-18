@@ -142,7 +142,6 @@ function initFormEvents() {
     const previewImg = document.getElementById('previewImg');
     const removeBtn = document.getElementById('removePhotoBtn');
 
-    // === MANEJO DE FOTO ===
     if (uploadArea) {
         uploadArea.addEventListener('click', () => fotoInput.click());
         uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
@@ -269,15 +268,12 @@ function initFormEvents() {
         const ticketActions = document.querySelector('.ticket-actions');
         const btnDescargar = document.getElementById('btnDescargarComprobante');
 
-        // Mostrar placeholder del ticket mientras se genera
         ticketDisplay.textContent = '# - - - - -';
         ticketStatus.textContent = '⏳ GENERANDO TICKET...';
         ticketStatus.style.color = '#FFC107';
 
-        // Ocultar botón de descarga inicialmente
         if (btnDescargar) btnDescargar.style.display = 'none';
 
-        // Ocultar acciones de confirmación inicialmente (solo se muestran antes de enviar)
         if (ticketActions) {
             ticketActions.style.display = 'flex';
         }
@@ -320,7 +316,6 @@ function initFormEvents() {
         confirmModal.style.display = 'flex';
         errorMsg.style.display = 'none';
 
-        // === CONFIGURAR BOTÓN DE CONFIRMACIÓN ===
         btnConfirm.onclick = async function() {
             btnConfirm.disabled = true;
             btnConfirm.textContent = '⏳ ENVIANDO...';
@@ -353,13 +348,10 @@ function initFormEvents() {
                     ticketStatus.textContent = '✅ INSCRIPCIÓN COMPLETADA';
                     ticketStatus.style.color = '#00E676';
 
-                    // === CAMBIAR EL MODAL A MODO "COMPROBANTE" ===
-                    // Ocultar los botones de confirmación y cancelar
                     if (ticketActions) {
                         ticketActions.style.display = 'none';
                     }
 
-                    // Agregar mensaje de captura de pantalla
                     const mensajeCaptura = document.createElement('div');
                     mensajeCaptura.className = 'ticket-screenshot-message';
                     mensajeCaptura.innerHTML = `
@@ -370,19 +362,16 @@ function initFormEvents() {
                             </p>
                         </div>
                     `;
-                    // Insertar después del ticket-status y antes de ticket-actions
                     const ticketFooter = document.querySelector('.ticket-footer');
                     if (ticketFooter) {
                         ticketFooter.insertBefore(mensajeCaptura, ticketActions);
                     }
 
-                    // === BOTÓN "REALIZAR OTRA INSCRIPCIÓN" ===
                     const btnOtraInscripcion = document.createElement('button');
                     btnOtraInscripcion.className = 'btn-primary ticket-btn-confirm';
                     btnOtraInscripcion.textContent = '🔄 REALIZAR OTRA INSCRIPCIÓN';
                     btnOtraInscripcion.style.marginTop = '0.8rem';
                     btnOtraInscripcion.onclick = function() {
-                        // Cerrar modal y limpiar formulario
                         confirmModal.style.display = 'none';
                         form.reset();
                         if (removeBtn) removeBtn.click();
@@ -390,21 +379,16 @@ function initFormEvents() {
                         document.getElementById('formaPago').value = '';
                         imagenBase64 = '';
                         imagenNombre = '';
-                        // Restaurar el modal para próxima inscripción
                         if (ticketActions) {
                             ticketActions.style.display = 'flex';
                         }
-                        // Remover mensaje de captura y botón extra si existen
                         const msg = document.querySelector('.ticket-screenshot-message');
                         if (msg) msg.remove();
                         const extraBtn = document.querySelector('.ticket-btn-otra');
                         if (extraBtn) extraBtn.remove();
-                        // Ocultar botón de descarga
                         if (btnDescargar) btnDescargar.style.display = 'none';
-                        // Restaurar texto del botón confirmar
                         btnConfirm.textContent = '✅ CONFIRMAR INSCRIPCIÓN';
                         btnConfirm.disabled = false;
-                        // Limpiar campos
                         document.getElementById('nombre').value = '';
                         document.getElementById('edad').value = '';
                         document.getElementById('genero').value = '';
@@ -418,32 +402,65 @@ function initFormEvents() {
                         ticketFooter.appendChild(btnOtraInscripcion);
                     }
 
-                    // === MOSTRAR BOTÓN DE DESCARGAR COMPROBANTE ===
+                    // === BOTÓN DESCARGAR COMPROBANTE (VERSIÓN MEJORADA) ===
                     if (btnDescargar) {
                         btnDescargar.style.display = 'block';
                         btnDescargar.onclick = async function() {
                             try {
-                                const modalElement = document.querySelector('.ticket-modal');
-                                const canvas = await html2canvas(modalElement, {
-                                    scale: 2,
-                                    backgroundColor: null,
+                                // Crear un clon del ticket sin los botones ni mensajes
+                                const ticketOriginal = document.querySelector('.ticket-modal');
+                                const clon = ticketOriginal.cloneNode(true);
+                                
+                                // Eliminar elementos no deseados del clon
+                                const elementosAEliminar = clon.querySelectorAll('.ticket-actions, .ticket-screenshot-message, .ticket-btn-otra, #btnDescargarComprobante, #btnConfirmSend, #btnCancelSend, .ticket-status');
+                                elementosAEliminar.forEach(el => el.remove());
+                                
+                                // Eliminar cualquier botón extra que pueda haber
+                                const botonesExtra = clon.querySelectorAll('button');
+                                botonesExtra.forEach(btn => btn.remove());
+                                
+                                // Ocultar temporalmente el ticket original para evitar flickering
+                                ticketOriginal.style.opacity = '0';
+                                
+                                // Agregar el clon al body para capturarlo
+                                clon.style.position = 'fixed';
+                                clon.style.top = '0';
+                                clon.style.left = '0';
+                                clon.style.zIndex = '9999';
+                                clon.style.opacity = '1';
+                                clon.style.transform = 'scale(1)';
+                                clon.style.borderRadius = '24px';
+                                clon.style.boxShadow = '0 30px 80px rgba(0,0,0,0.6)';
+                                document.body.appendChild(clon);
+                                
+                                await new Promise(resolve => setTimeout(resolve, 100));
+                                
+                                const canvas = await html2canvas(clon, {
+                                    scale: 2.5,
+                                    backgroundColor: '#0d1117',
                                     useCORS: true,
                                     allowTaint: true,
                                     logging: false
                                 });
                                 
+                                clon.remove();
+                                ticketOriginal.style.opacity = '1';
+                                
                                 const link = document.createElement('a');
-                                link.download = `comprobante_${ticketReal}.png`;
+                                const ticketNum = document.getElementById('ticketDisplay').textContent.replace('#', '').trim();
+                                link.download = `comprobante_${ticketNum}.png`;
                                 link.href = canvas.toDataURL('image/png');
                                 link.click();
+                                
                             } catch (err) {
                                 console.error('Error al generar captura:', err);
                                 alert('❌ No se pudo generar el comprobante. Por favor, toma una captura manual.');
+                                const ticketOriginal = document.querySelector('.ticket-modal');
+                                if (ticketOriginal) ticketOriginal.style.opacity = '1';
                             }
                         };
                     }
 
-                    // Limpiar campos del formulario (pero mantenerlos ocultos)
                     document.getElementById('nombre').value = '';
                     document.getElementById('edad').value = '';
                     document.getElementById('genero').value = '';
@@ -471,15 +488,12 @@ function initFormEvents() {
             }
         };
 
-        // Cancelar
         btnCancel.onclick = function() {
             confirmModal.style.display = 'none';
         };
 
-        // Cerrar al hacer clic fuera (solo si no se ha enviado)
         confirmModal.onclick = function(e) {
             if (e.target === confirmModal) {
-                // Solo cerrar si no está en modo comprobante
                 const isCompleted = ticketStatus.textContent === '✅ INSCRIPCIÓN COMPLETADA';
                 if (!isCompleted) {
                     confirmModal.style.display = 'none';
