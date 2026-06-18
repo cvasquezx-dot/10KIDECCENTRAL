@@ -7,6 +7,8 @@ const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxHdlF600JtEE
 const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
 const CONTRASENA_ORGANIZADOR = "IDEC2026";
 
+// ============================================
+
 let imagenBase64 = '';
 let imagenNombre = '';
 
@@ -49,7 +51,8 @@ function renderRegistro() {
             </div>
             <div class="form-group">
                 <label>EDAD</label>
-                <input type="number" id="edad" name="edad" placeholder="Ej: 25" min="1" max="99" required>
+                <input type="number" id="edad" name="edad" placeholder="Ej: 25" min="1" max="99" maxlength="2" required>
+                <small style="color: rgba(255,255,255,0.4); font-size: 0.65rem;">Máximo 99 años</small>
             </div>
             <div class="form-group">
                 <label>GÉNERO</label>
@@ -139,6 +142,7 @@ function initFormEvents() {
     const previewImg = document.getElementById('previewImg');
     const removeBtn = document.getElementById('removePhotoBtn');
 
+    // === MANEJO DE FOTO ===
     if (uploadArea) {
         uploadArea.addEventListener('click', () => fotoInput.click());
         uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
@@ -233,7 +237,7 @@ function initFormEvents() {
             const formaPago = document.getElementById('formaPago').value;
 
             if (!nombre || nombre.length < 3) return alert('❌ INGRESE SU NOMBRE CORRECTAMENTE');
-            if (!edad || edad < 1 || edad > 120) return alert('❌ INGRESE SU EDAD CORRECTAMENTE');
+            if (!edad || edad < 1 || edad > 99) return alert('❌ INGRESE SU EDAD CORRECTAMENTE (MÁXIMO 99 AÑOS)');
             if (!genero) return alert('❌ SELECCIONE SU GENERO');
             if (!/^[0-9]{8}$/.test(telefono)) return alert('❌ INGRESE SU NUMERO DE TELEFONO CORRECTAMENTE (8 dígitos)');
             if (!formaPago) return alert('❌ SELECCIONE SU FORMA DE PAGO');
@@ -263,11 +267,15 @@ function initFormEvents() {
         const ticketDisplay = document.getElementById('ticketDisplay');
         const ticketStatus = document.getElementById('ticketStatus');
         const ticketActions = document.querySelector('.ticket-actions');
+        const btnDescargar = document.getElementById('btnDescargarComprobante');
 
         // Mostrar placeholder del ticket mientras se genera
         ticketDisplay.textContent = '# - - - - -';
         ticketStatus.textContent = '⏳ GENERANDO TICKET...';
         ticketStatus.style.color = '#FFC107';
+
+        // Ocultar botón de descarga inicialmente
+        if (btnDescargar) btnDescargar.style.display = 'none';
 
         // Ocultar acciones de confirmación inicialmente (solo se muestran antes de enviar)
         if (ticketActions) {
@@ -368,7 +376,7 @@ function initFormEvents() {
                         ticketFooter.insertBefore(mensajeCaptura, ticketActions);
                     }
 
-                    // Agregar botón "REALIZAR OTRA INSCRIPCIÓN"
+                    // === BOTÓN "REALIZAR OTRA INSCRIPCIÓN" ===
                     const btnOtraInscripcion = document.createElement('button');
                     btnOtraInscripcion.className = 'btn-primary ticket-btn-confirm';
                     btnOtraInscripcion.textContent = '🔄 REALIZAR OTRA INSCRIPCIÓN';
@@ -391,13 +399,48 @@ function initFormEvents() {
                         if (msg) msg.remove();
                         const extraBtn = document.querySelector('.ticket-btn-otra');
                         if (extraBtn) extraBtn.remove();
+                        // Ocultar botón de descarga
+                        if (btnDescargar) btnDescargar.style.display = 'none';
                         // Restaurar texto del botón confirmar
                         btnConfirm.textContent = '✅ CONFIRMAR INSCRIPCIÓN';
                         btnConfirm.disabled = false;
+                        // Limpiar campos
+                        document.getElementById('nombre').value = '';
+                        document.getElementById('edad').value = '';
+                        document.getElementById('genero').value = '';
+                        document.getElementById('telefono').value = '';
+                        document.getElementById('formaPago').value = '';
+                        imagenBase64 = '';
+                        imagenNombre = '';
                     };
                     btnOtraInscripcion.className += ' ticket-btn-otra';
                     if (ticketFooter) {
                         ticketFooter.appendChild(btnOtraInscripcion);
+                    }
+
+                    // === MOSTRAR BOTÓN DE DESCARGAR COMPROBANTE ===
+                    if (btnDescargar) {
+                        btnDescargar.style.display = 'block';
+                        btnDescargar.onclick = async function() {
+                            try {
+                                const modalElement = document.querySelector('.ticket-modal');
+                                const canvas = await html2canvas(modalElement, {
+                                    scale: 2,
+                                    backgroundColor: null,
+                                    useCORS: true,
+                                    allowTaint: true,
+                                    logging: false
+                                });
+                                
+                                const link = document.createElement('a');
+                                link.download = `comprobante_${ticketReal}.png`;
+                                link.href = canvas.toDataURL('image/png');
+                                link.click();
+                            } catch (err) {
+                                console.error('Error al generar captura:', err);
+                                alert('❌ No se pudo generar el comprobante. Por favor, toma una captura manual.');
+                            }
+                        };
                     }
 
                     // Limpiar campos del formulario (pero mantenerlos ocultos)
