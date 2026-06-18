@@ -612,16 +612,27 @@ input[type="tel"] {
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
 }
 
-/* --- Logo en la parte superior --- */
+/* ============================================
+   LOGO ENCABEZADO DEL TICKET - ANCHO COMPLETO
+   ============================================ */
+
 .ticket-logo {
     text-align: center;
-    padding: 1.5rem 1.5rem 0 1.5rem;
+    padding: 0.8rem 0.8rem 0 0.8rem;
+    background: #0d1117;
+    border-radius: 24px 24px 0 0;
+    overflow: hidden;
 }
 
 .ticket-logo img {
-    max-width: 120px;
+    width: 95%;
+    max-width: 95%;
     height: auto;
+    display: block;
+    object-fit: contain;
     border-radius: 12px;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* --- Cabecera del ticket --- */
@@ -817,8 +828,13 @@ input[type="tel"] {
 
 /* --- Responsive --- */
 @media (max-width: 600px) {
+    .ticket-logo {
+        padding: 0.5rem 0.5rem 0 0.5rem;
+    }
     .ticket-logo img {
-        max-width: 80px;
+        width: 90%;
+        max-width: 90%;
+        border-radius: 8px;
     }
     .ticket-verse {
         padding: 0.5rem 1rem;
