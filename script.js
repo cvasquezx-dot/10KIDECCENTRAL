@@ -5,7 +5,8 @@
 // Configuración
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxHdlF600JtEEGCWlXb-Obp1wIbb_S3HTzIR3NqLrmkGd0mAYjHvez-Xjvf3-jdDCH6/exec';
 const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
-const CONTRASENA_ORGANIZADOR = "carrera2024";
+const CONTRASENA_ORGANIZADOR = "carrera2026";
+// ============================================
 
 let imagenBase64 = '';
 let imagenNombre = '';
@@ -350,11 +351,13 @@ function initFormEvents() {
                     ticketStatus.textContent = '✅ INSCRIPCIÓN COMPLETADA';
                     ticketStatus.style.color = '#00E676';
 
+                    // Esperar 1.5 segundos para que el usuario vea el ticket final
                     await new Promise(resolve => setTimeout(resolve, 1500));
 
+                    // Cerrar el modal SIN mostrar alerta adicional
                     confirmModal.style.display = 'none';
-                    alert(`✅ ¡${nombre}, TE HAZ INSCRITO CORRECTAMENTE!\n\n🎫 TICKET: #${ticketReal}\n💰 ESTADO DE PAGO: ${estadoPago}`);
                     
+                    // Resetear formulario
                     form.reset();
                     if (removeBtn) removeBtn.click();
                     document.getElementById('photoSection').classList.remove('visible');
