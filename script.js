@@ -5,9 +5,7 @@
 // Configuración
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxHdlF600JtEEGCWlXb-Obp1wIbb_S3HTzIR3NqLrmkGd0mAYjHvez-Xjvf3-jdDCH6/exec';
 const GOOGLE_SHEET_ID = '1ZDN_H9VmvKFq9i3VIjzV0pjSa97_EHw4JjVgrJ_fDwk';
-const CONTRASENA_ORGANIZADOR = "carrera2026";
-// ============================================
-
+const CONTRASENA_ORGANIZADOR = "IDEC2026";
 
 let imagenBase64 = '';
 let imagenNombre = '';
@@ -264,11 +262,17 @@ function initFormEvents() {
         const errorMsg = document.getElementById('errorConfirm');
         const ticketDisplay = document.getElementById('ticketDisplay');
         const ticketStatus = document.getElementById('ticketStatus');
+        const ticketActions = document.querySelector('.ticket-actions');
 
         // Mostrar placeholder del ticket mientras se genera
         ticketDisplay.textContent = '# - - - - -';
         ticketStatus.textContent = '⏳ GENERANDO TICKET...';
         ticketStatus.style.color = '#FFC107';
+
+        // Ocultar acciones de confirmación inicialmente (solo se muestran antes de enviar)
+        if (ticketActions) {
+            ticketActions.style.display = 'flex';
+        }
 
         const estadoPagoClass = (formaPago === 'Efectivo') ? 'pending' : 'paid';
         const estadoPagoText = (formaPago === 'Efectivo') ? '⏳ PENDIENTE' : '✅ CANCELADO';
@@ -308,6 +312,7 @@ function initFormEvents() {
         confirmModal.style.display = 'flex';
         errorMsg.style.display = 'none';
 
+        // === CONFIGURAR BOTÓN DE CONFIRMACIÓN ===
         btnConfirm.onclick = async function() {
             btnConfirm.disabled = true;
             btnConfirm.textContent = '⏳ ENVIANDO...';
@@ -340,16 +345,72 @@ function initFormEvents() {
                     ticketStatus.textContent = '✅ INSCRIPCIÓN COMPLETADA';
                     ticketStatus.style.color = '#00E676';
 
-                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    // === CAMBIAR EL MODAL A MODO "COMPROBANTE" ===
+                    // Ocultar los botones de confirmación y cancelar
+                    if (ticketActions) {
+                        ticketActions.style.display = 'none';
+                    }
 
-                    confirmModal.style.display = 'none';
-                    
-                    form.reset();
+                    // Agregar mensaje de captura de pantalla
+                    const mensajeCaptura = document.createElement('div');
+                    mensajeCaptura.className = 'ticket-screenshot-message';
+                    mensajeCaptura.innerHTML = `
+                        <div style="text-align: center; margin: 1rem 0; padding: 0.8rem; background: rgba(255, 193, 7, 0.1); border-radius: 12px; border: 1px solid rgba(255, 193, 7, 0.2);">
+                            <p style="color: #FFC107; font-size: 0.85rem; font-weight: 600; margin: 0;">
+                                📸 RECUERDA TOMARLE CAPTURA DE PANTALLA<br>
+                                <span style="font-size: 0.7rem; font-weight: 400; color: rgba(255,255,255,0.6);">para tenerlo como comprobante de INSCRIPCIÓN</span>
+                            </p>
+                        </div>
+                    `;
+                    // Insertar después del ticket-status y antes de ticket-actions
+                    const ticketFooter = document.querySelector('.ticket-footer');
+                    if (ticketFooter) {
+                        ticketFooter.insertBefore(mensajeCaptura, ticketActions);
+                    }
+
+                    // Agregar botón "REALIZAR OTRA INSCRIPCIÓN"
+                    const btnOtraInscripcion = document.createElement('button');
+                    btnOtraInscripcion.className = 'btn-primary ticket-btn-confirm';
+                    btnOtraInscripcion.textContent = '🔄 REALIZAR OTRA INSCRIPCIÓN';
+                    btnOtraInscripcion.style.marginTop = '0.8rem';
+                    btnOtraInscripcion.onclick = function() {
+                        // Cerrar modal y limpiar formulario
+                        confirmModal.style.display = 'none';
+                        form.reset();
+                        if (removeBtn) removeBtn.click();
+                        document.getElementById('photoSection').classList.remove('visible');
+                        document.getElementById('formaPago').value = '';
+                        imagenBase64 = '';
+                        imagenNombre = '';
+                        // Restaurar el modal para próxima inscripción
+                        if (ticketActions) {
+                            ticketActions.style.display = 'flex';
+                        }
+                        // Remover mensaje de captura y botón extra si existen
+                        const msg = document.querySelector('.ticket-screenshot-message');
+                        if (msg) msg.remove();
+                        const extraBtn = document.querySelector('.ticket-btn-otra');
+                        if (extraBtn) extraBtn.remove();
+                        // Restaurar texto del botón confirmar
+                        btnConfirm.textContent = '✅ CONFIRMAR INSCRIPCIÓN';
+                        btnConfirm.disabled = false;
+                    };
+                    btnOtraInscripcion.className += ' ticket-btn-otra';
+                    if (ticketFooter) {
+                        ticketFooter.appendChild(btnOtraInscripcion);
+                    }
+
+                    // Limpiar campos del formulario (pero mantenerlos ocultos)
+                    document.getElementById('nombre').value = '';
+                    document.getElementById('edad').value = '';
+                    document.getElementById('genero').value = '';
+                    document.getElementById('telefono').value = '';
+                    document.getElementById('formaPago').value = '';
                     if (removeBtn) removeBtn.click();
                     document.getElementById('photoSection').classList.remove('visible');
-                    document.getElementById('formaPago').value = '';
                     imagenBase64 = '';
                     imagenNombre = '';
+
                 } else {
                     errorMsg.style.display = 'block';
                     errorMsg.textContent = '❌ Error al guardar: ' + (json.error || 'Desconocido');
@@ -367,13 +428,19 @@ function initFormEvents() {
             }
         };
 
+        // Cancelar
         btnCancel.onclick = function() {
             confirmModal.style.display = 'none';
         };
 
+        // Cerrar al hacer clic fuera (solo si no se ha enviado)
         confirmModal.onclick = function(e) {
             if (e.target === confirmModal) {
-                confirmModal.style.display = 'none';
+                // Solo cerrar si no está en modo comprobante
+                const isCompleted = ticketStatus.textContent === '✅ INSCRIPCIÓN COMPLETADA';
+                if (!isCompleted) {
+                    confirmModal.style.display = 'none';
+                }
             }
         };
     }
