@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>10K 2026 IDEC CENTRAL SAN CRISTOBAL</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Librería para captura de pantalla -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <!-- Botón menú móvil -->
@@ -40,9 +42,9 @@
     <div class="container">
         <!-- Header -->
         <div class="main-header">
-            <div class="logo-badge">IDEC CENTRAL SAN CRISTOBA</div>
+            <div class="logo-badge">IDEC CENTRAL SAN CRISTOBAL</div>
             <h1>10K EDICION 2026</h1>
-            <div class="subtitle">INSCRIBETE PARA ESTA GRAN CARRERA DE LA FÉ</div>
+            <div class="subtitle">Inscríbete ahora mismo a la gran carrera de la Fé</div>
         </div>
 
         <!-- Banner -->
@@ -92,6 +94,9 @@
                     <button id="btnConfirmSend" class="btn-primary ticket-btn-confirm">✅ CONFIRMAR INSCRIPCIÓN</button>
                     <button id="btnCancelSend" class="btn-outline ticket-btn-cancel">✖️ CANCELAR</button>
                 </div>
+                <button id="btnDescargarComprobante" class="btn-primary ticket-btn-confirm" style="display: none; margin-top: 0.8rem;">
+                    📸 DESCARGAR COMPROBANTE
+                </button>
                 <div id="errorConfirm" class="error-msg" style="display: none;">❌ Error al enviar, intenta de nuevo</div>
             </div>
         </div>
